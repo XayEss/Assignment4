@@ -29,14 +29,14 @@ public interface ImageProcessor {
 
   /**
    * Calculates and returns an image that visualizes the intensity of the image.
-   * @param image the image from which the vizualization of intensity will be made.
+   * @param image the image from which the visualization of intensity will be made.
    * @return a new image visualization of intensity.
    */
   Image getIntensity(Image image);
 
   /**
    Calculates and returns an image that visualizes the luma of the image.
-   * @param image the image from which the vizualization of luma will be made.
+   * @param image the image from which the visualization of luma will be made.
    * @return a new image visualization of luma.
    */
   Image getLuma(Image image);
@@ -44,11 +44,10 @@ public interface ImageProcessor {
   /**
    * Changes the brightness of the image by a given amount.
    * @param image image which will be changed.
-   * @param increase increase or decrease.
    * @param value the amount to change.
    * @return a new image with the altered brightness.
    */
-  Image alterBrightness(Image image, boolean increase, int value);
+  Image alterBrightness(Image image, int value);
 
   /**
    * Splits an image into all it's separate channels.

@@ -38,12 +38,12 @@ public interface Image {
   Image getLumaImage();
 
   /**
-   * Changes the brightness of the image by a given amount.
-   * @param increase increase or decrease.
+   * Changes the brightness of the image by a given amount. Negative - decrease, positive
+   * - increase.
    * @param value the amount to change.
    * @return a new image with the altered brightness.
    */
-  Image alterBrightness(boolean increase, int value);
+  Image alterBrightness(int value);
 
   /**
    * Returns a pixel channel value in a given row and column.

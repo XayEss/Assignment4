@@ -21,21 +21,20 @@ public interface Pixel {
 
   /**
    * Change the value of a chosen channel by the given amount.
-   * @param increase increase or decrease the value.
    * @param channel the channel to change.
    * @param value the value by which to change the channel.
    */
-  void alterValue(boolean increase, int channel, int value);
+  void alterValue(int channel, int value);
 
   /**
-   * Change the brightness of the pixel.
-   * @param increase determines increase or decrease the value.
+   * Change the brightness of the pixel. Negative values decrease the brightness, positive
+   * - increase.
    * @param value the value by which to change the brightness.
    */
-  void alterBrightness(boolean increase, int value);
+  void alterBrightness(int value);
 
   /**
-   * Gets the value(highest value) of the pixel.
+   * Gets the value(the highest channel value) of the pixel.
    * @return the value.
    */
   int getValue();
