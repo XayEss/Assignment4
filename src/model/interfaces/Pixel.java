@@ -6,14 +6,14 @@ package model.interfaces;
 public interface Pixel {
 
   /**
-   * Returns the value of a certain channel.
+   * Returns the value at a certain channel.
    * @param channel the channel to be returned.
    * @return integer value of the chosen channel.
    */
   int getChannel(int channel);
 
   /**
-   * Sets the channel value to the given value.
+   * Sets the value at channel to the given value.
    * @param channel the channel to set.
    * @param value the value to be set.
    */
@@ -35,13 +35,13 @@ public interface Pixel {
 
   /**
    * Change the brightness of the pixel. Negative values decrease the brightness, positive
-   * - increase.
+   * values increase the brightness.
    * @param value the value by which to change the brightness.
    */
   void alterBrightness(int value);
 
   /**
-   * Gets the value(the highest channel value) of the pixel.
+   * Gets the value (the maximum value among channels) of the pixel.
    * @return the value.
    */
   int getValue();
@@ -66,7 +66,7 @@ public interface Pixel {
 
   /**
    * Returns the number of channels this pixel provides.
-   * @return the numer of channels.
+   * @return the number of channels.
    */
   int getNumberOfChannels();
 }

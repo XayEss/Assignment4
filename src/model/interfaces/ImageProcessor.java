@@ -57,11 +57,11 @@ public interface ImageProcessor {
   Image[] getSplitChannels(Image image);
 
   /**
-   * Combines three greyscale images into one colorful image.
+   * Combines three greyscale images into one three channeled image.
    * @param first the first image to combine.
    * @param second the second image to combine.
    * @param third the third image to combine.
-   * @return a new colorful image
+   * @return a new three channeled image
    */
   Image combineGreyScaleImages(Image first, Image second, Image third);
 }
