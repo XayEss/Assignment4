@@ -20,6 +20,13 @@ public interface Pixel {
   void setChannel(int channel, int value);
 
   /**
+   * Gets a pixel with only one of the chosen channels.
+   * @param channel the channel to leave in pixel.
+   * @return a new pixel with only one chosen channel.
+   */
+  Pixel getOneChanneledPixel(int channel);
+
+  /**
    * Change the value of a chosen channel by the given amount.
    * @param channel the channel to change.
    * @param value the value by which to change the channel.
@@ -56,4 +63,10 @@ public interface Pixel {
    * @return the grayscale int parameter of the pixel.
    */
   int getGreyScale();
+
+  /**
+   * Returns the number of channels this pixel provides.
+   * @return the numer of channels.
+   */
+  int getNumberOfChannels();
 }

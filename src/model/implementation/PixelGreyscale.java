@@ -3,7 +3,12 @@ package model.implementation;
 import model.interfaces.Pixel;
 
 public class PixelGreyscale implements Pixel {
+
   private int greyscale;
+
+  public PixelGreyscale(int scale) {
+    greyscale = scale;
+  }
 
   @Override
   public int getChannel(int channel) {
@@ -16,6 +21,11 @@ public class PixelGreyscale implements Pixel {
     checkChannelArgument(channel);
     checkBounds(value);
     greyscale = value;
+  }
+
+  @Override
+  public Pixel getOneChanneledPixel(int channel) {
+    return new PixelGreyscale(greyscale);
   }
 
   @Override
@@ -48,27 +58,37 @@ public class PixelGreyscale implements Pixel {
     return greyscale;
   }
 
-  private void checkChannelArgument(int channel) throws IllegalArgumentException{
-    if(channel > 0){
+  @Override
+  public int getNumberOfChannels() {
+    return 1;
+  }
+
+  private void checkChannelArgument(int channel) throws IllegalArgumentException {
+    if (channel != 0) {
+      throw new IllegalArgumentException("Grayscale pixel has only one channel - 0");
+    }
+  }
+
+  private void checkBounds(int channel) throws IllegalArgumentException {
+    if (channel > 0) {
       throw new IllegalArgumentException("Channel can not be more than 0");
     }
   }
 
-  private void checkBounds(int channel) throws IllegalArgumentException{
-    if(channel > 0){
-      throw new IllegalArgumentException("Channel can not be more than 0");
-    }
-  }
-
-  private int calculateChangeValue(int initialValue, int value){
+  private int calculateChangeValue(int initialValue, int value) {
     int returnValue;
-    if (initialValue + value > 255){
+    if (initialValue + value > 255) {
       returnValue = 255;
-    }else if(initialValue + value < 0){
+    } else if (initialValue + value < 0) {
       returnValue = 0;
-    }else{
+    } else {
       returnValue = initialValue + value;
     }
     return returnValue;
+  }
+
+  @Override
+  public String toString() {
+    return "" + greyscale;
   }
 }

@@ -33,6 +33,22 @@ public class PixelRGB implements Pixel {
   }
 
   @Override
+  public Pixel getOneChanneledPixel(int channel) {
+    checkChannelArgument(channel);
+    int r = 0;
+    int g = 0;
+    int b = 0;
+    if(channel == 0){
+      r = red;
+    }else if(channel == 1){
+      g = green;
+    }else{
+      b = blue;
+    }
+    return new PixelRGB(r, g, b);
+  }
+
+  @Override
   public void alterValue(int channel, int value) {
     int val = getChannelValue(channel);
     setChannelValue(channel, val + value);
@@ -66,6 +82,11 @@ public class PixelRGB implements Pixel {
   }
 
   @Override
+  public int getNumberOfChannels() {
+    return 3;
+  }
+
+  @Override
   public String toString() {
     return red + " " + green + " " + blue;
   }
@@ -73,6 +94,12 @@ public class PixelRGB implements Pixel {
   private void checkBounds(int parameter) throws IllegalArgumentException{
     if(parameter < 0 || parameter > 255){
       throw new IllegalArgumentException("Any RGB component value should be from 0 to 255");
+    }
+  }
+
+  private void checkChannelArgument(int channel) throws IllegalArgumentException{
+    if(channel > 2 || channel < 0){
+      throw new IllegalArgumentException("Channel can not be more than 2 and less than 0");
     }
   }
 
