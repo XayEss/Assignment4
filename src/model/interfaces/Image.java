@@ -39,7 +39,7 @@ public interface Image {
 
   /**
    * Changes the brightness of the image by a given amount. Negative - decrease, positive
-   * - increase.
+   * - increases the brightness.
    * @param value the amount to change.
    * @return a new image with the altered brightness.
    */
@@ -73,13 +73,13 @@ public interface Image {
   int getWidth();
 
   /**
-   * ???????
-   * @return
+   * String representation of the dimensions of the image: width x height
+   * @return a string which gives the dimensions of the image.
    */
   String getSize();
 
   /**
-   * Sets a pixel channel value to the value given.
+   * Sets a pixel value at a channel to the value given.
    * @param row the row of the pixel.
    * @param column the column of the pixel.
    * @param channel the channel to change.
