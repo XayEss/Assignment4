@@ -1,6 +1,7 @@
 package model.implementation;
 
 import java.util.Arrays;
+import java.util.function.Function;
 import model.interfaces.Image;
 import model.interfaces.Pixel;
 
@@ -55,16 +56,17 @@ public class ImageImpl implements Image {
 
   @Override
   public Image getIntensityImage() {
-    Pixel[][] intensityPixels = new Pixel[getHeight()][getWidth()];
-    for(int i = 0; i < getHeight(); i++) {
-      for (int j = 0; j < getWidth(); j++) {
-        //intensityPixels[i][j] = new PixelGreyscale(pixels[i][j].getIntensity());
-        int intensity = pixels[i][j].getLuma();
-        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
-        intensityPixels[i][j] = new PixelRGB(intensity,intensity,intensity);
-      }
-    }
-    return new ImageImpl(intensityPixels);
+//    Pixel[][] intensityPixels = new Pixel[getHeight()][getWidth()];
+//    for(int i = 0; i < getHeight(); i++) {
+//      for (int j = 0; j < getWidth(); j++) {
+//        //intensityPixels[i][j] = new PixelGreyscale(pixels[i][j].getIntensity());
+//        int intensity = pixels[i][j].getLuma();
+//        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
+//        intensityPixels[i][j] = new PixelRGB(intensity,intensity,intensity);
+//      }
+//    }
+//    return new ImageImpl(intensityPixels);
+    return higherOrderFunction((p)->new PixelRGB(p.getIntensity()));
   }
 
   @Override
@@ -88,6 +90,18 @@ public class ImageImpl implements Image {
       }
     }
     return this;
+  }
+
+  private Image higherOrderFunction(Function<Pixel, Pixel> function){
+    Pixel[][] lumaPixels = new Pixel[getHeight()][getWidth()];
+    for(int i = 0; i < getHeight(); i++) {
+      for (int j = 0; j < getWidth(); j++) {
+        int luma = pixels[i][j].getLuma();
+        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
+        lumaPixels[i][j] = function.apply(pixels[i][j]);
+      }
+    }
+    return new ImageImpl(lumaPixels);
   }
 
   @Override

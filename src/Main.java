@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import model.implementation.ImageImpl;
 import model.implementation.ImageProcessorImpl;
+import model.implementation.ImageToBufferedImageService;
 import model.implementation.PixelRGB;
 import model.interfaces.Image;
 import model.interfaces.ImageProcessor;
@@ -38,10 +39,12 @@ public class Main {
     //new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.getLumaImage().getBytes()));
     ImageProcessor imageProcessor = new ImageProcessorImpl();
     Image combined = imageProcessor.combineGreyScaleImages(koalaRedGreyscale, koalaGreenGreyscale, koalaBlueGreyscale);
-    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaRedGreyscale.getBytes()));
-    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaGreenGreyscale.getBytes()));
-    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaBlueGreyscale.getBytes()));
-    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.alterBrightness(50).getBytes()));
+//    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaRedGreyscale.getBytes()));
+//    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaGreenGreyscale.getBytes()));
+//    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaBlueGreyscale.getBytes()));
+//    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.alterBrightness(50).getBytes()));
+    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala.getIntensityImage().getGreyscaleImage()));
+
 
   }
 

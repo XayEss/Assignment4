@@ -34,6 +34,13 @@ public class PixelRGB implements Pixel {
     }
   }
 
+  public PixelRGB(int value){
+      red = value;
+      green = value;
+      blue = value;
+
+  }
+
   @Override
   public int getChannel(int channel) {
     return getChannelValue(channel);
@@ -91,7 +98,7 @@ public class PixelRGB implements Pixel {
   @Override
   public int getGreyScale() {
     //return (int)(0.3 * red + 0.59 * green + 0.11 * blue);
-    return (int)(red/3 + green/3 + blue/3);
+    return (red/3 + green/3 + blue/3);
   }
 
   @Override
