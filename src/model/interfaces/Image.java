@@ -46,13 +46,20 @@ public interface Image {
   Image alterBrightness(int value);
 
   /**
+   * Returns a pixel in a given row and column.
+   * @param row the row of the pixel.
+   * @param column the column of the pixel.
+   * @return A new pixel with the chosen channel.
+   */
+  Pixel getPixel(int row, int column);
+  /**
    * Returns a pixel channel value in a given row and column.
    * @param row the row of the pixel.
    * @param column the column of the pixel.
-   * @param channel the channel to be returned.
+   * @param channel the channel to return.
    * @return A new pixel with the chosen channel.
    */
-  Pixel getPixel(int row, int column, int channel);
+  int getPixelChannel(int row, int column, int channel);
 
   /**
    * Returns the number of channels of the image.
@@ -87,4 +94,16 @@ public interface Image {
    */
   void setPixel(int row, int column, int channel, int value);
 
+  /**
+   * Returns a new greyscale version of the picture.
+   * @return a new greyscale image.
+   */
+  Image getGreyscaleImage();
+
+
+  /**
+   * Represents an image as a set of bytes.
+   * @return set of bytes from current image.
+   */
+  byte[] getBytes();
 }

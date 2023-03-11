@@ -21,6 +21,25 @@ public class PixelRGB implements Pixel {
     green = g;
     blue = b;
   }
+  public PixelRGB(Pixel pixel){
+    if(pixel.getNumberOfChannels() == 3){
+      red = pixel.getChannel(0);
+      green = pixel.getChannel(1);
+      blue = pixel.getChannel(2);
+    }
+    else if(pixel.getNumberOfChannels() == 1) {
+      red = pixel.getChannel(0);
+      green = pixel.getChannel(0);
+      blue = pixel.getChannel(0);
+    }
+  }
+
+  public PixelRGB(int value){
+      red = value;
+      green = value;
+      blue = value;
+
+  }
 
   @Override
   public int getChannel(int channel) {
@@ -78,7 +97,8 @@ public class PixelRGB implements Pixel {
 
   @Override
   public int getGreyScale() {
-    return (int)(0.3 * red + 0.59 * green + 0.11 * blue);
+    //return (int)(0.3 * red + 0.59 * green + 0.11 * blue);
+    return (red/3 + green/3 + blue/3);
   }
 
   @Override
