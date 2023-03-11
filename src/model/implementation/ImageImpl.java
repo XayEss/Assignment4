@@ -58,7 +58,10 @@ public class ImageImpl implements Image {
     Pixel[][] intensityPixels = new Pixel[getHeight()][getWidth()];
     for(int i = 0; i < getHeight(); i++) {
       for (int j = 0; j < getWidth(); j++) {
-        intensityPixels[i][j] = new PixelGreyscale(pixels[i][j].getIntensity());
+        //intensityPixels[i][j] = new PixelGreyscale(pixels[i][j].getIntensity());
+        int intensity = pixels[i][j].getLuma();
+        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
+        intensityPixels[i][j] = new PixelRGB(intensity,intensity,intensity);
       }
     }
     return new ImageImpl(intensityPixels);
@@ -69,7 +72,9 @@ public class ImageImpl implements Image {
     Pixel[][] lumaPixels = new Pixel[getHeight()][getWidth()];
     for(int i = 0; i < getHeight(); i++) {
       for (int j = 0; j < getWidth(); j++) {
-        lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
+        int luma = pixels[i][j].getLuma();
+        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
+        lumaPixels[i][j] = new PixelRGB(luma,luma,luma);
       }
     }
     return new ImageImpl(lumaPixels);
@@ -86,9 +91,13 @@ public class ImageImpl implements Image {
   }
 
   @Override
-  public Pixel getPixel(int row, int column, int channel) {
-    //Change method signature.
-    return null;
+  public Pixel getPixel(int row, int column) {
+    return new PixelRGB(pixels[row][column]);
+  }
+
+  @Override
+  public int getPixelChannel(int row, int column, int channel) {
+    return pixels[row][column].getChannel(channel);
   }
 
   @Override
@@ -114,6 +123,31 @@ public class ImageImpl implements Image {
   @Override
   public void setPixel(int row, int column, int channel, int value) {
 
+  }
+
+  @Override
+  public Image getGreyscaleImage() {
+    Pixel[][] greyPixels = new Pixel[getHeight()][getWidth()];
+    for(int i = 0; i < getHeight(); i++) {
+      for (int j = 0; j < getWidth(); j++) {
+        int grey = pixels[i][j].getGreyScale();
+        greyPixels[i][j] = new PixelRGB(grey, grey, grey);
+      }
+    }
+    return new ImageImpl(greyPixels);
+  }
+
+  @Override
+  public byte[] getBytes() {
+    byte[] byteImage = new byte[getHeight()*getWidth()*3];
+    for(int i = 0; i < getHeight(); i++){
+      for(int j = 0; j < getWidth(); j++){
+        byteImage[i*getWidth()*3+j*3] = (byte)pixels[i][j].getChannel(0);
+        byteImage[i*getWidth()*3+j*3+1] = (byte)pixels[i][j].getChannel(1);
+        byteImage[i*getWidth()*3+j*3+2] = (byte)pixels[i][j].getChannel(2);
+      }
+    }
+    return byteImage;
   }
 
   @Override
