@@ -32,18 +32,21 @@ public class Main {
     pixelMap[1][2] = pixel6;
     Image koala = new ImageImpl(ImageUtil.readPPM("resources/images/ppm/koala.ppm"));
     System.out.println("---------------");
-    //VisualizeImage vi = new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.getBytes()));
+    VisualizeImage vi = new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala));
     Image koalaRedGreyscale = koala.getImageChannel(0).getGreyscaleImage();
     Image koalaGreenGreyscale = koala.getImageChannel(1).getGreyscaleImage();
     Image koalaBlueGreyscale = koala.getImageChannel(2).getGreyscaleImage();
     //new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.getLumaImage().getBytes()));
     ImageProcessor imageProcessor = new ImageProcessorImpl();
     Image combined = imageProcessor.combineGreyScaleImages(koalaRedGreyscale, koalaGreenGreyscale, koalaBlueGreyscale);
+    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala.getGreyscaleImage()));
+    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(combined.flipImage(true).flipImage(false)));
 //    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaRedGreyscale.getBytes()));
 //    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaGreenGreyscale.getBytes()));
 //    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaBlueGreyscale.getBytes()));
 //    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.alterBrightness(50).getBytes()));
-    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala.getIntensityImage().getGreyscaleImage()));
+    //vi.changeImage(ImageToBufferedImageService.convertToBuffered(koala.getImageChannel(0)));
+    //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala.getLumaImage()));
 
 
   }

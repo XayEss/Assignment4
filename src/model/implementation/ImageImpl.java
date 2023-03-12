@@ -144,8 +144,7 @@ public class ImageImpl implements Image {
     Pixel[][] greyPixels = new Pixel[getHeight()][getWidth()];
     for(int i = 0; i < getHeight(); i++) {
       for (int j = 0; j < getWidth(); j++) {
-        int grey = pixels[i][j].getGreyScale();
-        greyPixels[i][j] = new PixelRGB(grey, grey, grey);
+        greyPixels[i][j] = new PixelRGB(pixels[i][j].getGreyScale());
       }
     }
     return new ImageImpl(greyPixels);

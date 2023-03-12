@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import model.interfaces.Image;
 
 public class VisualizeImage extends JFrame {
+  JPanel panel;
   JLabel labelImageLabel;
 
   public VisualizeImage(BufferedImage image){
@@ -17,7 +18,8 @@ public class VisualizeImage extends JFrame {
   }
   public void imageView(BufferedImage image){
     JPanel panel = new JPanel();
-    JLabel labelImageLabel = new JLabel(new ImageIcon(image));
+    JLabel labelImageLabel = new JLabel();
+    labelImageLabel.setIcon(new ImageIcon(image));
     //JLabel label = new JLabel(new ImageIcon("resources/images/png/koala-vertical.png"));
     panel.add(labelImageLabel);
     add(panel);
@@ -25,7 +27,13 @@ public class VisualizeImage extends JFrame {
   }
 
   public void changeImage(BufferedImage image){
-    labelImageLabel = new JLabel(new ImageIcon(image));
+    //panel.remove(0);
+    //labelImageLabel = new JLabel(new ImageIcon(image));
+    //panel.add(labelImageLabel);
+    labelImageLabel.setIcon(new ImageIcon(image));
+    labelImageLabel.repaint();
+    repaint();
+    setVisible(true);
     //add(panel);
     //setVisible(true);
   }
