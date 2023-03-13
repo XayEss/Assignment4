@@ -8,15 +8,9 @@ public class PixelRGB implements Pixel {
   private int blue;
 
   public PixelRGB(int r, int g, int b) throws IllegalArgumentException{
-    if(r < 0 || r > 255){
-      throw new IllegalArgumentException("Red value should be from 0 to 255");
-    }
-    if(g < 0 || g > 255){
-      throw new IllegalArgumentException("Green value should be from 0 to 255");
-    }
-    if(b < 0 || b > 255){
-      throw new IllegalArgumentException("Blue value should be from 0 to 255");
-    }
+    checkBounds(r);
+    checkBounds(g);
+    checkBounds(b);
     red = r;
     green = g;
     blue = b;
@@ -36,6 +30,7 @@ public class PixelRGB implements Pixel {
   }
 
   public PixelRGB(int value){
+      checkBounds(value);
       red = value;
       green = value;
       blue = value;
@@ -98,7 +93,7 @@ public class PixelRGB implements Pixel {
   @Override
   public int getGreyScale() {
     //return (int)(0.3 * red + 0.59 * green + 0.11 * blue);
-    return (red/3 + green/3 + blue/3);
+    return (red + green + blue)/3;
   }
 
   @Override

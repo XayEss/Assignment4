@@ -37,8 +37,9 @@ public interface Pixel {
    * Change the brightness of the pixel. Negative values decrease the brightness, positive
    * values increase the brightness.
    * @param value the value by which to change the brightness.
+   * @return a new pixel with the changed brightness.
    */
-  void alterBrightness(int value);
+  Pixel alterBrightness(int value);
 
   /**
    * Gets the value (the maximum value among channels) of the pixel.

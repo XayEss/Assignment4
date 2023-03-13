@@ -1,0 +1,71 @@
+package model.implementation;
+
+import java.util.HashMap;
+import java.util.Map;
+import model.interfaces.Image;
+import model.interfaces.ImageHandler;
+import model.interfaces.ImageProcessor;
+
+public class ImageHandlerImpl implements ImageHandler{
+  private final Map<String, Image> nameToImage;
+  private ImageProcessor imageProcessor;
+
+  public ImageHandlerImpl(ImageProcessor processor){
+    nameToImage = new HashMap<>();
+    imageProcessor = processor;
+  }
+
+  @Override
+  public void getChannel(String name, int channel, String saveName) {
+    saveWithName(saveName, imageProcessor.getChannel(getByName(name), channel));
+  }
+
+  @Override
+  public void flipImage(String name, boolean horizontal, String saveName) {
+    saveWithName(saveName, imageProcessor.flipImage(getByName(name), horizontal));
+  }
+
+  @Override
+  public void getValue(String name, String saveName) {
+    saveWithName(saveName, imageProcessor.getValue(getByName(name)));
+  }
+
+  @Override
+  public void getIntensity(String name, String saveName) {
+    saveWithName(saveName, imageProcessor.getIntensity(getByName(name)));
+  }
+
+  @Override
+  public void getLuma(String name, String saveName) {
+    saveWithName(saveName, imageProcessor.getLuma(getByName(name)));
+  }
+
+  @Override
+  public void alterBrightness(String name, int value, String saveName) {
+    saveWithName(saveName, imageProcessor.alterBrightness(getByName(name), value));
+  }
+
+  @Override
+  public void getSplitChannels(String name, String redSaveName, String greenSaveName, String blueSaveName) {
+    Image[] split = imageProcessor.getSplitChannels(getByName(name));
+    saveWithName(redSaveName, split[0]);
+    saveWithName(greenSaveName, split[0]);
+    saveWithName(blueSaveName, split[0]);
+  }
+
+  @Override
+  public void combineGreyScaleImages(String redName, String greenName, String blueName, String saveName) {
+    saveWithName(saveName, imageProcessor.combineGreyScaleImages(getByName(redName),
+        getByName(greenName), getByName(blueName)));
+  }
+
+  @Override
+  public Image getByName(String name) {
+    return nameToImage.get(name);
+  }
+
+  @Override
+  public void saveWithName(String name, Image image) {
+    nameToImage.put(name, image);
+  }
+}
