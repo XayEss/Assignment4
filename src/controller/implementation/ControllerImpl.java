@@ -6,6 +6,7 @@ import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
 import model.interfaces.Image;
 import model.interfaces.ImageHandler;
+import view.intefraces.Output;
 
 /**
  * An implementation of the controller for image manipulation.
@@ -14,7 +15,7 @@ public class ControllerImpl implements Controller {
   ImageInput imageInput;
   ImageSaver imageSaver;
   Input input;
-  //Output output;
+  Output output;
   ImageHandler imageHandler;
 
   public ControllerImpl(ImageInput imageInput) {
@@ -22,11 +23,12 @@ public class ControllerImpl implements Controller {
   }
 
   public ControllerImpl(ImageInput imageInput, ImageSaver imageSaver, Input input,
-      ImageHandler imageHandler) {
+      ImageHandler imageHandler, Output output) {
     this.imageInput = imageInput;
     this.imageSaver = imageSaver;
     this.input = input;
     this.imageHandler = imageHandler;
+    this.output = output;
   }
 
 
@@ -36,38 +38,38 @@ public class ControllerImpl implements Controller {
   }
 
   @Override
-  public void getChannel(String name, String resultName, int channel) {
+  public void separateImageChannel(String name, String resultName, int channel) {
     imageHandler.getChannel(name, channel, resultName);
   }
 
   @Override
-  public void flipImage(String name, String resultName, boolean horizontal) {
+  public void createFlippedImage(String name, String resultName, boolean horizontal) {
     imageHandler.flipImage(name, horizontal, resultName);
   }
 
   @Override
-  public void getValue(String name, String resultName) {
+  public void createValueImage(String name, String resultName) {
     imageHandler.getValue(name, resultName);
   }
 
   @Override
-  public void getIntensity(String name, String resultName) {
+  public void createIntensityImage(String name, String resultName) {
     imageHandler.getIntensity(name, resultName);
   }
 
   @Override
-  public void getLuma(String name, String resultName) {
+  public void createLumaImage(String name, String resultName) {
     imageHandler.getLuma(name, resultName);
   }
 
   @Override
-  public void alterBrightness(String name, String resultName, int value) {
+  public void alterImageBrightness(String name, String resultName, int value) {
     imageHandler.alterBrightness(name, value, resultName);
   }
 
   @Override
-  public void getSplitChannels(String name, String resultName) {
-    ;
+  public void splitImageChannels(String name, String redResultName, String greenResultName, String blueResultName) {
+    imageHandler.getSplitChannels(name, redResultName, greenResultName, blueResultName);
   }
 
   @Override
@@ -78,12 +80,12 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void loadImage(String path, String name) {
-
+    imageHandler.saveWithName(name, imageInput.readFile(path));
   }
 
   @Override
   public void saveImage(String path, String name, String saveName) {
-
+    imageSaver.save(path, imageHandler.getByName(name));
   }
 
   @Override

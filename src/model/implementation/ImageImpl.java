@@ -19,13 +19,14 @@ public class ImageImpl implements Image {
 
   @Override
   public Image getImageChannel(int channel) {
-    Pixel[][] oneChannel = new Pixel[getHeight()][getWidth()];
-    for(int i = 0; i < getHeight(); i++){
-      for(int j = 0; j < getWidth(); j++){
-        oneChannel[i][j] = pixels[i][j].getOneChanneledPixel(channel);
-      }
-    }
-    return new ImageImpl(oneChannel);
+//    Pixel[][] oneChannel = new Pixel[getHeight()][getWidth()];
+//    for(int i = 0; i < getHeight(); i++){
+//      for(int j = 0; j < getWidth(); j++){
+//        oneChannel[i][j] = pixels[i][j].getOneChanneledPixel(channel);
+//      }
+//    }
+//    return new ImageImpl(oneChannel);
+    return manipulationHelper(p -> p.getOneChanneledPixel(channel));
   }
 
   @Override
@@ -45,13 +46,14 @@ public class ImageImpl implements Image {
 
   @Override
   public Image getValueImage() {
-    Pixel[][] valuePixels = new Pixel[getHeight()][getWidth()];
-    for(int i = 0; i < getHeight(); i++) {
-      for (int j = 0; j < getWidth(); j++) {
-        valuePixels[i][j] = new PixelGreyscale(pixels[i][j].getValue());
-      }
-    }
-    return new ImageImpl(valuePixels);
+//    Pixel[][] valuePixels = new Pixel[getHeight()][getWidth()];
+//    for(int i = 0; i < getHeight(); i++) {
+//      for (int j = 0; j < getWidth(); j++) {
+//        valuePixels[i][j] = new PixelGreyscale(pixels[i][j].getValue());
+//      }
+//    }
+//    return new ImageImpl(valuePixels);
+    return manipulationHelper(p -> new PixelRGB(p.getValue()));
   }
 
   @Override
@@ -66,42 +68,36 @@ public class ImageImpl implements Image {
 //      }
 //    }
 //    return new ImageImpl(intensityPixels);
-    return higherOrderFunction((p)->new PixelRGB(p.getIntensity()));
+    return manipulationHelper((p)->new PixelRGB(p.getIntensity()));
   }
 
   @Override
   public Image getLumaImage() {
-    Pixel[][] lumaPixels = new Pixel[getHeight()][getWidth()];
-    for(int i = 0; i < getHeight(); i++) {
-      for (int j = 0; j < getWidth(); j++) {
-        int luma = pixels[i][j].getLuma();
-        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
-        lumaPixels[i][j] = new PixelRGB(luma,luma,luma);
-      }
-    }
-    return new ImageImpl(lumaPixels);
+//    Pixel[][] lumaPixels = new Pixel[getHeight()][getWidth()];
+//    for(int i = 0; i < getHeight(); i++) {
+//      for (int j = 0; j < getWidth(); j++) {
+//        int luma = pixels[i][j].getLuma();
+//        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
+//        lumaPixels[i][j] = new PixelRGB(luma,luma,luma);
+//      }
+//    }
+//    return new ImageImpl(lumaPixels);
+    return manipulationHelper((p)->new PixelRGB(p.getLuma()));
   }
 
   @Override
   public Image alterBrightness(int value) {
-    for(int i = 0; i < getHeight(); i++) {
-      for (int j = 0; j < getWidth(); j++) {
-        pixels[i][j].alterBrightness(value);
-      }
-    }
-    return this;
+    return manipulationHelper(p -> p.alterBrightness(value));
   }
 
-  private Image higherOrderFunction(Function<Pixel, Pixel> function){
-    Pixel[][] lumaPixels = new Pixel[getHeight()][getWidth()];
+  private Image manipulationHelper(Function<Pixel, Pixel> function){
+    Pixel[][] changedPixels = new Pixel[getHeight()][getWidth()];
     for(int i = 0; i < getHeight(); i++) {
       for (int j = 0; j < getWidth(); j++) {
-        int luma = pixels[i][j].getLuma();
-        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
-        lumaPixels[i][j] = function.apply(pixels[i][j]);
+        changedPixels[i][j] = function.apply(pixels[i][j]);
       }
     }
-    return new ImageImpl(lumaPixels);
+    return new ImageImpl(changedPixels);
   }
 
   @Override
@@ -141,13 +137,7 @@ public class ImageImpl implements Image {
 
   @Override
   public Image getGreyscaleImage() {
-    Pixel[][] greyPixels = new Pixel[getHeight()][getWidth()];
-    for(int i = 0; i < getHeight(); i++) {
-      for (int j = 0; j < getWidth(); j++) {
-        greyPixels[i][j] = new PixelRGB(pixels[i][j].getGreyScale());
-      }
-    }
-    return new ImageImpl(greyPixels);
+    return manipulationHelper(p -> new PixelRGB(p.getGreyScale()));
   }
 
   @Override

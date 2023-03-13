@@ -17,45 +17,45 @@ public interface Controller {
    * @param name the name of the image.
    * @param channel the channel to get from the picture.
    */
-  void getChannel(String name, String resultName, int channel);
+  void separateImageChannel(String name, String resultName, int channel);
 
   /**
    * Flips the image horizontally if horizontal is true, otherwise vertical.
    * @param name name of the image to flip.
    * @param horizontal the axis to flip.
    */
-  void flipImage(String name, String resultName, boolean horizontal);
+  void createFlippedImage(String name, String resultName, boolean horizontal);
 
   /**
    * Gets an image that visualizes the Values of each pixel.
    * @param name name of the image to get the value image from.
    */
-  void getValue(String name, String resultName);
+  void createValueImage(String name, String resultName);
 
   /**
    * Calculates and returns an image that visualizes the intensity of the image.
    * @param name name of the image from which the visualization of intensity will be made.
    */
-  void getIntensity(String name, String resultName);
+  void createIntensityImage(String name, String resultName);
 
   /**
    Calculates and returns an image that visualizes the luma of the image.
    * @param name name of the image from which the visualization of luma will be made.
    */
-  void getLuma(String name, String resultName);
+  void createLumaImage(String name, String resultName);
 
   /**
    * Changes the brightness of the image by a given amount.
    * @param name name of image which will be changed.
    * @param value the amount to change.
    */
-  void alterBrightness(String name, String resultName, int value);
+  void alterImageBrightness(String name, String resultName, int value);
 
   /**
    * Splits an image into all it's separate channels.
    * @param name name of the image to split.
    */
-  void getSplitChannels(String name ,String resultName);
+  void splitImageChannels(String name, String redResultName, String greenResultName, String blueResultName);
 
   /**
    * Combines three greyscale images into one three channeled image.
