@@ -16,43 +16,47 @@ public class ImageHandlerImpl implements ImageHandler{
   }
 
   @Override
-  public Image getChannel(String name, int channel) {
-    return imageProcessor.getChannel(getByName(name), channel);
+  public void getChannel(String name, int channel, String saveName) {
+    saveWithName(saveName, imageProcessor.getChannel(getByName(name), channel));
   }
 
   @Override
-  public Image flipImage(String name, boolean horizontal) {
-    return imageProcessor.flipImage(getByName(name), horizontal);
+  public void flipImage(String name, boolean horizontal, String saveName) {
+    saveWithName(saveName, imageProcessor.flipImage(getByName(name), horizontal));
   }
 
   @Override
-  public Image getValue(String name) {
-    return imageProcessor.getValue(getByName(name));
+  public void getValue(String name, String saveName) {
+    saveWithName(saveName, imageProcessor.getValue(getByName(name)));
   }
 
   @Override
-  public Image getIntensity(String name) {
-    return imageProcessor.getIntensity(getByName(name));
+  public void getIntensity(String name, String saveName) {
+    saveWithName(saveName, imageProcessor.getIntensity(getByName(name)));
   }
 
   @Override
-  public Image getLuma(String name) {
-    return imageProcessor.getLuma(getByName(name));
+  public void getLuma(String name, String saveName) {
+    saveWithName(saveName, imageProcessor.getLuma(getByName(name)));
   }
 
   @Override
-  public Image alterBrightness(String name, int value) {
-    return imageProcessor.alterBrightness(getByName(name), value);
+  public void alterBrightness(String name, int value, String saveName) {
+    saveWithName(saveName, imageProcessor.alterBrightness(getByName(name), value));
   }
 
   @Override
-  public Image[] getSplitChannels(String name) {
-    return imageProcessor.getSplitChannels(getByName(name));
+  public void getSplitChannels(String name, String redSaveName, String greenSaveName, String blueSaveName) {
+    Image[] split = imageProcessor.getSplitChannels(getByName(name));
+    saveWithName(redSaveName, split[0]);
+    saveWithName(greenSaveName, split[0]);
+    saveWithName(blueSaveName, split[0]);
   }
 
   @Override
-  public Image combineGreyScaleImages(String redName, String greenName, String blueName) {
-    return imageProcessor.combineGreyScaleImages(getByName(redName), getByName(greenName), getByName(blueName));
+  public void combineGreyScaleImages(String redName, String greenName, String blueName, String saveName) {
+    saveWithName(saveName, imageProcessor.combineGreyScaleImages(getByName(redName),
+        getByName(greenName), getByName(blueName)));
   }
 
   @Override

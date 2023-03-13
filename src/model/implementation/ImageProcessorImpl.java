@@ -4,6 +4,9 @@ import model.interfaces.Image;
 import model.interfaces.ImageProcessor;
 import model.interfaces.Pixel;
 
+/**
+ * Implementation for ImageProcessor, to process given images.
+ */
 public class ImageProcessorImpl implements ImageProcessor {
 
   @Override

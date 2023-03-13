@@ -2,7 +2,6 @@ import controller.implementation.ImageUtil;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 import javax.imageio.ImageIO;
 import model.implementation.ImageImpl;
 import model.implementation.ImageProcessorImpl;
@@ -30,7 +29,7 @@ public class Main {
     pixelMap[1][0] = pixel4;
     pixelMap[1][1] = pixel5;
     pixelMap[1][2] = pixel6;
-    Image koala = new ImageImpl(ImageUtil.readPPM("resources/images/ppm/koala.ppm"));
+    Image koala = new ImageUtil().readFile("resources/images/ppm/koala.ppm");
     System.out.println("---------------");
     VisualizeImage vi = new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala));
     Image koalaRedGreyscale = koala.getImageChannel(0).getGreyscaleImage();

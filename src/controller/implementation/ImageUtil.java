@@ -1,9 +1,12 @@
 package controller.implementation;
 
+import controller.interfaces.ImageInput;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
+import model.implementation.ImageImpl;
 import model.implementation.PixelRGB;
+import model.interfaces.Image;
 import model.interfaces.Pixel;
 
 
@@ -11,14 +14,14 @@ import model.interfaces.Pixel;
  * This class contains utility methods to read a PPM image from file and simply print its contents. Feel free to change this method 
  *  as required.
  */
-public class ImageUtil {
+public class ImageUtil implements ImageInput {
 
   /**
    * Read an image file in the PPM format and print the colors.
    *
    * @param filename the path of the file. 
    */
-  public static Pixel[][] readPPM(String filename) {
+  public Image readFile(String filename) {
     Scanner sc;
     
     try {
@@ -62,7 +65,7 @@ public class ImageUtil {
             //System.out.println("Color of pixel ("+j+","+i+"): "+ r+","+g+","+b);
         }
     }
-    return pixels;
+    return new ImageImpl(pixels);
   }
 }
 
