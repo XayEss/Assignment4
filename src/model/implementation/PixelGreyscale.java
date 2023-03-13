@@ -34,8 +34,9 @@ public class PixelGreyscale implements Pixel {
   }
 
   @Override
-  public void alterBrightness(int value) {
-    greyscale = calculateChangeValue(greyscale, value);
+  public PixelGreyscale alterBrightness(int value) {
+    //greyscale = calculateChangeValue(greyscale, value);
+    return null;
   }
 
   @Override
