@@ -9,6 +9,9 @@ import model.implementation.PixelRGB;
 import model.interfaces.Image;
 import model.interfaces.Pixel;
 
+// Hashmap {function-code, function}
+// Hashmap {Image-name: Image-path}
+// Function (Input-image-name, Output-image-name, function-code? )
 
 /**
  * This class contains utility methods to read a PPM image from file and simply print its contents. Feel free to change this method 

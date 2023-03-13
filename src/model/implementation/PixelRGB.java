@@ -15,6 +15,7 @@ public class PixelRGB implements Pixel {
     green = g;
     blue = b;
   }
+
   public PixelRGB(Pixel pixel){
     if(pixel.getNumberOfChannels() == 3){
       red = pixel.getChannel(0);
@@ -33,7 +34,6 @@ public class PixelRGB implements Pixel {
       red = value;
       green = value;
       blue = value;
-
   }
 
   @Override
