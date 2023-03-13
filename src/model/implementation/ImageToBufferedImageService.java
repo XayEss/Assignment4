@@ -8,6 +8,7 @@ public class ImageToBufferedImageService {
   public static BufferedImage convertToBuffered(Image image){
     return ppm(image.getWidth(), image.getHeight(), 255, image.getBytes());
   }
+
   static public BufferedImage ppm(int width, int height, int maxcolval, byte[] data){
     if(maxcolval<256){
       BufferedImage image=new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);

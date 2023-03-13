@@ -69,15 +69,16 @@ public class PixelRGB implements Pixel {
   }
 
   @Override
-  public void alterBrightness(int value) {
+  public Pixel alterBrightness(int value) {
     red = calculateChangeValue(red, value);
     green = calculateChangeValue(green, value);
     blue = calculateChangeValue(blue, value);
+    return new PixelRGB(red, green, blue);
   }
 
   @Override
   public int getValue() {
-    return red > green ? (red > blue ? red : blue) : (green > blue ? green : blue);
+    return Math.max(red, Math.max(blue, green));
   }
 
   @Override
