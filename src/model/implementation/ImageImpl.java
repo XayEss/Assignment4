@@ -94,12 +94,12 @@ public class ImageImpl implements Image {
 
   @Override
   public String getSize() {
-    return null;
+    return "" + this.getWidth() + " x " + this.getHeight();
   }
 
   @Override
   public void setPixel(int row, int column, int channel, int value) {
-
+    pixels[row][column].setChannel(channel, value);
   }
 
   @Override
@@ -119,7 +119,6 @@ public class ImageImpl implements Image {
     }
     return byteImage;
   }
-
 
 
   @Override
