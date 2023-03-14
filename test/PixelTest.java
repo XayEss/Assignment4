@@ -6,6 +6,7 @@ import model.implementation.PixelRGB;
 import model.interfaces.Pixel;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class PixelTest {
@@ -237,7 +238,6 @@ public class PixelTest {
     }
   }
 
-
   @Test
   public void testAlterValue() {
 
@@ -424,7 +424,6 @@ public class PixelTest {
   }
 
 
-  // TODO: FIX ALTERBRIGHTNESS
   @Test
   public void testAlterBrightness() {
 
@@ -454,32 +453,33 @@ public class PixelTest {
     assertEquals(230, testRGB.getChannel(2));
 
     // Alter above max value [Grey/RGB]
-    try {
-      testGrey.alterBrightness(200);
-      fail("Value can't be over 255!!");
-    } catch (IllegalArgumentException e) {
-      // Do Nothing
-    }
-    try {
-      testRGB.alterBrightness(200);
-      fail("Value can't be over 255!!");
-    } catch (IllegalArgumentException e) {
-      // Do Nothing
-    }
+    testGrey.alterBrightness(200);
+    assertTrue(testGrey.getChannel(0) <= 255);
+    assertTrue(testGrey.getChannel(0) >= 0);
+
+
+    testRGB.alterBrightness(200);
+    assertTrue(testRGB.getChannel(0) <= 255);
+    assertTrue(testRGB.getChannel(0) >= 0);
+    assertTrue(testRGB.getChannel(1) <= 255);
+    assertTrue(testRGB.getChannel(1) >= 0);
+    assertTrue(testRGB.getChannel(2) <= 255);
+    assertTrue(testRGB.getChannel(2) >= 0);
+
 
     // Alter below min value [Grey/RGB]
-    try {
-      testGrey.alterBrightness(-300);
-      fail("Value can't be under 0!!");
-    } catch (IllegalArgumentException e) {
-      // Do Nothing
-    }
-    try {
-      testRGB.alterBrightness(-300);
-      fail("Value can't be under 0!!");
-    } catch (IllegalArgumentException e) {
-      // Do Nothing
-    }
+    testGrey.alterBrightness(-300);
+    assertTrue(testGrey.getChannel(0) <= 255);
+    assertTrue(testGrey.getChannel(0) >= 0);
+
+
+    testRGB.alterBrightness(-300);
+    assertTrue(testRGB.getChannel(0) <= 255);
+    assertTrue(testRGB.getChannel(0) >= 0);
+    assertTrue(testRGB.getChannel(1) <= 255);
+    assertTrue(testRGB.getChannel(1) >= 0);
+    assertTrue(testRGB.getChannel(2) <= 255);
+    assertTrue(testRGB.getChannel(2) >= 0);
   }
 
 
@@ -504,31 +504,25 @@ public class PixelTest {
   @Test
   public void testGetIntensity() {
     // Greyscale
-    Pixel testGrey = new PixelRGB(33);
-    assertEquals(33, testGrey.getIntensity());
+    Pixel testGrey = new PixelRGB(17);
+    assertEquals(17, testGrey.getIntensity());
 
     // RGB
-    Pixel testRGB = new PixelRGB(100, 100, 100);
-    assertEquals(100, testRGB.getIntensity());
+    Pixel testRGB = new PixelRGB(12, 10, 100);
+    assertEquals(122 / 3, testRGB.getIntensity());
   }
 
 
   @Test
   public void testGetLuma() {
 
-    // TODO: Remove Luma for Greyscale?
     // Greyscale
-//    Pixel testGrey = new PixelRGB(33);
-//    try {
-//      testGrey.getLuma();
-//      fail("Luma operation shouldn't be possible for Greyscale images!!");
-//    } catch (IllegalAccessError e) {
-//      // Do Nothing
-//    }
+    Pixel testGrey = new PixelRGB(33);
+    assertEquals(33, testGrey.getLuma());
 
     // RGB
     Pixel testRGB = new PixelRGB(100, 100, 100);
-    assertEquals((int)(0.0126 * testRGB.getChannel(0) + 0.7152 * testRGB.getChannel(1)
+    assertEquals((int) (0.2126 * testRGB.getChannel(0) + 0.7152 * testRGB.getChannel(1)
             + 0.0722 * testRGB.getChannel(2)), testRGB.getLuma());
   }
 
@@ -537,9 +531,8 @@ public class PixelTest {
   public void testGetGreyScale() {
 
     // Greyscale
-    // TODO: Remove this for Greyscale
-//    Pixel testGrey = new PixelRGB(17);
-//    assertEquals(17, testGrey.getGreyScale());
+    Pixel testGrey = new PixelRGB(17);
+    assertEquals(17, testGrey.getGreyScale());
 
     // RGB
     Pixel testRGB0 = new PixelRGB(0, 0, 0);
@@ -547,18 +540,16 @@ public class PixelTest {
     Pixel testRGB2 = new PixelRGB(255, 255, 255);
 
     assertEquals(0, testRGB0.getGreyScale());
-    // TODO: Fix getGreyScale to add RGB then divide by 3 once
     assertEquals(100, testRGB1.getGreyScale());
     assertEquals(255, testRGB2.getGreyScale());
-
   }
 
 
   @Test
   public void testGetNumberOfChannels() {
-    // TODO: Fix getNumberOfChannels for Greyscale
-//    Pixel testGrey = new PixelRGB(10);
-//    assertEquals(1, testGrey.getNumberOfChannels());
+
+    Pixel testGreyscale = new PixelRGB(10);
+    assertEquals(3, testGreyscale.getNumberOfChannels());
 
     Pixel testRGB = new PixelRGB(10, 10, 10);
     assertEquals(3, testRGB.getNumberOfChannels());

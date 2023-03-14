@@ -88,12 +88,14 @@ public class PixelRGB implements Pixel {
 
   @Override
   public int getLuma() {
-    return (int)(0.0126 * red + 0.7152 * green + 0.0722 * blue);
+    if (red == green && green == blue) {
+      return red;
+    }
+    return (int) (0.2126 * red + 0.7152 * green + 0.0722 * blue);
   }
 
   @Override
   public int getGreyScale() {
-    //return (int)(0.3 * red + 0.59 * green + 0.11 * blue);
     return (red + green + blue)/3;
   }
 
@@ -119,6 +121,7 @@ public class PixelRGB implements Pixel {
     }
   }
 
+  // TODO: Account for saturation in RGB image
   private int calculateChangeValue(int initialValue, int value){
     int returnValue;
     if (initialValue + value > 255){
