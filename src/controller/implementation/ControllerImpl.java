@@ -4,6 +4,7 @@ import controller.interfaces.Controller;
 import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
+import java.io.FileNotFoundException;
 import model.interfaces.Image;
 import model.interfaces.ImageHandler;
 import view.intefraces.Output;
@@ -85,7 +86,11 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void saveImage(String path, String name, String saveName) {
-    imageSaver.save(path, imageHandler.getByName(name));
+    try {
+      imageSaver.save(path, imageHandler.getByName(name));
+    } catch(FileNotFoundException e){
+
+    }
   }
 
   @Override

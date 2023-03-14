@@ -1,4 +1,6 @@
 import controller.implementation.ImageUtil;
+import controller.implementation.PPMImageSaver;
+import controller.interfaces.ImageSaver;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -30,23 +32,20 @@ public class Main {
     pixelMap[1][1] = pixel5;
     pixelMap[1][2] = pixel6;
     Image koala = new ImageUtil().readFile("resources/images/ppm/koala.ppm");
-    System.out.println("---------------");
-    VisualizeImage vi = new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala));
+//    System.out.println("---------------");
+//    VisualizeImage vi = new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala));
     Image koalaRedGreyscale = koala.getImageChannel(0).getGreyscaleImage();
-    Image koalaGreenGreyscale = koala.getImageChannel(1).getGreyscaleImage();
-    Image koalaBlueGreyscale = koala.getImageChannel(2).getGreyscaleImage();
-    //new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.getLumaImage().getBytes()));
-    ImageProcessor imageProcessor = new ImageProcessorImpl();
-    Image combined = imageProcessor.combineGreyScaleImages(koalaRedGreyscale, koalaGreenGreyscale, koalaBlueGreyscale);
-    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala.getGreyscaleImage()));
-    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(combined.flipImage(true).flipImage(false)));
-//    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaRedGreyscale.getBytes()));
-//    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaGreenGreyscale.getBytes()));
-//    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koalaBlueGreyscale.getBytes()));
-//    new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.alterBrightness(50).getBytes()));
-    //vi.changeImage(ImageToBufferedImageService.convertToBuffered(koala.getImageChannel(0)));
-    //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala.getLumaImage()));
-
+//    Image koalaGreenGreyscale = koala.getImageChannel(1).getGreyscaleImage();
+//    Image koalaBlueGreyscale = koala.getImageChannel(2).getGreyscaleImage();
+//    //new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.getLumaImage().getBytes()));
+//    ImageProcessor imageProcessor = new ImageProcessorImpl();
+//    Image combined = imageProcessor.combineGreyScaleImages(koalaRedGreyscale, koalaGreenGreyscale, koalaBlueGreyscale);
+//    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala.alterBrightness(60)));
+//    Image koalabrighter = koala.alterBrightness(120);
+//    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koalabrighter));
+//    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koalabrighter.alterBrightness(-120)));
+      ImageSaver saver = new PPMImageSaver();
+      saver.save("resources/images/ppm/koala-red.ppm", koalaRedGreyscale);
 
   }
 

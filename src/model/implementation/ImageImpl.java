@@ -19,13 +19,6 @@ public class ImageImpl implements Image {
 
   @Override
   public Image getImageChannel(int channel) {
-//    Pixel[][] oneChannel = new Pixel[getHeight()][getWidth()];
-//    for(int i = 0; i < getHeight(); i++){
-//      for(int j = 0; j < getWidth(); j++){
-//        oneChannel[i][j] = pixels[i][j].getOneChanneledPixel(channel);
-//      }
-//    }
-//    return new ImageImpl(oneChannel);
     return manipulationHelper(p -> p.getOneChanneledPixel(channel));
   }
 
@@ -46,42 +39,16 @@ public class ImageImpl implements Image {
 
   @Override
   public Image getValueImage() {
-//    Pixel[][] valuePixels = new Pixel[getHeight()][getWidth()];
-//    for(int i = 0; i < getHeight(); i++) {
-//      for (int j = 0; j < getWidth(); j++) {
-//        valuePixels[i][j] = new PixelGreyscale(pixels[i][j].getValue());
-//      }
-//    }
-//    return new ImageImpl(valuePixels);
     return manipulationHelper(p -> new PixelRGB(p.getValue()));
   }
 
   @Override
   public Image getIntensityImage() {
-//    Pixel[][] intensityPixels = new Pixel[getHeight()][getWidth()];
-//    for(int i = 0; i < getHeight(); i++) {
-//      for (int j = 0; j < getWidth(); j++) {
-//        //intensityPixels[i][j] = new PixelGreyscale(pixels[i][j].getIntensity());
-//        int intensity = pixels[i][j].getLuma();
-//        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
-//        intensityPixels[i][j] = new PixelRGB(intensity,intensity,intensity);
-//      }
-//    }
-//    return new ImageImpl(intensityPixels);
     return manipulationHelper((p)->new PixelRGB(p.getIntensity()));
   }
 
   @Override
   public Image getLumaImage() {
-//    Pixel[][] lumaPixels = new Pixel[getHeight()][getWidth()];
-//    for(int i = 0; i < getHeight(); i++) {
-//      for (int j = 0; j < getWidth(); j++) {
-//        int luma = pixels[i][j].getLuma();
-//        //lumaPixels[i][j] = new PixelGreyscale(pixels[i][j].getLuma());
-//        lumaPixels[i][j] = new PixelRGB(luma,luma,luma);
-//      }
-//    }
-//    return new ImageImpl(lumaPixels);
     return manipulationHelper((p)->new PixelRGB(p.getLuma()));
   }
 

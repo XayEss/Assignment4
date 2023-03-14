@@ -27,9 +27,12 @@ public class ImageToBufferedImageService {
       else{
         for(int y=0;y<height;y++){
           for(int x=0;(x<width)&&((k+3)<data.length);x++){
-            r=data[k++] & 0xFF;r=((r*255)+(maxcolval>>1))/maxcolval;  // scale to 0..255 range
-            g=data[k++] & 0xFF;g=((g*255)+(maxcolval>>1))/maxcolval;
-            b=data[k++] & 0xFF;b=((b*255)+(maxcolval>>1))/maxcolval;
+            r=data[k++] & 0xFF;
+            r=((r*255)+(maxcolval>>1))/maxcolval;  // scale to 0..255 range
+            g=data[k++] & 0xFF;
+            g=((g*255)+(maxcolval>>1))/maxcolval;
+            b=data[k++] & 0xFF;
+            b=((b*255)+(maxcolval>>1))/maxcolval;
             pixel=0xFF000000+(r<<16)+(g<<8)+b;
             image.setRGB(x,y,pixel);
           }
@@ -44,9 +47,12 @@ public class ImageToBufferedImageService {
       int r,g,b,k=0,pixel;
       for(int y=0;y<height;y++){
         for(int x=0;(x<width)&&((k+6)<data.length);x++){
-          r=(data[k++] & 0xFF)|((data[k++] & 0xFF)<<8);r=((r*255)+(maxcolval>>1))/maxcolval;  // scale to 0..255 range
-          g=(data[k++] & 0xFF)|((data[k++] & 0xFF)<<8);g=((g*255)+(maxcolval>>1))/maxcolval;
-          b=(data[k++] & 0xFF)|((data[k++] & 0xFF)<<8);b=((b*255)+(maxcolval>>1))/maxcolval;
+          r=(data[k++] & 0xFF)|((data[k++] & 0xFF)<<8);
+          r=((r*255)+(maxcolval>>1))/maxcolval;  // scale to 0..255 range
+          g=(data[k++] & 0xFF)|((data[k++] & 0xFF)<<8);
+          g=((g*255)+(maxcolval>>1))/maxcolval;
+          b=(data[k++] & 0xFF)|((data[k++] & 0xFF)<<8);
+          b=((b*255)+(maxcolval>>1))/maxcolval;
           pixel=0xFF000000+(r<<16)+(g<<8)+b;
           image.setRGB(x,y,pixel);
         }
