@@ -89,7 +89,7 @@ public class ControllerImpl implements Controller {
     try {
       imageSaver.save(path, imageHandler.getByName(name));
     } catch(FileNotFoundException e){
-
+      System.out.println("Wrong path name");
     }
   }
 

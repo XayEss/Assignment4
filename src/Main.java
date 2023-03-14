@@ -31,10 +31,10 @@ public class Main {
     pixelMap[1][0] = pixel4;
     pixelMap[1][1] = pixel5;
     pixelMap[1][2] = pixel6;
-    Image koala = new ImageUtil().readFile("resources/images/ppm/koala.ppm");
+    Image koala = new ImageUtil().readFile("resources/images/ppm/koala2.ppm");
 //    System.out.println("---------------");
-//    VisualizeImage vi = new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala));
-    Image koalaRedGreyscale = koala.getImageChannel(0).getGreyscaleImage();
+    //VisualizeImage vi = new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala));
+      //Image koalaRedGreyscale = koala.getImageChannel(0);//.getGreyscaleImage();
 //    Image koalaGreenGreyscale = koala.getImageChannel(1).getGreyscaleImage();
 //    Image koalaBlueGreyscale = koala.getImageChannel(2).getGreyscaleImage();
 //    //new VisualizeImage(ppm(koala.getWidth(), koala.getHeight(), 255, koala.getLumaImage().getBytes()));
@@ -44,8 +44,9 @@ public class Main {
 //    Image koalabrighter = koala.alterBrightness(120);
 //    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koalabrighter));
 //    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koalabrighter.alterBrightness(-120)));
+      //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koalaRedGreyscale));
       ImageSaver saver = new PPMImageSaver();
-      saver.save("resources/images/ppm/koala-red.ppm", koalaRedGreyscale);
+      saver.save("resources/images/ppm/koala-red.ppm", koala.getImageChannel(0));
 
   }
 

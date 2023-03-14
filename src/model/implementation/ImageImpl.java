@@ -120,6 +120,8 @@ public class ImageImpl implements Image {
     return byteImage;
   }
 
+
+
   @Override
   public String toString() {
     return Arrays.deepToString(pixels);
