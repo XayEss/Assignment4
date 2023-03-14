@@ -114,7 +114,7 @@ public class ImageImpl implements Image {
       for(int j = 0; j < getWidth(); j++){
         byteImage[i*getWidth()*3+j*3] = (byte)pixels[i][j].getChannel(0);
         byteImage[i*getWidth()*3+j*3+1] = (byte)pixels[i][j].getChannel(1);
-        byteImage[i*getWidth()*3+j*3+2] = (byte)pixels[i][j].getChannel(2);
+        byteImage[i * getWidth() * 3 + j * 3 + 2] = (byte) pixels[i][j].getChannel(2);
       }
     }
     return byteImage;
@@ -126,4 +126,19 @@ public class ImageImpl implements Image {
   public String toString() {
     return Arrays.deepToString(pixels);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ImageImpl image = (ImageImpl) o;
+    return Arrays.deepEquals(pixels, image.pixels);
+  }
+
+  @Override
+  public int hashCode() {
+    return Arrays.deepHashCode(pixels);
+  }
+
+
 }

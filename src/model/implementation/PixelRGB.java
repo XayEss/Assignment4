@@ -1,5 +1,7 @@
 package model.implementation;
 
+import java.util.Objects;
+
 import model.interfaces.Pixel;
 
 public class PixelRGB implements Pixel {
@@ -164,5 +166,18 @@ public class PixelRGB implements Pixel {
         blue = value;
         break;
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    PixelRGB pixelRGB = (PixelRGB) o;
+    return red == pixelRGB.red && green == pixelRGB.green && blue == pixelRGB.blue;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(red, green, blue);
   }
 }
