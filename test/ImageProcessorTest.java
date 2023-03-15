@@ -94,13 +94,21 @@ public class ImageProcessorTest {
 
     Image[] temp = testProcessor.getSplitChannels(testImg);
 
-
-    System.out.println(testImg);
-    System.out.println(temp[0]);
-    System.out.println(temp[1]);
-    System.out.println(temp[2]);
-
     assertEquals(testImg, testProcessor.combineGreyScaleImages(temp[0], temp[1], temp[2]));
   }
+
+
+  @Test
+  public void testCombineThreeImages() {
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImgRed = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage_RedChannel.ppm");
+    Image testImgGreen = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage_GreenChannel.ppm");
+    Image testImgBlue = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage_BlueChannel.ppm");
+
+    ImageProcessor testProcessor = new ImageProcessorImpl();
+
+    assertEquals(testImg, testProcessor.combineGreyScaleImages(testImgRed, testImgGreen, testImgBlue));
+  }
+
 
 }
