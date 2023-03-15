@@ -11,7 +11,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 
   @Override
   public Image getChannel(Image image, int channel) {
-    return null;
+    return image.getImageChannel(channel);
   }
 
   @Override
@@ -52,21 +52,21 @@ public class ImageProcessorImpl implements ImageProcessor {
   @Override
   public Image combineGreyScaleImages(Image first, Image second, Image third) {
     Pixel[][] pixels = new PixelRGB[first.getHeight()][first.getWidth()];
-    for(int i = 0; i < first.getHeight(); i++){
-      for (int j = 0; j < first.getWidth(); j++){
-        pixels[i][j] = new PixelRGB(3*first.getPixelChannel(i,j, 0),
-            3*second.getPixelChannel(i,j, 1), 3*third.getPixelChannel(i,j, 2));
+    for (int i = 0; i < first.getHeight(); i++) {
+      for (int j = 0; j < first.getWidth(); j++) {
+        pixels[i][j] = new PixelRGB(3 * first.getPixelChannel(i, j, 0),
+                3 * second.getPixelChannel(i, j, 1), 3 * third.getPixelChannel(i, j, 2));
       }
     }
     return new ImageImpl(pixels);
   }
 
-  private Image combineThreeImages(Image first, Image second, Image third){
+  private Image combineThreeImages(Image first, Image second, Image third) {
     Pixel[][] pixels = new PixelRGB[first.getHeight()][first.getWidth()];
-    for(int i = 0; i < first.getHeight(); i++){
-      for (int j = 0; j < first.getWidth(); j++){
-        pixels[i][j] = new PixelRGB(first.getPixelChannel(i,j, 0),
-            second.getPixelChannel(i,j, 1), third.getPixelChannel(i,j, 2));
+    for (int i = 0; i < first.getHeight(); i++) {
+      for (int j = 0; j < first.getWidth(); j++) {
+        pixels[i][j] = new PixelRGB(first.getPixelChannel(i, j, 0),
+                second.getPixelChannel(i, j, 1), third.getPixelChannel(i, j, 2));
       }
     }
     return new ImageImpl(pixels);
