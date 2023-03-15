@@ -21,7 +21,7 @@ public class VisualizeImage extends JFrame {
    */
   public VisualizeImage(BufferedImage image) {
     setSize(1200, 1200);
-    setDefaultCloseOperation(EXIT_ON_CLOSE);
+    //setDefaultCloseOperation(EXIT_ON_CLOSE);
     imageView(image);
   }
 

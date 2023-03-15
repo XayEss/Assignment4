@@ -15,7 +15,7 @@ public class VisualizeAscii implements Output {
       for (int j = 0; j < image.getWidth(); j++) {
         line.append(getAsciiChar(image.getPixel(i, j).getGreyScale()));
       }
-      System.out.println(line.toString());
+      System.out.println(line);
       line.delete(0, line.length());
     }
   }

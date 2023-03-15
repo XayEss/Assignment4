@@ -71,7 +71,7 @@ public class CommandLineInput implements Input {
           controller.combineGreyScaleImages(name, name2, name3, saveName);
           break;
         case "run":
-          runScript(scanner.next());
+          controller.runScript(scanner.next());
           break;
         case "show":
           name = scanner.next();

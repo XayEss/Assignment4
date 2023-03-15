@@ -12,9 +12,13 @@ import controller.interfaces.Controller;
 import controller.interfaces.Input;
 import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageProcessorImpl;
+import model.implementation.ImageToBufferedImageService;
 import model.implementation.PixelRGB;
+import model.interfaces.Image;
+import model.interfaces.ImageHandler;
 import model.interfaces.Pixel;
 import view.impl.VisualizeAscii;
+import view.impl.VisualizeImage;
 
 /**
  * The Main class is the entry point of the program.
@@ -33,21 +37,12 @@ public class Main {
    * @throws InterruptedException if an error occurs while executing the program
    */
   public static void main(String[] args) throws IOException, InterruptedException {
-    BufferedImage image = ImageIO.read(new File("resources/images/png/koala-blue-greyscale.png"));
-    Pixel pixel = new PixelRGB(1, 1, 1);
-    Pixel pixel2 = new PixelRGB(2, 2, 2);
-    Pixel pixel3 = new PixelRGB(3, 3, 3);
-    Pixel pixel4 = new PixelRGB(4, 4, 4);
-    Pixel pixel5 = new PixelRGB(5, 5, 5);
-    Pixel pixel6 = new PixelRGB(6, 6, 6);
-    Pixel[][] pixelMap = new PixelRGB[2][3];
-    pixelMap[0][0] = pixel;
-    pixelMap[0][1] = pixel2;
-    pixelMap[0][2] = pixel3;
-    pixelMap[1][0] = pixel4;
-    pixelMap[1][1] = pixel5;
-    pixelMap[1][2] = pixel6;
-    //Image koala = new ImageUtil().readFileP6("resources/images/ppm/anime-test.ppm");
+    //Image koala = new ImageUtil().readFile("resources/Koala.ppm");
+    //ImageHandler ih = new ImageHandlerImpl(new ImageProcessorImpl());
+    //ih.saveWithName("koala", koala);
+    //ih.flipImage("koala", false, "koala-dead");
+    //new VisualizeAscii().show(koala);
+    //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(ih.getByName("koala-dead")));
     //    System.out.println("---------------");
     //    VisualizeImage vi = new VisualizeImage(
     //    ImageToBufferedImageService.convertToBuffered(koala));
@@ -73,7 +68,11 @@ public class Main {
     Controller controller = new ControllerImpl(new ImageUtil(), new PPMImageSaver(),
             in, new ImageHandlerImpl(new ImageProcessorImpl()), new VisualizeAscii());
     in.setController(controller);
-    controller.start();
+    //controller.start();
+    controller.loadImage("resources/koala.ppm", "koala");
+    controller.createFlippedImage("koala", "koala-dead", true);
+    controller.runScript("koala-dead");
+    controller.saveImage("resources/dead.ppm", );
   }
 
 }
