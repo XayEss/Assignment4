@@ -23,11 +23,8 @@ public class PPMImageSaver implements ImageSaver {
         writer.println(image.getPixelChannel(i, j, 0));
         writer.println(image.getPixelChannel(i, j, 1));
         writer.println(image.getPixelChannel(i, j, 2));
-        //k+=1;
-        //System.out.println(image.getPixelChannel(i, j, 0) + image.getPixelChannel(i, j, 1) + image.getPixelChannel(i, j, 2));
       }
     }
-    System.out.println(k);
     writer.close();
   }
 }

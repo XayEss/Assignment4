@@ -1,17 +1,24 @@
+import controller.implementation.CommandLineInput;
+import controller.implementation.ControllerImpl;
 import controller.implementation.ImageUtil;
 import controller.implementation.PPMImageSaver;
+import controller.interfaces.Controller;
 import controller.interfaces.ImageSaver;
+import controller.interfaces.Input;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageImpl;
 import model.implementation.ImageProcessorImpl;
 import model.implementation.ImageToBufferedImageService;
 import model.implementation.PixelRGB;
 import model.interfaces.Image;
+import model.interfaces.ImageHandler;
 import model.interfaces.ImageProcessor;
 import model.interfaces.Pixel;
+import view.impl.VisualizeAscii;
 import view.impl.VisualizeImage;
 
 public class Main {
@@ -31,9 +38,9 @@ public class Main {
     pixelMap[1][0] = pixel4;
     pixelMap[1][1] = pixel5;
     pixelMap[1][2] = pixel6;
-    Image koala = new ImageUtil().readFile("resources/images/ppm/koala2.ppm");
+    //Image koala = new ImageUtil().readFileP6("resources/images/ppm/anime-test.ppm");
 //    System.out.println("---------------");
-    //VisualizeImage vi = new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala));
+//    VisualizeImage vi = new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koala));
       //Image koalaRedGreyscale = koala.getImageChannel(0);//.getGreyscaleImage();
 //    Image koalaGreenGreyscale = koala.getImageChannel(1).getGreyscaleImage();
 //    Image koalaBlueGreyscale = koala.getImageChannel(2).getGreyscaleImage();
@@ -45,9 +52,14 @@ public class Main {
 //    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koalabrighter));
 //    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koalabrighter.alterBrightness(-120)));
       //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(koalaRedGreyscale));
-      ImageSaver saver = new PPMImageSaver();
-      saver.save("resources/images/ppm/koala-red.ppm", koala.getImageChannel(0));
-
+      //ImageSaver saver = new PPMImageSaver();
+      //saver.save("resources/images/ppm/koala-red.ppm", koala.getImageChannel(0));
+    //new VisualizeAscii().show(koala);
+    Input in = new CommandLineInput();
+    Controller controller = new ControllerImpl(new ImageUtil(), new PPMImageSaver(),
+        in, new ImageHandlerImpl(new ImageProcessorImpl()), new VisualizeAscii());
+    in.setController(controller);
+    controller.start();
   }
 
 }

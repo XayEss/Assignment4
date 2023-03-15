@@ -52,6 +52,13 @@ public interface Controller {
   void alterImageBrightness(String name, String resultName, int value);
 
   /**
+   * Commands to create a greyscale image of an image with the given name and save under a new name.
+   * @param name the of the image stored in the program.
+   * @param resultName the name under which to save the new image.
+   */
+  void createGreyScaleImage(String name, String resultName);
+
+  /**
    * Splits an image into all it's separate channels.
    * @param name name of the image to split.
    */
@@ -76,9 +83,8 @@ public interface Controller {
    * Save image with the given name to the filesystem with the save name.
    * @param path the path where to save the image.
    * @param name the image name in the program.
-   * @param saveName the name to save with in the filesystem.
    */
-  void saveImage(String path, String name, String saveName);
+  void saveImage(String path, String name);
 
   /**
    * Runs a list of commands from the chosen file.

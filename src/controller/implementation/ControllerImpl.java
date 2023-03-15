@@ -5,8 +5,11 @@ import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
 import java.io.FileNotFoundException;
+import model.implementation.ImageToBufferedImageService;
 import model.interfaces.Image;
 import model.interfaces.ImageHandler;
+import view.impl.VisualizeAscii;
+import view.impl.VisualizeImage;
 import view.intefraces.Output;
 
 /**
@@ -19,9 +22,6 @@ public class ControllerImpl implements Controller {
   Output output;
   ImageHandler imageHandler;
 
-  public ControllerImpl(ImageInput imageInput) {
-    this.imageInput = imageInput;
-  }
 
   public ControllerImpl(ImageInput imageInput, ImageSaver imageSaver, Input input,
       ImageHandler imageHandler, Output output) {
@@ -35,7 +35,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void start() {
-
+    input.startCommandReading();
   }
 
   @Override
@@ -69,6 +69,11 @@ public class ControllerImpl implements Controller {
   }
 
   @Override
+  public void createGreyScaleImage(String name, String resultName) {
+    imageHandler.getGreyscale(name, resultName);
+  }
+
+  @Override
   public void splitImageChannels(String name, String redResultName, String greenResultName, String blueResultName) {
     imageHandler.getSplitChannels(name, redResultName, greenResultName, blueResultName);
   }
@@ -85,7 +90,7 @@ public class ControllerImpl implements Controller {
   }
 
   @Override
-  public void saveImage(String path, String name, String saveName) {
+  public void saveImage(String path, String name) {
     try {
       imageSaver.save(path, imageHandler.getByName(name));
     } catch(FileNotFoundException e){
@@ -95,6 +100,9 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void runScript(String path) {
+    System.out.println("FUCK!!!");
+    new VisualizeAscii().show(imageHandler.getByName(path));
+    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(imageHandler.getByName(path)));
 
   }
 }

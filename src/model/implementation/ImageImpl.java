@@ -27,7 +27,7 @@ public class ImageImpl implements Image {
     Pixel[][] flippedPixels = new Pixel[getHeight()][getWidth()];
     for(int i = 0; i < getHeight(); i++) {
       for (int j = 0; j < getWidth(); j++) {
-        if (!horizontal) {
+        if (horizontal) {
           flippedPixels[i][j] = pixels[i][getWidth() - 1 - j];
         } else {
           flippedPixels[i][j] = pixels[getHeight() - 1 - i][j];

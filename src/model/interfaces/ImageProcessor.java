@@ -50,6 +50,13 @@ public interface ImageProcessor {
   Image alterBrightness(Image image, int value);
 
   /**
+   * Creates a new greyscale image of the given image.
+   * @param image the image to make a greyscale from.
+   * @return a new greyscale image.
+   */
+  Image getGreyscale(Image image);
+
+  /**
    * Splits an image into all it's separate channels.
    * @param image the image to split.
    * @return a list or images, which are the channels of the given image.

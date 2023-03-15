@@ -40,6 +40,11 @@ public class ImageProcessorImpl implements ImageProcessor {
   }
 
   @Override
+  public Image getGreyscale(Image image) {
+    return image.getGreyscaleImage();
+  }
+
+  @Override
   public Image[] getSplitChannels(Image image) {
     return new Image[]{image.getImageChannel(0), image.getImageChannel(1), image.getImageChannel(2)};
   }

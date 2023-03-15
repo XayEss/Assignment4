@@ -42,6 +42,13 @@ public interface ImageHandler {
   void alterBrightness(String name, int value, String saveName);
 
   /**
+   * Makes a new greyscale image of the image with the given name.
+   * @param name the image name to make a greyscale from.
+   * @param saveName the name to save the new image under.
+   */
+  void getGreyscale(String name, String saveName);
+
+  /**
    * Splits an image into all it's separate channels.
    * @param name name of the image to split.
    */

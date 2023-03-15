@@ -5,4 +5,5 @@ public interface Input {
   void startCommandReading();
   void parseInput(String line);
   void runScript(String path);
+  void setController(Controller controller);
 }

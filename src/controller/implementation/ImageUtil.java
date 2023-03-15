@@ -1,6 +1,10 @@
 package controller.implementation;
 
 import controller.interfaces.ImageInput;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.FileInputStream;
@@ -67,6 +71,63 @@ public class ImageUtil implements ImageInput {
             pixels[i][j] = new PixelRGB(r,g,b);
             //System.out.println("Color of pixel ("+j+","+i+"): "+ r+","+g+","+b);
         }
+    }
+    return new ImageImpl(pixels);
+  }
+
+  public Image readFileP6(String filename) {
+    Scanner sc;
+
+    try {
+      sc = new Scanner(new FileInputStream(filename));
+    }
+    catch (FileNotFoundException e) {
+      System.out.println("File "+filename+ " not found!");
+      return null;
+    }
+    StringBuilder builder = new StringBuilder();
+    //read the file line by line, and populate a string. This will throw away any comment lines
+    while (sc.hasNextLine()) {
+      String s = sc.nextLine();
+      if (s.charAt(0)!='#') {
+        builder.append(s+System.lineSeparator());
+      }
+    }
+
+    //now set up the scanner to read from the string we just built
+    sc = new Scanner(builder.toString());
+    System.out.println(builder.toString());
+    String token;
+
+    token = sc.next();
+//    if (!token.equals("P3")) {
+//      System.out.println("Invalid PPM file: plain RAW file should begin with P3");
+//    }
+    int width = sc.nextInt();
+    System.out.println("Width of image: "+width);
+    int height = sc.nextInt();
+    System.out.println("Height of image: "+height);
+    int maxValue = sc.nextInt();
+    System.out.println("Maximum value of a color in this file (usually 255): "+maxValue);
+    builder.delete(0, builder.lastIndexOf("255")+3);
+    System.out.println(builder.toString());
+    InputStream is = new ByteArrayInputStream(builder.toString().getBytes());
+    Pixel[][] pixels = new Pixel[height][width];
+    try {
+      byte[] allbytes = is.readAllBytes();
+      int k = 0;
+      for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+          int r = allbytes[k++];
+          int g = allbytes[k++];
+          int b = allbytes[k++];
+          System.out.println(k);
+          pixels[i][j] = new PixelRGB(r, g, b);
+          //System.out.println("Color of pixel ("+j+","+i+"): "+ r+","+g+","+b);
+        }
+      }
+    }catch (IOException e){
+
     }
     return new ImageImpl(pixels);
   }
