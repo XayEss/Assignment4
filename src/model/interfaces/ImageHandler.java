@@ -1,5 +1,7 @@
 package model.interfaces;
 
+import model.implementation.NoSuchImageException;
+
 /**
  * Interface for handling images.
  */
@@ -11,7 +13,7 @@ public interface ImageHandler {
    * @param name    the name of the image.
    * @param channel the channel to get from the picture.
    */
-  void getChannel(String name, int channel, String saveName);
+  void getChannel(String name, int channel, String saveName) throws NoSuchImageException;
 
   /**
    * Flips the image horizontally if horizontal is true, otherwise vertical.
@@ -19,28 +21,28 @@ public interface ImageHandler {
    * @param name       name of the image to flip.
    * @param horizontal the axis to flip.
    */
-  void flipImage(String name, boolean horizontal, String saveName);
+  void flipImage(String name, boolean horizontal, String saveName) throws NoSuchImageException;
 
   /**
    * Gets an image that visualizes the Values of each pixel.
    *
    * @param name name of the image to get the value image from.
    */
-  void getValue(String name, String saveName);
+  void getValue(String name, String saveName) throws NoSuchImageException;
 
   /**
    * Calculates and returns an image that visualizes the intensity of the image.
    *
    * @param name name of the image from which the visualization of intensity will be made.
    */
-  void getIntensity(String name, String saveName);
+  void getIntensity(String name, String saveName) throws NoSuchImageException;
 
   /**
    * Calculates and returns an image that visualizes the luma of the image.
    *
    * @param name name of the image from which the visualization of luma will be made.
    */
-  void getLuma(String name, String saveName);
+  void getLuma(String name, String saveName) throws NoSuchImageException;
 
   /**
    * Changes the brightness of the image by a given amount.
@@ -48,7 +50,7 @@ public interface ImageHandler {
    * @param name  name of image which will be changed.
    * @param value the amount to change.
    */
-  void alterBrightness(String name, int value, String saveName);
+  void alterBrightness(String name, int value, String saveName) throws NoSuchImageException;
 
   /**
    * Makes a new greyscale image of the image with the given name.
@@ -56,14 +58,15 @@ public interface ImageHandler {
    * @param name     the image name to make a greyscale from.
    * @param saveName the name to save the new image under.
    */
-  void getGreyscale(String name, String saveName);
+  void getGreyscale(String name, String saveName) throws NoSuchImageException;
 
   /**
    * Splits an image into all it's separate channels.
    *
    * @param name name of the image to split.
    */
-  void getSplitChannels(String name, String redSaveName, String greenSaveName, String blueSaveName);
+  void getSplitChannels(String name, String redSaveName, String greenSaveName, String blueSaveName)
+      throws NoSuchImageException;
 
   /**
    * Combines three greyscale images into one three channeled image.
@@ -72,9 +75,10 @@ public interface ImageHandler {
    * @param greenName name of the second image to combine.
    * @param blueName  name of the third image to combine.
    */
-  void combineGreyScaleImages(String redName, String greenName, String blueName, String saveName);
+  void combineGreyScaleImages(String redName, String greenName, String blueName, String saveName)
+      throws NoSuchImageException;
 
-  Image getByName(String name);
+  Image getByName(String name) throws NoSuchImageException;
 
   void saveWithName(String name, Image image);
 

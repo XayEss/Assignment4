@@ -1,6 +1,5 @@
 package model.implementation;
 
-import java.rmi.NoSuchObjectException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,43 +23,45 @@ public class ImageHandlerImpl implements ImageHandler {
   }
 
   @Override
-  public void getChannel(String name, int channel, String saveName) {
+  public void getChannel(String name, int channel, String saveName) throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.getChannel(getByName(name), channel));
   }
 
   @Override
-  public void flipImage(String name, boolean horizontal, String saveName) {
+  public void flipImage(String name, boolean horizontal, String saveName)
+      throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.flipImage(getByName(name), horizontal));
   }
 
   @Override
-  public void getValue(String name, String saveName) {
+  public void getValue(String name, String saveName) throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.getValue(getByName(name)));
   }
 
   @Override
-  public void getIntensity(String name, String saveName) {
+  public void getIntensity(String name, String saveName) throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.getIntensity(getByName(name)));
   }
 
   @Override
-  public void getLuma(String name, String saveName) {
+  public void getLuma(String name, String saveName) throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.getLuma(getByName(name)));
   }
 
   @Override
-  public void alterBrightness(String name, int value, String saveName) {
+  public void alterBrightness(String name, int value, String saveName) throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.alterBrightness(getByName(name), value));
   }
 
   @Override
-  public void getGreyscale(String name, String saveName) {
+  public void getGreyscale(String name, String saveName) throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.getGreyscale(getByName(name)));
   }
 
   @Override
   public void getSplitChannels(String name, String redSaveName,
-                               String greenSaveName, String blueSaveName) {
+                               String greenSaveName, String blueSaveName)
+      throws NoSuchImageException {
     Image[] split = imageProcessor.getSplitChannels(getByName(name));
     saveWithName(redSaveName, split[0]);
     saveWithName(greenSaveName, split[1]);
@@ -69,16 +70,16 @@ public class ImageHandlerImpl implements ImageHandler {
 
   @Override
   public void combineGreyScaleImages(String redName, String greenName,
-                                     String blueName, String saveName) {
+                                     String blueName, String saveName) throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.combineGreyScaleImages(getByName(redName),
             getByName(greenName), getByName(blueName)));
   }
 
   @Override
-  public Image getByName(String name) {
+  public Image getByName(String name) throws NoSuchImageException {
     if (!nameToImage.containsKey(name)) {
       System.out.println("No such file name");
-//      throw new NoSuchObjectException("no image under name " + name);
+      throw new NoSuchImageException("No image with name " + name);
     }
     return nameToImage.get(name);
   }

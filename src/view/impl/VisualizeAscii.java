@@ -20,6 +20,11 @@ public class VisualizeAscii implements Output {
     }
   }
 
+  @Override
+  public void print(String string) {
+    System.out.print(string);
+  }
+
   private char getAsciiChar(int character) {
     final char str;
     if (character >= 230.0) {

@@ -37,10 +37,16 @@ public class Main {
    * @throws InterruptedException if an error occurs while executing the program
    */
   public static void main(String[] args) throws IOException, InterruptedException {
-    //Image koala = new ImageUtil().readFile("resources/Koala.ppm");
-    //ImageHandler ih = new ImageHandlerImpl(new ImageProcessorImpl());
-    //ih.saveWithName("koala", koala);
-    //ih.flipImage("koala", false, "koala-dead");
+//    Image koala = new ImageUtil().readFile("resources/Koala.ppm");
+    ImageHandler ih = new ImageHandlerImpl(new ImageProcessorImpl());
+//    ih.saveWithName("koala", koala);
+//    ih.flipImage("koala", true, "koala-dead");
+//    ih.getLuma("koala-dead", "dead-luma");
+//    ih.getChannel("koala", 0, "koala-dead");
+//    ih.alterBrightness("koala", -50, "koala-dark");
+//    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(ih.getByName("koala-dead")));
+//    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(ih.getByName("dead-luma")));
+//    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(ih.getByName("koala-dark")));
     //new VisualizeAscii().show(koala);
     //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(ih.getByName("koala-dead")));
     //    System.out.println("---------------");
@@ -66,13 +72,25 @@ public class Main {
     //new VisualizeAscii().show(koala);
     Input in = new CommandLineInput();
     Controller controller = new ControllerImpl(new ImageUtil(), new PPMImageSaver(),
-            in, new ImageHandlerImpl(new ImageProcessorImpl()), new VisualizeAscii());
+            in, ih/*new ImageHandlerImpl(new ImageProcessorImpl())*/, new VisualizeAscii());
     in.setController(controller);
-    //controller.start();
+    controller.start();
+    /*
     controller.loadImage("resources/koala.ppm", "koala");
-    controller.createFlippedImage("koala", "koala-dead", true);
-    controller.runScript("koala-dead");
-//    controller.saveImage("resources/dead.ppm", );
+    controller.splitImageChannels("koala", "koala-red", "koala-green", "koala-blue");
+    //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(ih.getByName("koala-dead")));
+    controller.createFlippedImage("koala", "kd", false);
+    controller.runScript("koala-red");
+    controller.runScript("koala-green");
+    controller.runScript("koala-blue");
+    controller.createGreyScaleImage("koala-red", "koala-red-g");
+    controller.createGreyScaleImage("koala-green", "koala-green-g");
+    controller.createGreyScaleImage("koala-blue", "koala-blue-g");
+    controller.combineGreyScaleImages("koala-red", "koala-green", "koala-blue", "koala-new");
+    controller.runScript("kd");
+    controller.saveImage("resources/undead.ppm", "koala-new");
+
+     */
   }
 
 }
