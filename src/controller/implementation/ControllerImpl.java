@@ -6,11 +6,8 @@ import controller.interfaces.Controller;
 import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
-import model.implementation.ImageToBufferedImageService;
 import model.implementation.NoSuchImageException;
 import model.interfaces.ImageHandler;
-import view.impl.VisualizeAscii;
-import view.impl.VisualizeImage;
 import view.intefraces.Output;
 
 /**
@@ -53,63 +50,63 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void separateImageChannel(String name, String resultName, int channel) {
-    try{
-    imageHandler.getChannel(name, channel, resultName);
-    }catch (NoSuchImageException e){
+    try {
+      imageHandler.getChannel(name, channel, resultName);
+    } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
   }
 
   @Override
   public void createFlippedImage(String name, String resultName, boolean horizontal) {
-    try{
-    imageHandler.flipImage(name, horizontal, resultName);
-    }catch (NoSuchImageException e){
+    try {
+      imageHandler.flipImage(name, horizontal, resultName);
+    } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
   }
 
   @Override
   public void createValueImage(String name, String resultName) {
-    try{
-    imageHandler.getValue(name, resultName);
-    }catch (NoSuchImageException e){
+    try {
+      imageHandler.getValue(name, resultName);
+    } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
   }
 
   @Override
   public void createIntensityImage(String name, String resultName) {
-    try{
-    imageHandler.getIntensity(name, resultName);
-    }catch (NoSuchImageException e){
+    try {
+      imageHandler.getIntensity(name, resultName);
+    } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
   }
 
   @Override
   public void createLumaImage(String name, String resultName) {
-    try{
-    imageHandler.getLuma(name, resultName);
-    }catch (NoSuchImageException e){
+    try {
+      imageHandler.getLuma(name, resultName);
+    } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
   }
 
   @Override
   public void alterImageBrightness(String name, String resultName, int value) {
-    try{
-    imageHandler.alterBrightness(name, value, resultName);
-    }catch (NoSuchImageException e){
+    try {
+      imageHandler.alterBrightness(name, value, resultName);
+    } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
   }
 
   @Override
   public void createGreyScaleImage(String name, String resultName) {
-    try{
-    imageHandler.getGreyscale(name, resultName);
-    }catch (NoSuchImageException e){
+    try {
+      imageHandler.getGreyscale(name, resultName);
+    } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
   }
@@ -117,9 +114,9 @@ public class ControllerImpl implements Controller {
   @Override
   public void splitImageChannels(String name, String redResultName,
                                  String greenResultName, String blueResultName) {
-    try{
-    imageHandler.getSplitChannels(name, redResultName, greenResultName, blueResultName);
-    }catch (NoSuchImageException e){
+    try {
+      imageHandler.getSplitChannels(name, redResultName, greenResultName, blueResultName);
+    } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
   }
@@ -129,7 +126,7 @@ public class ControllerImpl implements Controller {
                                      String resultName) {
     try {
       imageHandler.combineGreyScaleImages(redName, greenName, blueName, resultName);
-    }catch (NoSuchImageException e){
+    } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
   }

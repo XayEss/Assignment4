@@ -61,7 +61,6 @@ public class ImageHandlerImplTest {
 
     Image testNewImg = testImg.getImageChannel(0);
 
-    // TODO: Fix case of image not in handler
     // No image/ Name not present in handler
     try {
       testHandler.getByName("storedImage");

@@ -15,7 +15,7 @@ import model.interfaces.ImageProcessor;
  */
 public class ImageHandlerImpl implements ImageHandler {
   private final Map<String, Image> nameToImage;
-  private ImageProcessor imageProcessor;
+  private final ImageProcessor imageProcessor;
 
   public ImageHandlerImpl(ImageProcessor processor) {
     nameToImage = new HashMap<>();
@@ -29,7 +29,7 @@ public class ImageHandlerImpl implements ImageHandler {
 
   @Override
   public void flipImage(String name, boolean horizontal, String saveName)
-      throws NoSuchImageException {
+          throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.flipImage(getByName(name), horizontal));
   }
 
@@ -61,7 +61,7 @@ public class ImageHandlerImpl implements ImageHandler {
   @Override
   public void getSplitChannels(String name, String redSaveName,
                                String greenSaveName, String blueSaveName)
-      throws NoSuchImageException {
+          throws NoSuchImageException {
     Image[] split = imageProcessor.getSplitChannels(getByName(name));
     saveWithName(redSaveName, split[0]);
     saveWithName(greenSaveName, split[1]);
