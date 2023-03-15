@@ -216,7 +216,30 @@ public class ImageHandlerImplTest {
     assertEquals(testRed, testHandler.getByName("testRed"));
     assertEquals(testGre, testHandler.getByName("testGre"));
     assertEquals(testBlu, testHandler.getByName("testBlu"));
+  }
 
+
+  @Test
+  public void testCombineGreyscaleImages() {
+    ImageProcessor testProcessor = new ImageProcessorImpl();
+    ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
+
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
+//    testHandler.saveWithName("testImg", testImg);
+
+    Image testRed = testImg.getImageChannel(0);
+    Image testGre = testImg.getImageChannel(1);
+    Image testBlu = testImg.getImageChannel(2);
+
+    testHandler.saveWithName("testRed", testRed);
+    testHandler.saveWithName("testGre", testGre);
+    testHandler.saveWithName("testBlu", testBlu);
+
+    testHandler.combineGreyScaleImages("testRed", "testGre",
+            "testBlu", "testImg");
+
+    assertEquals(testImg, testHandler.getByName("testImg"));
 
   }
 
