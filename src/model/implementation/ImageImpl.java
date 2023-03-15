@@ -2,17 +2,21 @@ package model.implementation;
 
 import java.util.Arrays;
 import java.util.function.Function;
+
 import model.interfaces.Image;
 import model.interfaces.Pixel;
 
+/**
+ * Implementation of the Image interface that represents an image as a 2D array of Pixels.
+ */
 public class ImageImpl implements Image {
   private Pixel[][] pixels;
 
-  public ImageImpl(Pixel[][] pixels){
+  public ImageImpl(Pixel[][] pixels) {
     this.pixels = pixels;
   }
 
-  public ImageImpl(int height, int width){
+  public ImageImpl(int height, int width) {
     pixels = new Pixel[height][width];
   }
 
@@ -25,7 +29,7 @@ public class ImageImpl implements Image {
   @Override
   public Image flipImage(boolean horizontal) {
     Pixel[][] flippedPixels = new Pixel[getHeight()][getWidth()];
-    for(int i = 0; i < getHeight(); i++) {
+    for (int i = 0; i < getHeight(); i++) {
       for (int j = 0; j < getWidth(); j++) {
         if (horizontal) {
           flippedPixels[i][j] = pixels[i][getWidth() - 1 - j];
@@ -44,12 +48,12 @@ public class ImageImpl implements Image {
 
   @Override
   public Image getIntensityImage() {
-    return manipulationHelper((p)->new PixelRGB(p.getIntensity()));
+    return manipulationHelper((p) -> new PixelRGB(p.getIntensity()));
   }
 
   @Override
   public Image getLumaImage() {
-    return manipulationHelper((p)->new PixelRGB(p.getLuma()));
+    return manipulationHelper((p) -> new PixelRGB(p.getLuma()));
   }
 
   @Override
@@ -57,9 +61,9 @@ public class ImageImpl implements Image {
     return manipulationHelper(p -> p.alterBrightness(value));
   }
 
-  private Image manipulationHelper(Function<Pixel, Pixel> function){
+  private Image manipulationHelper(Function<Pixel, Pixel> function) {
     Pixel[][] changedPixels = new Pixel[getHeight()][getWidth()];
-    for(int i = 0; i < getHeight(); i++) {
+    for (int i = 0; i < getHeight(); i++) {
       for (int j = 0; j < getWidth(); j++) {
         changedPixels[i][j] = function.apply(pixels[i][j]);
       }
@@ -109,11 +113,11 @@ public class ImageImpl implements Image {
 
   @Override
   public byte[] getBytes() {
-    byte[] byteImage = new byte[getHeight()*getWidth()*3];
-    for(int i = 0; i < getHeight(); i++){
-      for(int j = 0; j < getWidth(); j++){
-        byteImage[i*getWidth()*3+j*3] = (byte)pixels[i][j].getChannel(0);
-        byteImage[i*getWidth()*3+j*3+1] = (byte)pixels[i][j].getChannel(1);
+    byte[] byteImage = new byte[getHeight() * getWidth() * 3];
+    for (int i = 0; i < getHeight(); i++) {
+      for (int j = 0; j < getWidth(); j++) {
+        byteImage[i * getWidth() * 3 + j * 3] = (byte) pixels[i][j].getChannel(0);
+        byteImage[i * getWidth() * 3 + j * 3 + 1] = (byte) pixels[i][j].getChannel(1);
         byteImage[i * getWidth() * 3 + j * 3 + 2] = (byte) pixels[i][j].getChannel(2);
       }
     }
@@ -128,8 +132,12 @@ public class ImageImpl implements Image {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     ImageImpl image = (ImageImpl) o;
     return Arrays.deepEquals(pixels, image.pixels);
   }

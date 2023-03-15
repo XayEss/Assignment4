@@ -3,6 +3,9 @@ package view.impl;
 import model.interfaces.Image;
 import view.intefraces.Output;
 
+/**
+ * The VisualizeAscii class represents an Output that displays an image in ASCII art.
+ */
 public class VisualizeAscii implements Output {
 
   @Override
@@ -10,14 +13,14 @@ public class VisualizeAscii implements Output {
     StringBuilder line = new StringBuilder();
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
-        line.append(getAsciiChar(image.getPixel(i,j).getGreyScale()));
+        line.append(getAsciiChar(image.getPixel(i, j).getGreyScale()));
       }
       System.out.println(line.toString());
       line.delete(0, line.length());
     }
   }
 
-  private char getAsciiChar(int character){
+  private char getAsciiChar(int character) {
     final char str;
     if (character >= 230.0) {
       str = ' ';

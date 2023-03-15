@@ -46,7 +46,8 @@ public class ImageProcessorImpl implements ImageProcessor {
 
   @Override
   public Image[] getSplitChannels(Image image) {
-    return new Image[]{image.getImageChannel(0), image.getImageChannel(1), image.getImageChannel(2)};
+    return new Image[]{image.getImageChannel(0), image.getImageChannel(1),
+            image.getImageChannel(2)};
   }
 
   @Override

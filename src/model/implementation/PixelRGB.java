@@ -4,12 +4,23 @@ import java.util.Objects;
 
 import model.interfaces.Pixel;
 
+/**
+ * A class representing a pixel with three color channels: red, green, and blue.
+ */
 public class PixelRGB implements Pixel {
   private int red;
   private int green;
   private int blue;
 
-  public PixelRGB(int r, int g, int b) throws IllegalArgumentException{
+  /**
+   * Constructs a new PixelRGB with the given red, green, and blue values.
+   *
+   * @param r the red channel value (0-255).
+   * @param g the green channel value (0-255).
+   * @param b the blue channel value (0-255).
+   * @throws IllegalArgumentException if any of the given values are outside the valid range.
+   */
+  public PixelRGB(int r, int g, int b) throws IllegalArgumentException {
     checkBounds(r);
     checkBounds(g);
     checkBounds(b);
@@ -18,24 +29,35 @@ public class PixelRGB implements Pixel {
     blue = b;
   }
 
-  public PixelRGB(Pixel pixel){
-    if(pixel.getNumberOfChannels() == 3){
+  /**
+   * Constructs a new PixelRGB from a given Pixel object. If the given Pixel has only one channel,
+   * it is used for all three channels of the new PixelRGB object.
+   *
+   * @param pixel the Pixel object to construct a new PixelRGB from.
+   */
+  public PixelRGB(Pixel pixel) {
+    if (pixel.getNumberOfChannels() == 3) {
       red = pixel.getChannel(0);
       green = pixel.getChannel(1);
       blue = pixel.getChannel(2);
-    }
-    else if(pixel.getNumberOfChannels() == 1) {
+    } else if (pixel.getNumberOfChannels() == 1) {
       red = pixel.getChannel(0);
       green = pixel.getChannel(0);
       blue = pixel.getChannel(0);
     }
   }
 
-  public PixelRGB(int value){
-      checkBounds(value);
-      red = value;
-      green = value;
-      blue = value;
+  /**
+   * Constructs a new PixelRGB with the given value for all three channels.
+   *
+   * @param value the value to use for all three channels (0-255).
+   * @throws IllegalArgumentException if the given value is outside of the valid range.
+   */
+  public PixelRGB(int value) {
+    checkBounds(value);
+    red = value;
+    green = value;
+    blue = value;
   }
 
   @Override
@@ -54,11 +76,11 @@ public class PixelRGB implements Pixel {
     int r = 0;
     int g = 0;
     int b = 0;
-    if(channel == 0){
+    if (channel == 0) {
       r = red;
-    }else if(channel == 1){
+    } else if (channel == 1) {
       g = green;
-    }else{
+    } else {
       b = blue;
     }
     return new PixelRGB(r, g, b);
@@ -98,7 +120,7 @@ public class PixelRGB implements Pixel {
 
   @Override
   public int getGreyScale() {
-    return (red + green + blue)/3;
+    return (red + green + blue) / 3;
   }
 
   @Override
@@ -111,20 +133,20 @@ public class PixelRGB implements Pixel {
     return red + " " + green + " " + blue;
   }
 
-  private void checkBounds(int parameter) throws IllegalArgumentException{
-    if(parameter < 0 || parameter > 255){
+  private void checkBounds(int parameter) throws IllegalArgumentException {
+    if (parameter < 0 || parameter > 255) {
       throw new IllegalArgumentException("Any RGB component value should be from 0 to 255");
     }
   }
 
-  private void checkChannelArgument(int channel) throws IllegalArgumentException{
-    if(channel > 2 || channel < 0){
+  private void checkChannelArgument(int channel) throws IllegalArgumentException {
+    if (channel > 2 || channel < 0) {
       throw new IllegalArgumentException("Channel can not be more than 2 and less than 0");
     }
   }
 
   // TODO: Account for saturation in RGB image
-  private int calculateChangeValue(int initialValue, int value){
+  private int calculateChangeValue(int initialValue, int value) {
     int returnValue;
 
     if (initialValue + value > 255) {
@@ -138,9 +160,9 @@ public class PixelRGB implements Pixel {
     return returnValue;
   }
 
-  private int getChannelValue(int channel){
+  private int getChannelValue(int channel) {
     int chan = 0;
-    switch (channel){
+    switch (channel) {
       case 0:
         chan = red;
         break;
@@ -150,14 +172,17 @@ public class PixelRGB implements Pixel {
       case 2:
         chan = blue;
         break;
+      default:
+        // Do Nothing
+        break;
     }
     return chan;
   }
 
-  private void setChannelValue(int channel, int value){
+  private void setChannelValue(int channel, int value) {
     checkBounds(value);
     int chan = 0;
-    switch (channel){
+    switch (channel) {
       case 0:
         red = value;
         break;
@@ -167,13 +192,20 @@ public class PixelRGB implements Pixel {
       case 2:
         blue = value;
         break;
+      default:
+        // Do Nothing
+        break;
     }
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     PixelRGB pixelRGB = (PixelRGB) o;
     return red == pixelRGB.red && green == pixelRGB.green && blue == pixelRGB.blue;
   }

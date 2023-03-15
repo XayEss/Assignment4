@@ -6,7 +6,8 @@ package model.interfaces;
 public interface ImageProcessor {
   /**
    * Returns a one channeled image.
-   * @param image the image to get one channel from.
+   *
+   * @param image   the image to get one channel from.
    * @param channel the channel to get from the image.
    * @return a new image made from the specified channel.
    */
@@ -14,7 +15,8 @@ public interface ImageProcessor {
 
   /**
    * Flips the image horizontally if horizontal is true, otherwise vertical.
-   * @param image the image to flip.
+   *
+   * @param image      the image to flip.
    * @param horizontal the axis to flip.
    * @return a new image, obtained by flipping the given one.
    */
@@ -22,6 +24,7 @@ public interface ImageProcessor {
 
   /**
    * Gets an image that visualizes the Values of each pixel.
+   *
    * @param image the image to get the value image from.
    * @return a new image which visualizes the Value.
    */
@@ -29,13 +32,15 @@ public interface ImageProcessor {
 
   /**
    * Calculates and returns an image that visualizes the intensity of the image.
+   *
    * @param image the image from which the visualization of intensity will be made.
    * @return a new image visualization of intensity.
    */
   Image getIntensity(Image image);
 
   /**
-   Calculates and returns an image that visualizes the luma of the image.
+   * Calculates and returns an image that visualizes the luma of the image.
+   *
    * @param image the image from which the visualization of luma will be made.
    * @return a new image visualization of luma.
    */
@@ -43,6 +48,7 @@ public interface ImageProcessor {
 
   /**
    * Changes the brightness of the image by a given amount.
+   *
    * @param image image which will be changed.
    * @param value the amount to change.
    * @return a new image with the altered brightness.
@@ -51,6 +57,7 @@ public interface ImageProcessor {
 
   /**
    * Creates a new greyscale image of the given image.
+   *
    * @param image the image to make a greyscale from.
    * @return a new greyscale image.
    */
@@ -58,6 +65,7 @@ public interface ImageProcessor {
 
   /**
    * Splits an image into all it's separate channels.
+   *
    * @param image the image to split.
    * @return a list or images, which are the channels of the given image.
    */
@@ -65,9 +73,10 @@ public interface ImageProcessor {
 
   /**
    * Combines three greyscale images into one three channeled image.
-   * @param first the first image to combine.
+   *
+   * @param first  the first image to combine.
    * @param second the second image to combine.
-   * @param third the third image to combine.
+   * @param third  the third image to combine.
    * @return a new three channeled image
    */
   Image combineGreyScaleImages(Image first, Image second, Image third);

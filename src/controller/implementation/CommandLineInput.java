@@ -1,11 +1,17 @@
 package controller.implementation;
 
+import java.util.Scanner;
+
 import controller.interfaces.Controller;
 import controller.interfaces.Input;
-import java.util.Scanner;
-import model.implementation.ImageToBufferedImageService;
-import view.impl.VisualizeImage;
 
+/**
+ * This class implements the Input interface and provides command-line input functionality for
+ * the image processing application.
+ * It allows the user to enter commands to load, alter, save and display images,
+ * as well as run scripts.
+ * It utilizes a Controller instance to perform the necessary operations on the images.
+ */
 public class CommandLineInput implements Input {
 
   private Controller controller;

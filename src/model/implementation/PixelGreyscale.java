@@ -2,6 +2,9 @@ package model.implementation;
 
 import model.interfaces.Pixel;
 
+/**
+ * A class representing a pixel with one color channel.
+ */
 public class PixelGreyscale implements Pixel {
 
   private int greyscale;

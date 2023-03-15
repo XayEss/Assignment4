@@ -1,17 +1,23 @@
 package model.implementation;
 
-import java.rmi.NoSuchObjectException;
 import java.util.HashMap;
 import java.util.Map;
+
 import model.interfaces.Image;
 import model.interfaces.ImageHandler;
 import model.interfaces.ImageProcessor;
 
-public class ImageHandlerImpl implements ImageHandler{
+/**
+ * Implementation of the ImageHandler interface.
+ * This class handles image processing operations such as flipping, splitting channels,
+ * and combining grayscale images.
+ * It uses an ImageProcessor object to perform the actual processing on images.
+ */
+public class ImageHandlerImpl implements ImageHandler {
   private final Map<String, Image> nameToImage;
   private ImageProcessor imageProcessor;
 
-  public ImageHandlerImpl(ImageProcessor processor){
+  public ImageHandlerImpl(ImageProcessor processor) {
     nameToImage = new HashMap<>();
     imageProcessor = processor;
   }
@@ -52,7 +58,8 @@ public class ImageHandlerImpl implements ImageHandler{
   }
 
   @Override
-  public void getSplitChannels(String name, String redSaveName, String greenSaveName, String blueSaveName) {
+  public void getSplitChannels(String name, String redSaveName,
+                               String greenSaveName, String blueSaveName) {
     Image[] split = imageProcessor.getSplitChannels(getByName(name));
     saveWithName(redSaveName, split[0]);
     saveWithName(greenSaveName, split[0]);
@@ -60,18 +67,19 @@ public class ImageHandlerImpl implements ImageHandler{
   }
 
   @Override
-  public void combineGreyScaleImages(String redName, String greenName, String blueName, String saveName) {
+  public void combineGreyScaleImages(String redName, String greenName,
+                                     String blueName, String saveName) {
     saveWithName(saveName, imageProcessor.combineGreyScaleImages(getByName(redName),
-        getByName(greenName), getByName(blueName)));
+            getByName(greenName), getByName(blueName)));
   }
 
   @Override
   public Image getByName(String name) {
-    if (!nameToImage.containsKey(name)){
+    if (!nameToImage.containsKey(name)) {
       System.out.println("No such file name");
       //throw new NoSuchObjectException("no image under name " + name);
     }
-        return nameToImage.get(name);
+    return nameToImage.get(name);
   }
 
   @Override

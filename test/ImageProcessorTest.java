@@ -2,18 +2,20 @@ import org.junit.Test;
 
 import controller.implementation.ImageUtil;
 import model.implementation.ImageProcessorImpl;
-
 import model.interfaces.Image;
 import model.interfaces.ImageProcessor;
-import model.interfaces.Pixel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for ImageProcessor.
+ */
 public class ImageProcessorTest {
 
   @Test
   public void testGetChannel() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getImageChannel(0), testProcessor.getChannel(testImg, 0));
@@ -24,16 +26,20 @@ public class ImageProcessorTest {
 
   @Test
   public void testFlipImage() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
-    assertEquals(testImg.flipImage(true), testProcessor.flipImage(testImg, true));
-    assertEquals(testImg.flipImage(false), testProcessor.flipImage(testImg, false));
+    assertEquals(testImg.flipImage(true), testProcessor.flipImage(testImg,
+            true));
+    assertEquals(testImg.flipImage(false), testProcessor.flipImage(testImg,
+            false));
   }
 
   @Test
   public void testGetValue() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getValueImage(), testProcessor.getValue(testImg));
@@ -41,7 +47,8 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetIntensity() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getIntensityImage(), testProcessor.getIntensity(testImg));
@@ -49,7 +56,8 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetLuma() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getLumaImage(), testProcessor.getLuma(testImg));
@@ -57,7 +65,8 @@ public class ImageProcessorTest {
 
   @Test
   public void testAlterBrightness() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     System.out.println(testImg);
@@ -68,7 +77,8 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetGreyScale() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getGreyscaleImage(), testProcessor.getGreyscale(testImg));
@@ -77,7 +87,8 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetSplitChannels() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     Image[] temp = testProcessor.getSplitChannels(testImg);
@@ -89,7 +100,8 @@ public class ImageProcessorTest {
 
   @Test
   public void testCombineGreyScaleImages() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     Image[] temp = testProcessor.getSplitChannels(testImg);
@@ -100,14 +112,19 @@ public class ImageProcessorTest {
 
   @Test
   public void testCombineThreeImages() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage.ppm");
-    Image testImgRed = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage_RedChannel.ppm");
-    Image testImgGreen = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage_GreenChannel.ppm");
-    Image testImgBlue = new ImageUtil().readFile("resources/images/ppm_testing/testBaseImage_BlueChannel.ppm");
+    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
+    Image testImgRed = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage_RedChannel.ppm");
+    Image testImgGreen = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage_GreenChannel.ppm");
+    Image testImgBlue = new ImageUtil().readFile("resources/images/ppm_testing/" +
+            "testBaseImage_BlueChannel.ppm");
 
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
-    assertEquals(testImg, testProcessor.combineGreyScaleImages(testImgRed, testImgGreen, testImgBlue));
+    assertEquals(testImg, testProcessor.combineGreyScaleImages(testImgRed, testImgGreen,
+            testImgBlue));
   }
 
 

@@ -9,6 +9,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+/**
+ * Test class for Pixel.
+ */
 public class PixelTest {
 
   @Test
@@ -251,20 +254,20 @@ public class PixelTest {
       Pixel testNeg = new PixelRGB(val);
 
       int alt = rand.nextInt(255);
-      
+
       if (alt + val > 255) {
         continue;
       }
 
       // TODO: alterValue for Greyscale shouldn't require channel?
       test.alterValue(0, alt);
-      assertEquals(val+alt, test.getChannel(0));
+      assertEquals(val + alt, test.getChannel(0));
 
       test.alterValue(1, alt);
-      assertEquals(val+alt, test.getChannel(1));
+      assertEquals(val + alt, test.getChannel(1));
 
       test.alterValue(2, alt);
-      assertEquals(val+alt, test.getChannel(2));
+      assertEquals(val + alt, test.getChannel(2));
 
       alt = -1 * alt;
 
@@ -273,13 +276,13 @@ public class PixelTest {
       }
 
       testNeg.alterValue(0, alt);
-      assertEquals(val+alt, testNeg.getChannel(0));
+      assertEquals(val + alt, testNeg.getChannel(0));
 
       testNeg.alterValue(1, alt);
-      assertEquals(val+alt, testNeg.getChannel(1));
+      assertEquals(val + alt, testNeg.getChannel(1));
 
       testNeg.alterValue(2, alt);
-      assertEquals(val+alt, testNeg.getChannel(2));
+      assertEquals(val + alt, testNeg.getChannel(2));
 
     }
 
@@ -288,45 +291,45 @@ public class PixelTest {
       int val0 = rand.nextInt(255);
       int val1 = rand.nextInt(255);
       int val2 = rand.nextInt(255);
-      
+
       Pixel test = new PixelRGB(val0, val1, val2);
       Pixel testNeg = new PixelRGB(val0, val1, val2);
 
       int alt0 = rand.nextInt(255);
       int alt1 = rand.nextInt(255);
       int alt2 = rand.nextInt(255);
-      
 
-      if (alt0 + val0 < 255 ) {
+
+      if (alt0 + val0 < 255) {
         test.alterValue(0, alt0);
-        assertEquals(val0+alt0, test.getChannel(0));
+        assertEquals(val0 + alt0, test.getChannel(0));
       }
 
       if (alt1 + val1 < 255) {
         test.alterValue(1, alt1);
-        assertEquals(val1+alt1, test.getChannel(1));
+        assertEquals(val1 + alt1, test.getChannel(1));
       }
-      
+
       if (alt2 + val2 < 255) {
         test.alterValue(2, alt2);
-        assertEquals(val2+alt2, test.getChannel(2));
+        assertEquals(val2 + alt2, test.getChannel(2));
       }
 
       // Checking that no other channels are affected by the operations
       if (alt0 + val0 < 255) {
-        assertEquals(val0+alt0, test.getChannel(0));
+        assertEquals(val0 + alt0, test.getChannel(0));
       } else {
         assertEquals(val0, test.getChannel(0));
       }
 
       if (alt1 + val1 < 255) {
-        assertEquals(val1+alt1, test.getChannel(1));
+        assertEquals(val1 + alt1, test.getChannel(1));
       } else {
         assertEquals(val1, test.getChannel(1));
       }
 
       if (alt2 + val2 < 255) {
-        assertEquals(val2+alt2, test.getChannel(2));
+        assertEquals(val2 + alt2, test.getChannel(2));
       } else {
         assertEquals(val2, test.getChannel(2));
       }
@@ -334,34 +337,34 @@ public class PixelTest {
       alt0 = -1 * alt0;
       alt1 = -1 * alt1;
       alt2 = -1 * alt2;
-      
+
 
       if (alt0 + val0 > 0) {
         testNeg.alterValue(0, alt0);
-        assertEquals(val0+alt0, testNeg.getChannel(0));
+        assertEquals(val0 + alt0, testNeg.getChannel(0));
       } else {
         assertEquals(val0, testNeg.getChannel(0));
       }
 
       if (alt1 + val1 > 0) {
         testNeg.alterValue(1, alt1);
-        assertEquals(val1+alt1, testNeg.getChannel(1));
+        assertEquals(val1 + alt1, testNeg.getChannel(1));
       } else {
         assertEquals(val1, testNeg.getChannel(1));
       }
 
       if (alt2 + val2 > 0) {
         testNeg.alterValue(2, alt2);
-        assertEquals(val2+alt2, testNeg.getChannel(2));
+        assertEquals(val2 + alt2, testNeg.getChannel(2));
       } else {
         assertEquals(val2, testNeg.getChannel(2));
       }
     }
-    
+
     // Alter above max pixel value
     // Greyscale
     Pixel testMax = new PixelRGB(200);
-    try{
+    try {
       testMax.alterValue(0, 60);
       fail("Shouldn't be able to increase pixel value above 255!!");
     } catch (IllegalArgumentException e) {
@@ -370,30 +373,30 @@ public class PixelTest {
 
     // RGB
     Pixel testMaxRGB = new PixelRGB(200);
-    try{
+    try {
       testMaxRGB.alterValue(0, 60);
       fail("Shouldn't be able to increase pixel value above 255!!");
     } catch (IllegalArgumentException e) {
       // Do Nothing
     }
-  try{
-    testMaxRGB.alterValue(1, 60);
-    fail("Shouldn't be able to increase pixel value above 255!!");
-  } catch (IllegalArgumentException e) {
-    // Do Nothing
-  }
-  try{
-    testMaxRGB.alterValue(2, 60);
-    fail("Shouldn't be able to increase pixel value above 255!!");
-  } catch (IllegalArgumentException e) {
-    // Do Nothing
-  }
+    try {
+      testMaxRGB.alterValue(1, 60);
+      fail("Shouldn't be able to increase pixel value above 255!!");
+    } catch (IllegalArgumentException e) {
+      // Do Nothing
+    }
+    try {
+      testMaxRGB.alterValue(2, 60);
+      fail("Shouldn't be able to increase pixel value above 255!!");
+    } catch (IllegalArgumentException e) {
+      // Do Nothing
+    }
 
 
     // Alter below min pixel value
     // Greyscale
     Pixel testMin = new PixelRGB(20);
-    try{
+    try {
       testMin.alterValue(0, -60);
       fail("Shouldn't be able to decrease pixel value below 0!!");
     } catch (IllegalArgumentException e) {
@@ -402,25 +405,25 @@ public class PixelTest {
 
     // RGB
     Pixel testMinRGB = new PixelRGB(20);
-    try{
+    try {
       testMinRGB.alterValue(0, -60);
       fail("Shouldn't be able to decrease pixel value below 0!!");
     } catch (IllegalArgumentException e) {
       // Do Nothing
     }
-    try{
+    try {
       testMinRGB.alterValue(1, -60);
       fail("Shouldn't be able to decrease pixel value below 0!!");
     } catch (IllegalArgumentException e) {
       // Do Nothing
     }
-    try{
+    try {
       testMinRGB.alterValue(2, -60);
       fail("Shouldn't be able to decrease pixel value below 0!!");
     } catch (IllegalArgumentException e) {
       // Do Nothing
     }
-    
+
   }
 
 
