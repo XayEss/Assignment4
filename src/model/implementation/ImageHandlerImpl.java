@@ -1,5 +1,6 @@
 package model.implementation;
 
+import java.rmi.NoSuchObjectException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,8 +63,8 @@ public class ImageHandlerImpl implements ImageHandler {
                                String greenSaveName, String blueSaveName) {
     Image[] split = imageProcessor.getSplitChannels(getByName(name));
     saveWithName(redSaveName, split[0]);
-    saveWithName(greenSaveName, split[0]);
-    saveWithName(blueSaveName, split[0]);
+    saveWithName(greenSaveName, split[1]);
+    saveWithName(blueSaveName, split[2]);
   }
 
   @Override
@@ -77,7 +78,7 @@ public class ImageHandlerImpl implements ImageHandler {
   public Image getByName(String name) {
     if (!nameToImage.containsKey(name)) {
       System.out.println("No such file name");
-      //throw new NoSuchObjectException("no image under name " + name);
+//      throw new NoSuchObjectException("no image under name " + name);
     }
     return nameToImage.get(name);
   }

@@ -433,35 +433,35 @@ public class PixelTest {
     // Greyscale
     Pixel testGrey = new PixelRGB(240);
 
-    testGrey.alterBrightness(10);
+    testGrey = testGrey.alterBrightness(10);
     assertEquals(250, testGrey.getChannel(0));
     assertEquals(250, testGrey.getChannel(1));
     assertEquals(250, testGrey.getChannel(2));
 
-    testGrey.alterBrightness(-20);
+    testGrey = testGrey.alterBrightness(-20);
     assertEquals(230, testGrey.getChannel(0));
     assertEquals(230, testGrey.getChannel(1));
     assertEquals(230, testGrey.getChannel(2));
 
     // RGB
     Pixel testRGB = new PixelRGB(240, 240, 240);
-    testRGB.alterBrightness(10);
+    testRGB = testRGB.alterBrightness(10);
     assertEquals(250, testRGB.getChannel(0));
     assertEquals(250, testRGB.getChannel(1));
     assertEquals(250, testRGB.getChannel(2));
 
-    testRGB.alterBrightness(-20);
+    testRGB = testRGB.alterBrightness(-20);
     assertEquals(230, testRGB.getChannel(0));
     assertEquals(230, testRGB.getChannel(1));
     assertEquals(230, testRGB.getChannel(2));
 
     // Alter above max value [Grey/RGB]
-    testGrey.alterBrightness(200);
+    testGrey = testGrey.alterBrightness(200);
     assertTrue(testGrey.getChannel(0) <= 255);
     assertTrue(testGrey.getChannel(0) >= 0);
 
 
-    testRGB.alterBrightness(200);
+    testRGB = testRGB.alterBrightness(200);
     assertTrue(testRGB.getChannel(0) <= 255);
     assertTrue(testRGB.getChannel(0) >= 0);
     assertTrue(testRGB.getChannel(1) <= 255);
@@ -471,12 +471,12 @@ public class PixelTest {
 
 
     // Alter below min value [Grey/RGB]
-    testGrey.alterBrightness(-300);
+    testGrey = testGrey.alterBrightness(-300);
     assertTrue(testGrey.getChannel(0) <= 255);
     assertTrue(testGrey.getChannel(0) >= 0);
 
 
-    testRGB.alterBrightness(-300);
+    testRGB = testRGB.alterBrightness(-300);
     assertTrue(testRGB.getChannel(0) <= 255);
     assertTrue(testRGB.getChannel(0) >= 0);
     assertTrue(testRGB.getChannel(1) <= 255);

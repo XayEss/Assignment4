@@ -72,7 +72,7 @@ public class Main {
     controller.loadImage("resources/koala.ppm", "koala");
     controller.createFlippedImage("koala", "koala-dead", true);
     controller.runScript("koala-dead");
-    controller.saveImage("resources/dead.ppm", );
+//    controller.saveImage("resources/dead.ppm", );
   }
 
 }

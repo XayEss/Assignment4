@@ -154,24 +154,26 @@ public class ImageTest {
     System.out.println(testImage);
 
     Image testIncreased = testImage.alterBrightness(20);
-    Image testDecreased = testImage.alterBrightness(-20);
+    Image testDecreased = testImage.alterBrightness(-50);
 
     for (int row = 0; row < testImage.getHeight(); row++) {
       for (int col = 0; col < testImage.getWidth(); col++) {
         assertEquals(testImage.getPixelChannel(row, col, 0) + 20,
                 testIncreased.getPixelChannel(row, col, 0));
+
         assertEquals(testImage.getPixelChannel(row, col, 1) + 20,
                 testIncreased.getPixelChannel(row, col, 1));
+
         assertEquals(testImage.getPixelChannel(row, col, 2) + 20,
                 testIncreased.getPixelChannel(row, col, 2));
 
-        // TODO: Negative value for alterBrightness? Pixel function working correctly
-        //  - Check manipulationHelper
-        assertEquals(testImage.getPixelChannel(row, col, 0) - 20,
+        assertEquals(testImage.getPixelChannel(row, col, 0) - 50,
                 testDecreased.getPixelChannel(row, col, 0));
-        assertEquals(testImage.getPixelChannel(row, col, 1) - 20,
+
+        assertEquals(testImage.getPixelChannel(row, col, 1) - 50,
                 testDecreased.getPixelChannel(row, col, 1));
-        assertEquals(testImage.getPixelChannel(row, col, 2) - 20,
+
+        assertEquals(testImage.getPixelChannel(row, col, 2) - 50,
                 testDecreased.getPixelChannel(row, col, 2));
       }
     }
