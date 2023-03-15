@@ -259,7 +259,6 @@ public class PixelTest {
         continue;
       }
 
-      // TODO: alterValue for Greyscale shouldn't require channel?
       test.alterValue(0, alt);
       assertEquals(val + alt, test.getChannel(0));
 

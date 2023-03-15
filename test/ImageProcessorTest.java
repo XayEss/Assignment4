@@ -70,7 +70,6 @@ public class ImageProcessorTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     System.out.println(testImg);
-    // TODO: Alter Brightness running twice through ImageProcessor!
     assertEquals(testImg.alterBrightness(20), testProcessor.alterBrightness(testImg, 20));
     assertEquals(testImg.alterBrightness(-20), testProcessor.alterBrightness(testImg, -20));
   }
