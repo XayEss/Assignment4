@@ -126,13 +126,15 @@ public class PixelRGB implements Pixel {
   // TODO: Account for saturation in RGB image
   private int calculateChangeValue(int initialValue, int value){
     int returnValue;
-    if (initialValue + value > 255){
+
+    if (initialValue + value > 255) {
       returnValue = 255;
-    }else if(initialValue + value < 0){
+    } else if (initialValue + value < 0) {
       returnValue = 0;
-    }else{
+    } else {
       returnValue = initialValue + value;
     }
+
     return returnValue;
   }
 
