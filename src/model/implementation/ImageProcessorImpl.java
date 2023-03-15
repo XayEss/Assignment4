@@ -54,8 +54,8 @@ public class ImageProcessorImpl implements ImageProcessor {
     Pixel[][] pixels = new PixelRGB[first.getHeight()][first.getWidth()];
     for (int i = 0; i < first.getHeight(); i++) {
       for (int j = 0; j < first.getWidth(); j++) {
-        pixels[i][j] = new PixelRGB(3 * first.getPixelChannel(i, j, 0),
-                3 * second.getPixelChannel(i, j, 1), 3 * third.getPixelChannel(i, j, 2));
+        pixels[i][j] = new PixelRGB(first.getPixelChannel(i, j, 0),
+                second.getPixelChannel(i, j, 1), third.getPixelChannel(i, j, 2));
       }
     }
     return new ImageImpl(pixels);
@@ -66,7 +66,8 @@ public class ImageProcessorImpl implements ImageProcessor {
     for (int i = 0; i < first.getHeight(); i++) {
       for (int j = 0; j < first.getWidth(); j++) {
         pixels[i][j] = new PixelRGB(first.getPixelChannel(i, j, 0),
-                second.getPixelChannel(i, j, 1), third.getPixelChannel(i, j, 2));
+                second.getPixelChannel(i, j, 1),
+                third.getPixelChannel(i, j, 2));
       }
     }
     return new ImageImpl(pixels);
