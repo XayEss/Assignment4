@@ -3,11 +3,13 @@ import org.junit.Test;
 import controller.implementation.ImageUtil;
 import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageProcessorImpl;
+import model.implementation.NoSuchImageException;
 import model.interfaces.Image;
 import model.interfaces.ImageHandler;
 import model.interfaces.ImageProcessor;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class ImageHandlerImplTest {
 
@@ -28,12 +30,24 @@ public class ImageHandlerImplTest {
 
     // Image present in handler
     testHandler.saveWithName("testImg", testImg);
-    assertEquals(testImg, testHandler.getByName("testImg"));
+    try {
+      assertEquals(testImg, testHandler.getByName("testImg"));
+    } catch (NoSuchImageException e) {
+      fail("No such image!");
+    }
 
     // Multiple images in handler
     testHandler.saveWithName("testNewImg", testNewImg);
-    assertEquals(testNewImg, testHandler.getByName("testNewImg"));
-    assertEquals(testImg, testHandler.getByName("testImg"));
+    try {
+      assertEquals(testNewImg, testHandler.getByName("testNewImg"));
+    } catch (NoSuchImageException e) {
+      fail("No such image!");
+    }
+    try {
+      assertEquals(testImg, testHandler.getByName("testImg"));
+    } catch (NoSuchImageException e) {
+      fail("No such image!");
+    }
   }
 
 
@@ -49,21 +63,33 @@ public class ImageHandlerImplTest {
 
     // TODO: Fix case of image not in handler
     // No image/ Name not present in handler
-//    try {
-//      testHandler.getByName("storedImage");
-//      fail("No image in Handler, error should've been thrown! ");
-//    } catch (NoSuchElementException e) {
-//      // Do Nothing
-//    }
+    try {
+      testHandler.getByName("storedImage");
+      fail("No image in Handler, error should've been thrown! ");
+    } catch (NoSuchImageException e) {
+      // Do Nothing
+    }
 
     // Image present in handler
     testHandler.saveWithName("testImg", testImg);
-    assertEquals(testImg, testHandler.getByName("testImg"));
+    try {
+      assertEquals(testImg, testHandler.getByName("testImg"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
     // Multiple images in handler
     testHandler.saveWithName("testNewImg", testNewImg);
-    assertEquals(testNewImg, testHandler.getByName("testNewImg"));
-    assertEquals(testImg, testHandler.getByName("testImg"));
+    try {
+      assertEquals(testNewImg, testHandler.getByName("testNewImg"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      assertEquals(testImg, testHandler.getByName("testImg"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 
@@ -80,13 +106,37 @@ public class ImageHandlerImplTest {
     Image testNewImg2 = testImg.getImageChannel(2);
 
     testHandler.saveWithName("testImg", testImg);
-    testHandler.getChannel("testImg", 0, "testImg0");
-    testHandler.getChannel("testImg", 1, "testImg1");
-    testHandler.getChannel("testImg", 2, "testImg2");
+    try {
+      testHandler.getChannel("testImg", 0, "testImg0");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      testHandler.getChannel("testImg", 1, "testImg1");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      testHandler.getChannel("testImg", 2, "testImg2");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
-    assertEquals(testNewImg0, testHandler.getByName("testImg0"));
-    assertEquals(testNewImg1, testHandler.getByName("testImg1"));
-    assertEquals(testNewImg2, testHandler.getByName("testImg2"));
+    try {
+      assertEquals(testNewImg0, testHandler.getByName("testImg0"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      assertEquals(testNewImg1, testHandler.getByName("testImg1"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      assertEquals(testNewImg2, testHandler.getByName("testImg2"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 
@@ -102,11 +152,27 @@ public class ImageHandlerImplTest {
     Image testFlipVer = testImg.flipImage(false);
 
     testHandler.saveWithName("testImg", testImg);
-    testHandler.flipImage("testImg", true, "testFlipHor");
-    testHandler.flipImage("testImg", false, "testFlipVer");
+    try {
+      testHandler.flipImage("testImg", true, "testFlipHor");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      testHandler.flipImage("testImg", false, "testFlipVer");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
-    assertEquals(testFlipHor, testHandler.getByName("testFlipHor"));
-    assertEquals(testFlipVer, testHandler.getByName("testFlipVer"));
+    try {
+      assertEquals(testFlipHor, testHandler.getByName("testFlipHor"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      assertEquals(testFlipVer, testHandler.getByName("testFlipVer"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 
@@ -120,9 +186,17 @@ public class ImageHandlerImplTest {
     testHandler.saveWithName("testImg", testImg);
 
     Image testValue = testImg.getValueImage();
-    testHandler.getValue("testImg", "testValue");
+    try {
+      testHandler.getValue("testImg", "testValue");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
-    assertEquals(testValue, testHandler.getByName("testValue"));
+    try {
+      assertEquals(testValue, testHandler.getByName("testValue"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 
@@ -136,9 +210,17 @@ public class ImageHandlerImplTest {
     testHandler.saveWithName("testImg", testImg);
 
     Image testIntensity = testImg.getIntensityImage();
-    testHandler.getIntensity("testImg", "testIntensity");
+    try {
+      testHandler.getIntensity("testImg", "testIntensity");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
-    assertEquals(testIntensity, testHandler.getByName("testIntensity"));
+    try {
+      assertEquals(testIntensity, testHandler.getByName("testIntensity"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 
@@ -152,9 +234,17 @@ public class ImageHandlerImplTest {
     testHandler.saveWithName("testImg", testImg);
 
     Image testLuma = testImg.getLumaImage();
-    testHandler.getLuma("testImg", "testLuma");
+    try {
+      testHandler.getLuma("testImg", "testLuma");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
-    assertEquals(testLuma, testHandler.getByName("testLuma"));
+    try {
+      assertEquals(testLuma, testHandler.getByName("testLuma"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
   }
 
@@ -171,11 +261,27 @@ public class ImageHandlerImplTest {
     Image testBrightInc = testImg.alterBrightness(20);
     Image testBrightDec = testImg.alterBrightness(-20);
 
-    testHandler.alterBrightness("testImg", 20, "testBrightInc");
-    testHandler.alterBrightness("testImg", -20, "testBrightDec");
+    try {
+      testHandler.alterBrightness("testImg", 20, "testBrightInc");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      testHandler.alterBrightness("testImg", -20, "testBrightDec");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
-    assertEquals(testBrightInc, testHandler.getByName("testBrightInc"));
-    assertEquals(testBrightDec, testHandler.getByName("testBrightDec"));
+    try {
+      assertEquals(testBrightInc, testHandler.getByName("testBrightInc"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      assertEquals(testBrightDec, testHandler.getByName("testBrightDec"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
   }
 
@@ -190,9 +296,17 @@ public class ImageHandlerImplTest {
     testHandler.saveWithName("testImg", testImg);
 
     Image testGrey = testImg.getGreyscaleImage();
-    testHandler.getGreyscale("testImg", "testGrey");
+    try {
+      testHandler.getGreyscale("testImg", "testGrey");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
-    assertEquals(testGrey, testHandler.getByName("testGrey"));
+    try {
+      assertEquals(testGrey, testHandler.getByName("testGrey"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
   }
 
@@ -210,12 +324,28 @@ public class ImageHandlerImplTest {
     Image testGre = testImg.getImageChannel(1);
     Image testBlu = testImg.getImageChannel(2);
 
-    testHandler.getSplitChannels("testImg", "testRed",
-            "testGre", "testBlu");
+    try {
+      testHandler.getSplitChannels("testImg", "testRed",
+              "testGre", "testBlu");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
-    assertEquals(testRed, testHandler.getByName("testRed"));
-    assertEquals(testGre, testHandler.getByName("testGre"));
-    assertEquals(testBlu, testHandler.getByName("testBlu"));
+    try {
+      assertEquals(testRed, testHandler.getByName("testRed"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      assertEquals(testGre, testHandler.getByName("testGre"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
+    try {
+      assertEquals(testBlu, testHandler.getByName("testBlu"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
   }
 
 
@@ -236,10 +366,18 @@ public class ImageHandlerImplTest {
     testHandler.saveWithName("testGre", testGre);
     testHandler.saveWithName("testBlu", testBlu);
 
-    testHandler.combineGreyScaleImages("testRed", "testGre",
-            "testBlu", "testImg");
+    try {
+      testHandler.combineGreyScaleImages("testRed", "testGre",
+              "testBlu", "testImg");
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
-    assertEquals(testImg, testHandler.getByName("testImg"));
+    try {
+      assertEquals(testImg, testHandler.getByName("testImg"));
+    } catch (NoSuchImageException e) {
+      throw new RuntimeException(e);
+    }
 
   }
 
