@@ -1,0 +1,2 @@
+load resources/example.ppm example
+vertical-flip example example-flip
