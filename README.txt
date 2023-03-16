@@ -14,7 +14,7 @@ saving them to the filesystem, reading user inputs, appropriately calling the mo
         through which all image manipulations are called.
       - ImageHandlerImpl - an implementation of ImageHandler to handle the storing and extraction of images as well as delegating to an ImageManipulator for
         manipulating images.
-      - NoSuchImageException - An Exception to that is thrown when there is not image stored with the given name.
+      - NoSuchImageException - An Exception to that is thrown when there is no image stored with the given name.
   Controller:
     Interfaces:
       - Controller - The main controller interface to control the program flow.
@@ -27,6 +27,7 @@ saving them to the filesystem, reading user inputs, appropriately calling the mo
       - PPMImageSaver - An implementation of the ImageSaver interface, that saves images in the .ppm format to the filesystem.
       - CommandLineInput - An implementation of Input that reads commands from the command line and calls the Controller to execute them.
 
+**Unzip resources folder**
 Run script instructions:
 To run a script file simply type the run command and provide the filepath to the script file as the command line argument.
 A script file with the name example-script is already given, to execute it type:
