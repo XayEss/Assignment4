@@ -25,7 +25,7 @@ public class ImageUtil implements ImageInput {
     Scanner sc;
     try {
       sc = new Scanner(new FileInputStream(filename));
-    } catch (FileNotFoundException e){
+    } catch (FileNotFoundException e) {
       return null;
     }
     StringBuilder builder = new StringBuilder();

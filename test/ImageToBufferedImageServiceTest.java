@@ -5,9 +5,8 @@ import java.awt.image.BufferedImage;
 import controller.implementation.ImageUtil;
 import model.interfaces.Image;
 
-
 import static model.implementation.ImageToBufferedImageService.convertToBuffered;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ImageToBufferedImageServiceTest {
 
