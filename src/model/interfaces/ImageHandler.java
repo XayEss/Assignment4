@@ -66,7 +66,7 @@ public interface ImageHandler {
    * @param name name of the image to split.
    */
   void getSplitChannels(String name, String redSaveName, String greenSaveName, String blueSaveName)
-      throws NoSuchImageException;
+          throws NoSuchImageException;
 
   /**
    * Combines three greyscale images into one three channeled image.
@@ -76,7 +76,7 @@ public interface ImageHandler {
    * @param blueName  name of the third image to combine.
    */
   void combineGreyScaleImages(String redName, String greenName, String blueName, String saveName)
-      throws NoSuchImageException;
+          throws NoSuchImageException;
 
   Image getByName(String name) throws NoSuchImageException;
 

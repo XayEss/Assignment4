@@ -1,5 +1,3 @@
-package controller.implementation;
-
 import java.io.FileNotFoundException;
 
 import controller.interfaces.Controller;
@@ -10,31 +8,18 @@ import model.implementation.NoSuchImageException;
 import model.interfaces.ImageHandler;
 import view.intefraces.Output;
 
-/**
- * An implementation of the controller for image manipulation.
- */
-public class ControllerImpl implements Controller {
+import static org.junit.Assert.*;
+
+public class ControllerImplTest implements Controller {
+  public String logOutput;
   ImageInput imageInput;
   ImageSaver imageSaver;
   Input input;
   Output output;
   ImageHandler imageHandler;
 
-
-  /**
-   * This is the constructor for the ControllerImpl class, which is responsible for coordinating
-   * the functionality of the image processing application.
-   * It takes in instances of ImageInput, ImageSaver, Input, ImageHandler, and Output as parameters,
-   * which are used to load, save, manipulate, and display images as required.
-   *
-   * @param imageInput   an instance of ImageInput used to load images
-   * @param imageSaver   an instance of ImageSaver used to save images
-   * @param input        an instance of Input used to receive user input
-   * @param imageHandler an instance of ImageHandler used to manipulate images
-   * @param output       an instance of Output used to display images
-   */
-  public ControllerImpl(ImageInput imageInput, ImageSaver imageSaver, Input input,
-                        ImageHandler imageHandler, Output output) {
+  public ControllerImplTest(ImageInput imageInput, ImageSaver imageSaver, Input input,
+                            ImageHandler imageHandler, Output output) {
     this.imageInput = imageInput;
     this.imageSaver = imageSaver;
     this.input = input;
@@ -42,9 +27,9 @@ public class ControllerImpl implements Controller {
     this.output = output;
   }
 
-
   @Override
   public void start() {
+    logOutput = "start";
     input.startCommandReading();
   }
 
@@ -52,6 +37,7 @@ public class ControllerImpl implements Controller {
   public void separateImageChannel(String name, String resultName, int channel) {
     try {
       imageHandler.getChannel(name, channel, resultName);
+      logOutput = "rgb-split";
     } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
@@ -61,6 +47,7 @@ public class ControllerImpl implements Controller {
   public void createFlippedImage(String name, String resultName, boolean horizontal) {
     try {
       imageHandler.flipImage(name, horizontal, resultName);
+      logOutput = "flip";
     } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
@@ -70,6 +57,7 @@ public class ControllerImpl implements Controller {
   public void createValueImage(String name, String resultName) {
     try {
       imageHandler.getValue(name, resultName);
+      logOutput = "value";
     } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
@@ -79,6 +67,7 @@ public class ControllerImpl implements Controller {
   public void createIntensityImage(String name, String resultName) {
     try {
       imageHandler.getIntensity(name, resultName);
+      logOutput = "intensity";
     } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
@@ -88,6 +77,7 @@ public class ControllerImpl implements Controller {
   public void createLumaImage(String name, String resultName) {
     try {
       imageHandler.getLuma(name, resultName);
+      logOutput = "luma";
     } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
@@ -97,6 +87,7 @@ public class ControllerImpl implements Controller {
   public void alterImageBrightness(String name, String resultName, int value) {
     try {
       imageHandler.alterBrightness(name, value, resultName);
+      logOutput = "alter-brightness";
     } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
@@ -106,6 +97,7 @@ public class ControllerImpl implements Controller {
   public void createGreyScaleImage(String name, String resultName) {
     try {
       imageHandler.getGreyscale(name, resultName);
+      logOutput = "greyscale";
     } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
@@ -116,6 +108,7 @@ public class ControllerImpl implements Controller {
                                  String greenResultName, String blueResultName) {
     try {
       imageHandler.getSplitChannels(name, redResultName, greenResultName, blueResultName);
+      logOutput = "split";
     } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
@@ -126,6 +119,7 @@ public class ControllerImpl implements Controller {
                                      String resultName) {
     try {
       imageHandler.combineGreyScaleImages(redName, greenName, blueName, resultName);
+      logOutput = "rgb-combine";
     } catch (NoSuchImageException e) {
       output.print(e.getMessage());
     }
@@ -134,12 +128,14 @@ public class ControllerImpl implements Controller {
   @Override
   public void loadImage(String path, String name) {
     imageHandler.saveWithName(name, imageInput.readFile(path));
+    logOutput = "load";
   }
 
   @Override
   public void saveImage(String path, String name) {
     try {
       imageSaver.save(path, imageHandler.getByName(name));
+      logOutput = "save";
     } catch (NoSuchImageException | FileNotFoundException e) {
       output.print(e.getMessage());
     }
@@ -148,7 +144,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void runScript(String path) {
-    System.out.println("in runScript!");
+    logOutput = "script";
     //new VisualizeAscii().show(imageHandler.getByName(path));
     //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(imageHandler.getByName(path)));
 

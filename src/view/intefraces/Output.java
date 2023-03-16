@@ -8,5 +8,6 @@ import model.interfaces.Image;
 public interface Output {
 
   void show(Image image);
+
   void print(String string);
 }

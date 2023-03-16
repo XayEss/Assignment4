@@ -13,8 +13,6 @@ public class ImageToBufferedImageServiceTest {
 
   @Test
   public void testConvertToBuffered() {
-    // TODO: More complicated test?
-
     Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
             "testBaseImage.ppm");
 

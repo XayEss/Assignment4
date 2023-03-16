@@ -10,7 +10,7 @@ import model.interfaces.Pixel;
  * Implementation of the Image interface that represents an image as a 2D array of Pixels.
  */
 public class ImageImpl implements Image {
-  private Pixel[][] pixels;
+  private final Pixel[][] pixels;
 
   public ImageImpl(Pixel[][] pixels) {
     this.pixels = pixels;

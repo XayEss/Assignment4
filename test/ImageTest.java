@@ -284,15 +284,6 @@ public class ImageTest {
 
 
   @Test
-  public void testGetBytes() {
-    // TODO: TEST THIS!
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
-    assertEquals(testImage.getBytes(), testImage);
-  }
-
-
-  @Test
   public void testToString() {
     Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
             "testBaseImage.ppm");

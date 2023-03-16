@@ -1,4 +1,4 @@
-package controller.implementation;
+import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,17 +10,14 @@ import model.implementation.PixelRGB;
 import model.interfaces.Image;
 import model.interfaces.Pixel;
 
-/**
- * This class contains utility methods to read a PPM image from file and simply print its contents.
- * Feel free to change this method as required.
- */
-public class ImageUtil implements ImageInput {
+import static org.junit.Assert.assertEquals;
 
-  /**
-   * Read an image file in the PPM format and print the colors.
-   *
-   * @param filename the path of the file.
-   */
+/**
+ * Test class for ImageUtil.
+ */
+public class ImageUtilTest implements ImageInput {
+
+  @Override
   public Image readFile(String filename) {
     Scanner sc;
 
@@ -68,5 +65,17 @@ public class ImageUtil implements ImageInput {
   }
 
 
-}
+  @Test
+  public void testReadFile() {
 
+    ImageInput testImgUtil = new ImageUtilTest();
+    Image testImg = testImgUtil.readFile("resources/images/ppm_testing/" +
+            "testBaseImage.ppm");
+    assertEquals(testImg.toString(), "[[101 90 58, 103 92 62, 110 95 66, 104 91 59, " +
+            "104 91 59], [104 93 63, 108 94 65, 100 86 57, 103 90 56, 105 91 64], " +
+            "[101 89 63, 103 91 65, 106 92 66, 103 86 66, 105 91 64]]");
+
+  }
+
+
+}
