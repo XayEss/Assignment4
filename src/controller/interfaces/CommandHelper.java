@@ -7,6 +7,8 @@ import model.interfaces.ImageHandler;
  */
 public interface CommandHelper {
 
-  void execute(ImageHandler handler);
+  void execute(String name);
+
+  void setHandler(ImageHandler handler);
 
 }

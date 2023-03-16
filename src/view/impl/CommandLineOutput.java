@@ -6,7 +6,7 @@ import view.intefraces.Output;
 /**
  * The VisualizeAscii class represents an Output that displays an image in ASCII art.
  */
-public class VisualizeAscii implements Output {
+public class CommandLineOutput implements Output {
 
   @Override
   public void show(Image image) {

@@ -28,6 +28,7 @@ public class ImageToBufferedImageService {
    * @param data      the byte array representation of the image
    * @return a BufferedImage representation of the PPM image
    */
+  //TODO: rewrite this code.
   static private BufferedImage ppm(int width, int height, int maxcolval, byte[] data) {
     if (maxcolval < 256) {
       BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);

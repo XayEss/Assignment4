@@ -9,7 +9,7 @@ import controller.interfaces.Input;
 import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageProcessorImpl;
 import model.interfaces.ImageHandler;
-import view.impl.VisualizeAscii;
+import view.impl.CommandLineOutput;
 
 /**
  * The Main class is the entry point of the program.
@@ -32,7 +32,7 @@ public class Main {
 
     Input in = new CommandLineInput();
     Controller controller = new ControllerImpl(new ImageUtil(), new PPMImageSaver(),
-            in, ih/*new ImageHandlerImpl(new ImageProcessorImpl())*/, new VisualizeAscii());
+            in, ih/*new ImageHandlerImpl(new ImageProcessorImpl())*/, new CommandLineOutput());
     in.setController(controller);
     controller.start();
 

@@ -9,7 +9,5 @@ public interface Input {
 
   void parseInput(String line);
 
-  void runScript(String path);
-
   void setController(Controller controller);
 }
