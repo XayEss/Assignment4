@@ -8,8 +8,6 @@ import model.implementation.NoSuchImageException;
 import model.interfaces.ImageHandler;
 import view.intefraces.Output;
 
-import static org.junit.Assert.*;
-
 public class ControllerImplTest implements Controller {
   public String logOutput;
   ImageInput imageInput;

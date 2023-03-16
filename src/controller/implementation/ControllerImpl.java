@@ -6,7 +6,6 @@ import controller.interfaces.Controller;
 import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
-import java.util.NoSuchElementException;
 import model.implementation.NoSuchImageException;
 import model.interfaces.Image;
 import model.interfaces.ImageHandler;
@@ -37,7 +36,7 @@ public class ControllerImpl implements Controller {
    * @param output       an instance of Output used to display images
    */
   public ControllerImpl(ImageInput imageInput, ImageSaver imageSaver, Input input,
-      ImageHandler imageHandler, Output output) {
+                        ImageHandler imageHandler, Output output) {
     this.imageInput = imageInput;
     this.imageSaver = imageSaver;
     this.input = input;
@@ -123,7 +122,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void splitImageChannels(String name, String redResultName,
-      String greenResultName, String blueResultName) {
+                                 String greenResultName, String blueResultName) {
     try {
       imageHandler.getSplitChannels(name, redResultName, greenResultName, blueResultName);
       output.print("Successfully split a image into r, g, b components");
@@ -134,7 +133,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void combineGreyScaleImages(String redName, String greenName, String blueName,
-      String resultName) {
+                                     String resultName) {
     try {
       imageHandler.combineGreyScaleImages(redName, greenName, blueName, resultName);
       output.print("Successfully combined greyscale images");

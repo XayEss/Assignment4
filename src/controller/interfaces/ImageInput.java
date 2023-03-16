@@ -1,6 +1,5 @@
 package controller.interfaces;
 
-import java.io.FileNotFoundException;
 import model.interfaces.Image;
 
 /**

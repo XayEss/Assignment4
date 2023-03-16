@@ -267,7 +267,7 @@ public class ImageTest {
     for (int row = 0; row < testImage.getHeight(); row++) {
       for (int col = 0; col < testImage.getWidth(); col++) {
 
-        assertEquals((int) (testImage.getPixelChannel(row, col, 0)
+        assertEquals((testImage.getPixelChannel(row, col, 0)
                         + testImage.getPixelChannel(row, col, 1)
                         + testImage.getPixelChannel(row, col, 2)) / 3,
                 testGreyscaleImage.getPixelChannel(row, col, 0));
