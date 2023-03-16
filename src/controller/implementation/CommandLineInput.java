@@ -1,5 +1,9 @@
 package controller.implementation;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 
 import controller.interfaces.Controller;
@@ -13,17 +17,29 @@ import controller.interfaces.Input;
  * It utilizes a Controller instance to perform the necessary operations on the images.
  */
 public class CommandLineInput implements Input {
-
+  private boolean run;
   private Controller controller;
+  public CommandLineInput() {
+    run = true;
+  }
+
+
 
 
   @Override
   public void startCommandReading() {
-    boolean run = true;
     Scanner scanner = new Scanner(System.in);
+    while (run) {
+      parseInput(scanner.nextLine());
+    }
+  }
+
+
+  @Override
+  public void parseInput(String line) {
+    Scanner scanner = new Scanner(line);
     String name;
     String saveName;
-    while (run) {
       switch (scanner.next()) {
         case "load":
           name = scanner.next();
@@ -71,7 +87,7 @@ public class CommandLineInput implements Input {
           controller.combineGreyScaleImages(name, name2, name3, saveName);
           break;
         case "run":
-          controller.runScript(scanner.next());
+          runScript(scanner.next());
           break;
         case "show":
           name = scanner.next();
@@ -80,20 +96,23 @@ public class CommandLineInput implements Input {
           run = false;
           break;
         default:
+          System.out.println("No such command!");
           break;
       }
-    }
-  }
-
-  @Override
-  public void parseInput(String line) {
-    //String[] tokens = line.split("/s+");
 
   }
 
   @Override
   public void runScript(String path) {
-    controller.runScript(path);
+    try {
+      List<String> lines = Files.readAllLines(Path.of(path));
+      for(String line : lines){
+        parseInput(line);
+      }
+    } catch (IOException e) {
+      System.out.println("File not found!");
+    }
+
   }
 
   @Override

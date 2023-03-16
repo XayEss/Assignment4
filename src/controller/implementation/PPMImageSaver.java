@@ -17,7 +17,6 @@ public class PPMImageSaver implements ImageSaver {
   @Override
   public void save(String path, Image image) throws FileNotFoundException {
     PrintWriter writer = new PrintWriter(path);
-    FileOutputStream fileOutputStream = new FileOutputStream(path);
     writer.println("P3");
     writer.println(image.getWidth() + " " + image.getHeight());
     writer.println("255");
