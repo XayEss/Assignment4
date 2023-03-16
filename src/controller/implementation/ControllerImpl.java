@@ -148,7 +148,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void runScript(String path) {
-    System.out.println("FUCK!!!");
+    System.out.println("in runScript!");
     //new VisualizeAscii().show(imageHandler.getByName(path));
     //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(imageHandler.getByName(path)));
 
