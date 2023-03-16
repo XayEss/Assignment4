@@ -23,11 +23,9 @@ public class ImageUtil implements ImageInput {
    */
   public Image readFile(String filename) {
     Scanner sc;
-
     try {
       sc = new Scanner(new FileInputStream(filename));
-    } catch (FileNotFoundException e) {
-      System.out.println("File " + filename + " not found!");
+    } catch (FileNotFoundException e){
       return null;
     }
     StringBuilder builder = new StringBuilder();

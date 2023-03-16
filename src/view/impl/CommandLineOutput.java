@@ -22,7 +22,7 @@ public class CommandLineOutput implements Output {
 
   @Override
   public void print(String string) {
-    System.out.print(string);
+    System.out.println(string);
   }
 
   private char getAsciiChar(int character) {

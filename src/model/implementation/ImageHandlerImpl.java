@@ -78,7 +78,6 @@ public class ImageHandlerImpl implements ImageHandler {
   @Override
   public Image getByName(String name) throws NoSuchImageException {
     if (!nameToImage.containsKey(name)) {
-      System.out.println("No such file name");
       throw new NoSuchImageException("No image with name " + name);
     }
     return nameToImage.get(name);
