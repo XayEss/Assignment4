@@ -1,2 +1,21 @@
 load resources/example.ppm example
 vertical-flip example example-flip
+brighten 54 example example-bright
+save resources/example-flip.ppm example-flip
+brighten -42 example-flip flip-dark
+rgb-split flip-dark flip-dark-r flip-dark-g flip-dark-b
+save resources/blue-flip.ppm flip-dark-b
+greyscale example-bright grey-example-bright
+save resources/grey-example-bright.ppm grey-example-bright
+load resources/blue-flip.ppm flip-blue
+rgb-combine restored-flip flip-dark-r flip-dark-g flip-blue
+save resources/restored-flip.ppm restored-flip
+vertical-flip flip-dark-r dark-r
+vertical-flip flip-dark-g dark-g
+vertical-flip flip-dark-b dark-b
+rgb-combine dark dark-r dark-g dark-b
+brighten 40 dark normal
+horizontal-flip normal flipped-reconstruction
+save resources/fl-recon.ppm flipped-reconstruction
+horizontal-flip flipped-reconstruction restored
+save resources/restored.ppm restored
