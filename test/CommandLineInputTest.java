@@ -8,15 +8,16 @@ import controller.interfaces.Input;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Test class for CommandLineInput.
+ */
 public class CommandLineInputTest implements Input {
 
-  private boolean run = true;
   private Controller controller;
 
 
   @Override
   public void startCommandReading() {
-//    Scanner scanner = new Scanner(System.in);
     try {
       parseInput("start");
     } catch (NoSuchElementException e) {
@@ -86,11 +87,8 @@ public class CommandLineInputTest implements Input {
       case "run":
         controller.runScript("file/path");
         break;
-      case "help":
-//        printHelp();
-        break;
       case "stop":
-        run = false;
+        boolean run = false;
         break;
       default:
         System.out.println("No such command! Type help for list of commands");
@@ -176,6 +174,9 @@ public class CommandLineInputTest implements Input {
   }
 
 
+  /**
+   * This is an implementation of a Mock Controller.
+   */
   public class ControllerMock implements Controller {
 
     public String log = "";
@@ -221,13 +222,17 @@ public class CommandLineInputTest implements Input {
     }
 
     @Override
-    public void splitImageChannels(String name, String redResultName, String greenResultName, String blueResultName) {
-      log += "splitImageChannels " + name + " " + redResultName + " " + greenResultName + " " + blueResultName + " ";
+    public void splitImageChannels(String name, String redResultName,
+                                   String greenResultName, String blueResultName) {
+      log += "splitImageChannels " + name + " " + redResultName + " " +
+              greenResultName + " " + blueResultName + " ";
     }
 
     @Override
-    public void combineGreyScaleImages(String redName, String greenName, String blueName, String resultName) {
-      log += "combineGreyScaleImages " + redName + " " + greenName + " " + blueName + " " + resultName + " ";
+    public void combineGreyScaleImages(String redName, String greenName,
+                                       String blueName, String resultName) {
+      log += "combineGreyScaleImages " + redName + " " + greenName + " " +
+              blueName + " " + resultName + " ";
     }
 
     @Override

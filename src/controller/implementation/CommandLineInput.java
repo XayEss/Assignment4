@@ -120,23 +120,33 @@ public class CommandLineInput implements Input {
 
   private void printHelp() {
     String help =
-            "load 'path' 'name' - loads an image with the given path and saves it with name.\n"
+            "load 'path' 'name' - loads an image with the given path and " +
+                    "saves it with name.\n"
                     + "save 'path' 'name' - save an image with name to the given path.\n"
-                    + "brighten [amount] 'name' 'save name' - brightens image with the name by a amount"
+                    + "brighten [amount] 'name' 'save name' - brightens image with the " +
+                    "name by a amount"
                     + " and saves under save name.\n"
-                    + "vertical-flip 'name' 'save name' - vertically flips image with the name and saves under "
+                    + "vertical-flip 'name' 'save name' - vertically flips image with the " +
+                    "name and saves under "
                     + "save name\n"
-                    + "horizontal-flip 'name' 'save name' - horizontally flips image with the name and saves"
+                    + "horizontal-flip 'name' 'save name' - horizontally flips image with " +
+                    "the name and saves"
                     + " under save name\n"
-                    + "greyscale 'name' 'save name' - makes a greyscale version of the image with the name"
+                    + "greyscale 'name' 'save name' - makes a greyscale version of the image " +
+                    "with the name"
                     + " and saves under save name\n"
-                    + "rgb-split 'name' 'name-red' 'name-green' 'name-blue' - splits image with name into three "
-                    + "rgb component images, red component is saved under name-red, green - name-green, "
+                    + "rgb-split 'name' 'name-red' 'name-green' 'name-blue' - splits image " +
+                    "with name into three "
+                    + "rgb component images, red component is saved under name-red, green - " +
+                    "name-green, "
                     + "blue - name-blue.\n"
-                    + "rgb-combine 'save name' 'name-red' 'name-green' 'name-blue' - combines three images into"
-                    + " one, where name-red is the name of the image with the red component, name-green - green"
+                    + "rgb-combine 'save name' 'name-red' 'name-green' 'name-blue' - combines " +
+                    "three images into"
+                    + " one, where name-red is the name of the image with the red component, " +
+                    "name-green - green"
                     + " component, name-blue - blue component. Saves the image with save name.\n"
-                    + "run 'path' runs all commands from a file with the give path. Each command should start "
+                    + "run 'path' runs all commands from a file with the give path. Each " +
+                    "command should start "
                     + "from a new line\n"
                     + "stop - stops the program.";
     System.out.println(help);
