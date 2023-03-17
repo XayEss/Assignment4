@@ -11,12 +11,21 @@ import model.interfaces.ImageProcessor;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * This is a test class for ImageHandlerImplementation.
+ */
 public class ImageHandlerImplTest {
 
   @Test
   public void testImageHandlerCreation() {
     ImageProcessor testProcessor = new ImageProcessorImpl();
-    ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
+
+    try {
+      ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
+    } catch (Exception e) {
+      fail("Exception thrown!");
+    }
+
   }
 
   @Test
@@ -355,7 +364,6 @@ public class ImageHandlerImplTest {
 
     Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
             "testBaseImage.ppm");
-//    testHandler.saveWithName("testImg", testImg);
 
     Image testRed = testImg.getImageChannel(0);
     Image testGre = testImg.getImageChannel(1);

@@ -1,7 +1,7 @@
 package model.implementation;
 
 /**
- * An exception for when an image
+ * An exception for when an image.
  */
 public class NoSuchImageException extends Exception {
 

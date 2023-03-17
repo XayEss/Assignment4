@@ -143,7 +143,7 @@ public class ControllerImpl implements Controller {
   }
 
   @Override
-  public void loadImage(String path, String name) {//  try {
+  public void loadImage(String path, String name) {
     Image image = imageInput.readFile(path);
     if (image != null) {
       imageHandler.saveWithName(name, image);
@@ -151,9 +151,6 @@ public class ControllerImpl implements Controller {
     } else {
       output.print("No file with path " + path + " found");
     }
-    //  }catch(FileNotFoundException f){
-    //    output.print("File with path " + path + " not found");
-    //  }
   }
 
   @Override
@@ -171,7 +168,8 @@ public class ControllerImpl implements Controller {
   public void runScript(String path) {
     //System.out.println("in runScript!");
     //new VisualizeAscii().show(imageHandler.getByName(path));
-    //new VisualizeImage(ImageToBufferedImageService.convertToBuffered(imageHandler.getByName(path)));
+    //new VisualizeImage(ImageToBufferedImageService.convertToBuffered
+    // (imageHandler.getByName(path)));
 
   }
 }
