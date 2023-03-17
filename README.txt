@@ -33,4 +33,4 @@ To run a script file simply type the run command and provide the filepath to the
 A script file with the name example-script is already given, to execute it type:
 run resources/example-script.txt
 
-##Example image created by Alexander Seljuk, all rights reserved.
+©Example image created by Alexander Seljuk(me), all rights reserved.
