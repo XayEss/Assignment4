@@ -1,5 +1,7 @@
 package model.implementation;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -84,7 +86,20 @@ public class ImageHandlerImpl implements ImageHandler {
   }
 
   @Override
-  public void saveWithName(String name, Image image) {
+  public void saveWithName(String name, Image image){
     nameToImage.put(name, image);
   }
+
+  @Override
+  public void importImage(String name, InputStream stream) throws IOException {
+    saveWithName(name, ImageConverter.convertFromBytes(stream));
+
+  }
+
+  @Override
+  public InputStream exportImage(String name) throws NoSuchImageException, IOException {
+    return ImageConverter.convertToBytes(getByName(name));
+  }
+
+
 }

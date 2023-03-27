@@ -6,6 +6,8 @@ import controller.interfaces.Controller;
 import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
+import java.io.IOException;
+import java.io.InputStream;
 import model.implementation.NoSuchImageException;
 import model.interfaces.Image;
 import model.interfaces.ImageHandler;
@@ -144,9 +146,13 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void loadImage(String path, String name) {
-    Image image = imageInput.readFile(path);
+    InputStream image = imageInput.readFile(path);
     if (image != null) {
-      imageHandler.saveWithName(name, image);
+      try {
+        imageHandler.importImage(name, image);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
       output.print("Successfully loaded image");
     } else {
       output.print("No file with path " + path + " found");
@@ -156,9 +162,9 @@ public class ControllerImpl implements Controller {
   @Override
   public void saveImage(String path, String name) {
     try {
-      imageSaver.save(path, imageHandler.getByName(name));
+      imageSaver.save(path, imageHandler.exportImage(name));
       output.print("Successfully saved image");
-    } catch (NoSuchImageException | FileNotFoundException e) {
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }

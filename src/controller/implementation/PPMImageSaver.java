@@ -1,9 +1,13 @@
 package controller.implementation;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 
 import controller.interfaces.ImageSaver;
+import java.nio.ByteBuffer;
+import model.implementation.ImageConverter;
 import model.interfaces.Image;
 
 /**
@@ -28,5 +32,27 @@ public class PPMImageSaver implements ImageSaver {
       }
     }
     writer.close();
+  }
+
+  @Override
+  public void save(String path, InputStream stream) throws IOException {
+    save(path, ImageConverter.convertFromBytes(stream));
+//    PrintWriter writer = new PrintWriter(path);
+//    byte[] heightBytes = new byte[4];
+//    byte[] widthBytes = new byte[4];
+//    stream.read(widthBytes);
+//    stream.read(heightBytes);
+//    ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
+//    buffer.put(heightBytes);
+//    buffer.rewind();
+//    int height = buffer.getInt();
+//    buffer.clear();
+//    buffer.put(widthBytes);
+//    buffer.rewind();
+//    int width = buffer.getInt();
+//    writer.println("P3");
+//    writer.println(width + " " + height);
+//    writer.println("255");
+
   }
 }

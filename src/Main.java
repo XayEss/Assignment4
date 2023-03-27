@@ -6,10 +6,19 @@ import controller.implementation.ImageUtil;
 import controller.implementation.PPMImageSaver;
 import controller.interfaces.Controller;
 import controller.interfaces.Input;
+import java.io.InputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import model.implementation.ImageConverter;
 import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageProcessorImpl;
+import model.implementation.ImageToBufferedImageService;
+import model.interfaces.Image;
 import model.interfaces.ImageHandler;
 import view.impl.CommandLineOutput;
+import view.impl.VisualizeImage;
 
 /**
  * The Main class is the entry point of the program.
@@ -29,7 +38,15 @@ public class Main {
    */
   public static void main(String[] args) throws IOException, InterruptedException {
     ImageHandler ih = new ImageHandlerImpl(new ImageProcessorImpl());
-
+//    Image im = ImageConverter.convertFromBytes(new ImageUtil().readFile("resources/gg.ppm"));
+////    PipedOutputStream pipedOutputStream = new PipedOutputStream();
+////    PipedInputStream pipedInputStream = new PipedInputStream();
+////    pipedOutputStream.connect(pipedInputStream);
+////    ObjectOutput os = new ObjectOutputStream(pipedOutputStream);
+////    os.writeObject(im);
+//    InputStream is = ImageConverter.convertToBytes(im);
+//    Image im2 = ImageConverter.convertFromBytes(is);
+//    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(im2));
     Input in = new CommandLineInput();
     Controller controller = new ControllerImpl(new ImageUtil(), new PPMImageSaver(),
             in, ih/*new ImageHandlerImpl(new ImageProcessorImpl())*/, new CommandLineOutput());

@@ -1,5 +1,6 @@
 package controller.interfaces;
 
+import model.implementation.NoSuchImageException;
 import model.interfaces.ImageHandler;
 
 /**
@@ -7,8 +8,7 @@ import model.interfaces.ImageHandler;
  */
 public interface CommandHelper {
 
-  void execute(String name);
+  void execute(String name, String saveName, ImageHandler handler) throws NoSuchImageException;
 
-  void setHandler(ImageHandler handler);
 
 }

@@ -1,5 +1,7 @@
 package model.interfaces;
 
+import java.io.IOException;
+import java.io.InputStream;
 import model.implementation.NoSuchImageException;
 
 /**
@@ -81,5 +83,10 @@ public interface ImageHandler {
   Image getByName(String name) throws NoSuchImageException;
 
   void saveWithName(String name, Image image);
+
+  void importImage(String name, InputStream stream) throws IOException;
+
+  InputStream exportImage(String name) throws NoSuchImageException, IOException;
+
 
 }
