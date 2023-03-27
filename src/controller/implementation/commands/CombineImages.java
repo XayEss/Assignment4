@@ -4,11 +4,18 @@ import controller.interfaces.CommandHelper;
 import model.implementation.NoSuchImageException;
 import model.interfaces.ImageHandler;
 
-public class LumaImage implements CommandHelper {
+public class CombineImages implements CommandHelper {
+  String greenName;
+  String blueName;
+
+  public CombineImages(String greenName, String blueName) {
+    this.greenName = greenName;
+    this.blueName = blueName;
+  }
 
   @Override
   public void execute(String name, String saveName, ImageHandler handler)
       throws NoSuchImageException {
-    handler.getLuma(name, saveName);
+    handler.combineGreyScaleImages(name, greenName, blueName, saveName);
   }
 }

@@ -115,6 +115,7 @@ public interface Image {
    */
   Image getGreyscaleImage();
 
+  Image linearTransformation(double[] vector);
 
   /**
    * Represents an image as a set of bytes.

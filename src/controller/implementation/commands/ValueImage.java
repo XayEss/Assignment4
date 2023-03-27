@@ -4,11 +4,11 @@ import controller.interfaces.CommandHelper;
 import model.implementation.NoSuchImageException;
 import model.interfaces.ImageHandler;
 
-public class LumaImage implements CommandHelper {
+public class ValueImage implements CommandHelper {
 
   @Override
   public void execute(String name, String saveName, ImageHandler handler)
       throws NoSuchImageException {
-    handler.getLuma(name, saveName);
+    handler.getValue(name, saveName);
   }
 }

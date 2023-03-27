@@ -112,6 +112,15 @@ public class ImageImpl implements Image {
   }
 
   @Override
+  public Image linearTransformation(double[] vector) {
+    manipulationHelper(p -> new PixelRGB(multiplyByVector(p.getChannel(0), p.getChannel(1), p.getChannel(2), vector)))
+  }
+
+  private int multiplyByVector(int r, int g, int b, double num){
+    return (int)(r * vector[0] + g * vector[1] + b * vector[2]);
+  }
+
+  @Override
   public byte[] getBytes() {
     byte[] byteImage = new byte[getHeight() * getWidth() * 3];
     for (int i = 0; i < getHeight(); i++) {
