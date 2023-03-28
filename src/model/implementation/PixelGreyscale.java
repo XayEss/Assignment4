@@ -67,6 +67,16 @@ public class PixelGreyscale implements Pixel {
     return 1;
   }
 
+  @Override
+  public Pixel linearlyTransform(double[][] transformation) {
+    return null;
+  }
+
+  @Override
+  public Pixel dither() {
+    return null;
+  }
+
   private void checkChannelArgument(int channel) throws IllegalArgumentException {
     if (channel != 0) {
       throw new IllegalArgumentException("Grayscale pixel has only one channel - 0");

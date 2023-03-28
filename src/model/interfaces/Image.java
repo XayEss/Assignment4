@@ -106,7 +106,7 @@ public interface Image {
    * @param channel the channel to change.
    * @param value   the value to be set.
    */
-  void setPixel(int row, int column, int channel, int value);
+  void setPixelChannel(int row, int column, int channel, int value);
 
   /**
    * Returns a new greyscale version of the picture.
@@ -115,7 +115,9 @@ public interface Image {
    */
   Image getGreyscaleImage();
 
-  Image linearTransformation(double[] vector);
+  Image linearTransformation(double[][] transformation);
+
+  Image dither();
 
   /**
    * Represents an image as a set of bytes.

@@ -80,4 +80,6 @@ public interface ImageProcessor {
    * @return a new three channeled image
    */
   Image combineGreyScaleImages(Image first, Image second, Image third);
+
+  Image sepiaTone(Image image);
 }

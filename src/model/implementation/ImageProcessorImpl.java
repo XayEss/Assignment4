@@ -62,6 +62,12 @@ public class ImageProcessorImpl implements ImageProcessor {
     return new ImageImpl(pixels);
   }
 
+  @Override
+  public Image sepiaTone(Image image) {
+    double[][] sepia = new double[][]{{0.393, 0.769, 0.189}, {0.349, 0.686, 0.168}, {0.272, 0.534, 0.131}};
+    return image.linearTransformation(sepia);
+  }
+
   private Image combineThreeImages(Image first, Image second, Image third) {
     Pixel[][] pixels = new PixelRGB[first.getHeight()][first.getWidth()];
     for (int i = 0; i < first.getHeight(); i++) {

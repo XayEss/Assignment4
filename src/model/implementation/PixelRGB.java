@@ -129,6 +129,40 @@ public class PixelRGB implements Pixel {
   }
 
   @Override
+  public Pixel linearlyTransform(double[][] transformation) {
+    int valueRed = transform(transformation[0]);
+    int valueGreen = transform(transformation[1]);
+    int valueBlue = transform(transformation[2]);
+    if(valueRed > 255){
+      valueRed = 255;
+    }
+    if(valueGreen > 255){
+      valueGreen = 255;
+    }
+    if(valueBlue > 255){
+      valueBlue = 255;
+    }
+    System.out.println(valueRed + " " + valueGreen + " " + valueGreen);
+    return new PixelRGB(valueRed, valueGreen, valueBlue);
+  }
+
+  @Override
+  public Pixel dither() {
+    int old = red;
+    int newColor = 0;
+     if( old > 255 / 2){
+       newColor = 255;
+     }
+     int error = newColor - old;
+    return null;
+  }
+
+  private int transform(double[] vector){
+    return (int)(red * vector[0] + green * vector[1] + blue * vector[2]);
+
+  }
+
+  @Override
   public String toString() {
     return red + " " + green + " " + blue;
   }

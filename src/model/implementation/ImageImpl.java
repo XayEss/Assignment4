@@ -102,7 +102,7 @@ public class ImageImpl implements Image {
   }
 
   @Override
-  public void setPixel(int row, int column, int channel, int value) {
+  public void setPixelChannel(int row, int column, int channel, int value) {
     pixels[row][column].setChannel(channel, value);
   }
 
@@ -112,12 +112,73 @@ public class ImageImpl implements Image {
   }
 
   @Override
-  public Image linearTransformation(double[] vector) {
-    manipulationHelper(p -> new PixelRGB(multiplyByVector(p.getChannel(0), p.getChannel(1), p.getChannel(2), vector)))
+  public Image linearTransformation(double[][] transformation) {
+    return manipulationHelper(p -> p.linearlyTransform(transformation));
   }
 
-  private int multiplyByVector(int r, int g, int b, double num){
-    return (int)(r * vector[0] + g * vector[1] + b * vector[2]);
+  @Override
+  public Image dither() {
+    Pixel[][] changedPixels = new Pixel[getHeight()][getWidth()];
+    int height = getHeight();
+    int width = getWidth();
+    Image workingImage = getLumaImage();
+    for (int i = 0; i < getHeight(); i++) {
+      for (int j = 0; j < getWidth(); j++) {
+        changedPixels[i][j] = workingImage.getPixel(i, j);
+      }
+    }
+    int[][] errors = new int[height][width];
+    for (int i = 0; i < getHeight(); i++) {
+      for (int j = 0; j < getWidth(); j++) {
+        int old = workingImage.getPixelChannel(i, j, 0);
+        int newColor = 0;
+        if(old > 255 / 2){
+          newColor = 255;
+        }
+        int error = old - newColor;
+        errors[i][j] = error;
+        changedPixels[i][j] = new PixelRGB(newColor);
+        if (j + 1 < width)
+          changedPixels[i][j + 1] = new PixelRGB(changedPixels[i][j + 1].getChannel(0) + (int) (7 / 16d * error));
+
+        if (i + 1 < height && j - 1 >= 0)
+          changedPixels[i + 1][j - 1] = new PixelRGB(changedPixels[i][j + 1].getChannel(0) + (int) (3 / 16d * error));
+        if (i + 1 < height)
+          changedPixels[i + 1][j] = new PixelRGB(changedPixels[i][j + 1].getChannel(0) + (int) (5 / 16d * error));
+        if (i + 1 < height && j + 1 < width)
+          changedPixels[i + 1][j + 1] = new PixelRGB(changedPixels[i][j + 1].getChannel(0) + (int) (1 / 16d * error));
+      }
+    }
+//    for (int i = 0; i < getHeight(); i++) {
+//      for (int j = 0; j < getWidth(); j++) {
+////        if (j + 1 < width)
+////          changedPixels[i][j + 1] = changedPixels[i][j + 1].alterBrightness(
+////              (int) (7 / 16d * error));
+////        if (i + 1 < height && j - 1 >= 0)
+////          changedPixels[i + 1][j - 1] = changedPixels[i + 1][j - 1].alterBrightness(
+////              (int) (3 / 16d * error));
+////        if (i + 1 < height)
+////          changedPixels[i + 1][j] = changedPixels[i + 1][j].alterBrightness(
+////              (int) (5 / 16d * error));
+////        if (i + 1 < height && j + 1 < width)
+////          changedPixels[i + 1][j + 1] = changedPixels[i + 1][j + 1].alterBrightness(
+////              (int) (1 / 16d * error));
+//        System.out.println((int) (7 / 16d * errors[i][j]));
+//        if (j + 1 < width)
+//          changedPixels[i][j + 1] = changedPixels[i][j + 1].alterBrightness(
+//              (int) (7 / 16d * errors[i][j]));
+//        if (i + 1 < height && j - 1 >= 0)
+//          changedPixels[i + 1][j - 1] = changedPixels[i + 1][j - 1].alterBrightness(
+//              (int) (3 / 16d * errors[i][j]));
+//        if (i + 1 < height)
+//          changedPixels[i + 1][j] = changedPixels[i + 1][j].alterBrightness(
+//              (int) (5 / 16d * errors[i][j]));
+//        if (i + 1 < height && j + 1 < width)
+//          changedPixels[i + 1][j + 1] = changedPixels[i + 1][j + 1].alterBrightness(
+//              (int) (1 / 16d * errors[i][j]));
+//      }
+//    }
+    return new ImageImpl(changedPixels);
   }
 
   @Override

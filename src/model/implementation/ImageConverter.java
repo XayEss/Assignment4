@@ -27,6 +27,7 @@ public class ImageConverter {
     buffer.put(widthBytes);
     buffer.rewind();
     int width = buffer.getInt();
+    System.out.println("parameters" + height + " " + width);
     pixels = new PixelRGB[height][width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {

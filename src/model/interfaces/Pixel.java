@@ -80,4 +80,13 @@ public interface Pixel {
    * @return the number of channels.
    */
   int getNumberOfChannels();
+
+  /**
+   * Linearly transforms pixel with the given vector.
+   * @param transformation the vector to apply to the pixel.
+   * @return new linearly transformed pixel.
+   */
+  Pixel linearlyTransform(double[][] transformation);
+
+  Pixel dither();
 }

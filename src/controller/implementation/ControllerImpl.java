@@ -146,7 +146,12 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void loadImage(String path, String name) {
-    InputStream image = imageInput.readFile(path);
+    InputStream image = null;
+    try {
+      image = imageInput.readFile(path);
+    }catch(IOException e){
+      output.print("Could not read the file");
+    }
     if (image != null) {
       try {
         imageHandler.importImage(name, image);
