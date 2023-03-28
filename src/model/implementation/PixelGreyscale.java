@@ -72,10 +72,6 @@ public class PixelGreyscale implements Pixel {
     return null;
   }
 
-  @Override
-  public Pixel dither() {
-    return null;
-  }
 
   private void checkChannelArgument(int channel) throws IllegalArgumentException {
     if (channel != 0) {

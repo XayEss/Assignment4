@@ -92,6 +92,11 @@ public class ImageToBufferedImageService {
     }
   }
 
+  /**
+   * Converts an Image to a BufferedImage.
+   * @param image the image to convert.
+   * @return a BufferedImage representation of the image.
+   */
   static public BufferedImage toBuffered(Image image) {
     int width = image.getWidth();
     int height = image.getHeight();
@@ -112,6 +117,14 @@ public class ImageToBufferedImageService {
     return bufferedImage;
   }
 
+  /**
+   * Converts an Image to a BufferedImage given an InputStream.
+   * First 4 bytes have to be the width of the image, next 4 bytes - the height. After each byte
+   * represents an r, g, b component.
+   * @param stream The stream from which to read the image data from.
+   * @return a BufferedImage representation of the image.
+   * @throws IOException if an error while reading the stream occurs.
+   */
   static public BufferedImage toBuffered(InputStream stream) throws IOException {
     byte[] widthBytes = new byte[4];
     byte[] heightBytes = new byte[4];

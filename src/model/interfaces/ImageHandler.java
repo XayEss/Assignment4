@@ -80,12 +80,39 @@ public interface ImageHandler {
   void combineGreyScaleImages(String redName, String greenName, String blueName, String saveName)
           throws NoSuchImageException;
 
+  /**
+   * Transforms the image into a sephia toned image and saves to the model.
+   * @param name of image to transform.
+   * @param saveName the new name to save under.
+   */
+  void sepiaToneImage(String name, String saveName) throws NoSuchImageException;
+
+  /**
+   * Dithers the image with name and saves under saveName.
+   * @param name the name of the image to change.
+   * @param saveName the name to save the new image under.
+   * @throws NoSuchImageException when an image with the name can't be found.
+   */
+  void ditherImage(String name, String saveName) throws NoSuchImageException;
+
   Image getByName(String name) throws NoSuchImageException;
 
   void saveWithName(String name, Image image);
 
+  /**
+   * Imports an image to the model, saves with the given name.
+   * @param name the name to save with.
+   * @param stream InputStream that has image data written inside.
+   * @throws IOException when a stream reading operation fails.
+   */
   void importImage(String name, InputStream stream) throws IOException;
-
+  /**
+   * Exports an image with the given name from the model, as an InputStream.
+   * @param name the name to save with.
+   * @return InputStream that has image data written inside.
+   * @throws IOException when a stream reading operation fails.
+   * @throws NoSuchImageException when an image with the name can't be found.
+   */
   InputStream exportImage(String name) throws NoSuchImageException, IOException;
 
 

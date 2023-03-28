@@ -78,6 +78,16 @@ public class ImageHandlerImpl implements ImageHandler {
   }
 
   @Override
+  public void sepiaToneImage(String name, String saveName) throws NoSuchImageException {
+    saveWithName(saveName, imageProcessor.sepiaTone(getByName(name)));
+  }
+
+  @Override
+  public void ditherImage(String name, String saveName) throws NoSuchImageException {
+    saveWithName(saveName, getByName(name).dither());
+  }
+
+  @Override
   public Image getByName(String name) throws NoSuchImageException {
     if (!nameToImage.containsKey(name)) {
       throw new NoSuchImageException("No image with name " + name);

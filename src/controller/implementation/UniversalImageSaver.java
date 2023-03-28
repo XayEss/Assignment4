@@ -19,8 +19,16 @@ public class UniversalImageSaver implements ImageSaver {
 
   @Override
   public void save(String path, InputStream stream) throws IOException {
-    BufferedImage image = ImageToBufferedImageService.toBuffered(stream);
     String format = path.substring(path.lastIndexOf('.')+1);
+    if(format.equals("ppm")){
+      new PPMImageSaver().save(path, stream);
+    } else {
+      saveConventional(path, format, stream);
+    }
+  }
+
+  private void saveConventional(String path, String format, InputStream stream) throws IOException {
+    BufferedImage image = ImageToBufferedImageService.toBuffered(stream);
     ImageIO.write(image, format, new File(path));
   }
 }

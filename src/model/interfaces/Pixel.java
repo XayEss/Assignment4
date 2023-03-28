@@ -88,5 +88,4 @@ public interface Pixel {
    */
   Pixel linearlyTransform(double[][] transformation);
 
-  Pixel dither();
 }

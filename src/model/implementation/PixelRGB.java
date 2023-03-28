@@ -146,16 +146,6 @@ public class PixelRGB implements Pixel {
     return new PixelRGB(valueRed, valueGreen, valueBlue);
   }
 
-  @Override
-  public Pixel dither() {
-    int old = red;
-    int newColor = 0;
-     if( old > 255 / 2){
-       newColor = 255;
-     }
-     int error = newColor - old;
-    return null;
-  }
 
   private int transform(double[] vector){
     return (int)(red * vector[0] + green * vector[1] + blue * vector[2]);

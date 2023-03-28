@@ -41,7 +41,8 @@ public class ImageProcessorImpl implements ImageProcessor {
 
   @Override
   public Image getGreyscale(Image image) {
-    return image.getGreyscaleImage();
+    double[][] grey = new double[][]{{0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722}};
+    return image.linearTransformation(grey);
   }
 
   @Override

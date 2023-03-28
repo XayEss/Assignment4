@@ -115,8 +115,17 @@ public interface Image {
    */
   Image getGreyscaleImage();
 
+  /**
+   * Linearly transforms the image with the given transformation matrix.
+   * @param transformation the transformation matrix.
+   * @return a new linearly transformed image.
+   */
   Image linearTransformation(double[][] transformation);
 
+  /**
+   * Applies the Floyd-Steinberg dithering to the image.
+   * @return a new dithered image.
+   */
   Image dither();
 
   /**
