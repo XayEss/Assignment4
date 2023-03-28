@@ -1,6 +1,8 @@
 import controller.implementation.UniversalImageLoader;
+import controller.implementation.UniversalImageSaver;
 import java.io.IOException;
 
+import java.io.InputStream;
 import model.implementation.ImageConverter;
 import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageProcessorImpl;
@@ -33,11 +35,12 @@ public class Main {
 //    pipedOutputStream.connect(pipedInputStream);
 //    ObjectOutput os = new ObjectOutputStream(pipedOutputStream);
 //    os.writeObject(im);
-//    InputStream is = ImageConverter.convertToBytes(im);
-//    Image im2 = ImageConverter.convertFromBytes(is)ccc;
+      InputStream is = ImageConverter.convertToBytes(im);
+      Image im2 = ImageConverter.convertFromBytes(is);
 //    ImageProcessor ip = new ImageProcessorImpl();
-    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(im));
-    new VisualizeImage(ImageToBufferedImageService.convertToBuffered(im.dither()));
+    new UniversalImageSaver().save("resources/sephia.png", ImageConverter.convertToBytes(new ImageProcessorImpl().sepiaTone(im2)));
+    new VisualizeImage(ImageToBufferedImageService.toBuffered(im2));
+    new VisualizeImage(ImageToBufferedImageService.toBuffered(ImageConverter.convertToBytes(new ImageProcessorImpl().sepiaTone(im2).dither())));
 //    Input in = new CommandLineInput();
 //    Controller controller = new ControllerImpl(new ImageUtil(), new PPMImageSaver(),
 //            in, ih/*new ImageHandlerImpl(new ImageProcessorImpl())*/, new CommandLineOutput());

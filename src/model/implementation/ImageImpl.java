@@ -130,54 +130,28 @@ public class ImageImpl implements Image {
     int[][] errors = new int[height][width];
     for (int i = 0; i < getHeight(); i++) {
       for (int j = 0; j < getWidth(); j++) {
-        int old = workingImage.getPixelChannel(i, j, 0);
+        int old = changedPixels[i][j].getChannel(0);
         int newColor = 0;
-        if(old > 255 / 2){
+        if (old > 255 / 2) {
           newColor = 255;
         }
         int error = old - newColor;
         errors[i][j] = error;
         changedPixels[i][j] = new PixelRGB(newColor);
         if (j + 1 < width)
-          changedPixels[i][j + 1] = new PixelRGB(changedPixels[i][j + 1].getChannel(0) + (int) (7 / 16d * error));
-
+          changedPixels[i][j + 1] = changedPixels[i][j + 1].alterBrightness(
+              (int) (7 / 16d * error));
         if (i + 1 < height && j - 1 >= 0)
-          changedPixels[i + 1][j - 1] = new PixelRGB(changedPixels[i][j + 1].getChannel(0) + (int) (3 / 16d * error));
+          changedPixels[i + 1][j - 1] = changedPixels[i + 1][j - 1].alterBrightness(
+              (int) (3 / 16d * error));
         if (i + 1 < height)
-          changedPixels[i + 1][j] = new PixelRGB(changedPixels[i][j + 1].getChannel(0) + (int) (5 / 16d * error));
+          changedPixels[i + 1][j] = changedPixels[i + 1][j].alterBrightness(
+              (int) (5 / 16d * error));
         if (i + 1 < height && j + 1 < width)
-          changedPixels[i + 1][j + 1] = new PixelRGB(changedPixels[i][j + 1].getChannel(0) + (int) (1 / 16d * error));
+          changedPixels[i + 1][j + 1] = changedPixels[i + 1][j + 1].alterBrightness(
+              (int) (1 / 16d * error));
       }
     }
-//    for (int i = 0; i < getHeight(); i++) {
-//      for (int j = 0; j < getWidth(); j++) {
-////        if (j + 1 < width)
-////          changedPixels[i][j + 1] = changedPixels[i][j + 1].alterBrightness(
-////              (int) (7 / 16d * error));
-////        if (i + 1 < height && j - 1 >= 0)
-////          changedPixels[i + 1][j - 1] = changedPixels[i + 1][j - 1].alterBrightness(
-////              (int) (3 / 16d * error));
-////        if (i + 1 < height)
-////          changedPixels[i + 1][j] = changedPixels[i + 1][j].alterBrightness(
-////              (int) (5 / 16d * error));
-////        if (i + 1 < height && j + 1 < width)
-////          changedPixels[i + 1][j + 1] = changedPixels[i + 1][j + 1].alterBrightness(
-////              (int) (1 / 16d * error));
-//        System.out.println((int) (7 / 16d * errors[i][j]));
-//        if (j + 1 < width)
-//          changedPixels[i][j + 1] = changedPixels[i][j + 1].alterBrightness(
-//              (int) (7 / 16d * errors[i][j]));
-//        if (i + 1 < height && j - 1 >= 0)
-//          changedPixels[i + 1][j - 1] = changedPixels[i + 1][j - 1].alterBrightness(
-//              (int) (3 / 16d * errors[i][j]));
-//        if (i + 1 < height)
-//          changedPixels[i + 1][j] = changedPixels[i + 1][j].alterBrightness(
-//              (int) (5 / 16d * errors[i][j]));
-//        if (i + 1 < height && j + 1 < width)
-//          changedPixels[i + 1][j + 1] = changedPixels[i + 1][j + 1].alterBrightness(
-//              (int) (1 / 16d * errors[i][j]));
-//      }
-//    }
     return new ImageImpl(changedPixels);
   }
 
@@ -193,7 +167,6 @@ public class ImageImpl implements Image {
     }
     return byteImage;
   }
-
 
   @Override
   public String toString() {

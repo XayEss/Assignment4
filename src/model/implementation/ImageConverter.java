@@ -27,7 +27,7 @@ public class ImageConverter {
     buffer.put(widthBytes);
     buffer.rewind();
     int width = buffer.getInt();
-    System.out.println("parameters" + height + " " + width);
+    //System.out.println("parameters" + height + " " + width);
     pixels = new PixelRGB[height][width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
@@ -40,13 +40,11 @@ public class ImageConverter {
 
   public static InputStream convertToBytes(Image image) throws IOException {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    Pixel[][] pixels;
-    byte[] heightBytes = new byte[4];
-    byte[] widthBytes = new byte[4];
-    ByteBuffer buffer = ByteBuffer.allocate(4);
-    heightBytes = buffer.putInt(image.getHeight()).array();
-    buffer.clear();
-    widthBytes = buffer.putInt(image.getWidth()).array();
+    byte[] heightBytes;
+    byte[] widthBytes;
+    System.out.println(image.getHeight());
+    heightBytes = ByteBuffer.allocate(4).putInt(image.getHeight()).array();
+    widthBytes = ByteBuffer.allocate(4).putInt(image.getWidth()).array();
     outputStream.write(widthBytes);
     outputStream.write(heightBytes);
     for (int i = 0; i < image.getHeight(); i++) {
