@@ -130,7 +130,7 @@ public class ImageProcessorTest {
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden-min.png"));
+              "resources/images/new_examples/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
@@ -140,7 +140,8 @@ public class ImageProcessorTest {
 
     try {
       greyImg = ImageConverter
-              .convertFromBytes(imageLoader.readFile("resources/raiden_grey.png"));
+              .convertFromBytes(imageLoader.readFile(
+                      "resources/images/new_examples/raiden_grey.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
@@ -226,7 +227,7 @@ public class ImageProcessorTest {
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden-min.png"));
+              "resources/images/new_examples/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
@@ -241,7 +242,7 @@ public class ImageProcessorTest {
 
     try {
       testTemp = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden_blurred.png"));
+              "resources/images/new_examples/raiden_blurred.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
@@ -259,7 +260,7 @@ public class ImageProcessorTest {
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden-min.png"));
+              "resources/images/new_examples/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
@@ -269,7 +270,7 @@ public class ImageProcessorTest {
 
     try {
       testTemp = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden_blurred.png"));
+              "resources/images/new_examples/raiden_blurred.png"));
     } catch (IOException e) {
       fail("Failed to load image");
     }
@@ -286,7 +287,7 @@ public class ImageProcessorTest {
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden-min.png"));
+              "resources/images/new_examples/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
@@ -296,7 +297,7 @@ public class ImageProcessorTest {
 
     try {
       testTemp = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden_sharpened.png"));
+              "resources/images/new_examples/raiden_sharpened.png"));
     } catch (IOException e) {
       fail("Failed to load image");
     }
@@ -314,7 +315,7 @@ public class ImageProcessorTest {
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden-min.png"));
+              "resources/images/new_examples/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
@@ -324,7 +325,7 @@ public class ImageProcessorTest {
 
     try {
       testTemp = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden-sepia.png"));
+              "resources/images/new_examples/raiden-sepia.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
