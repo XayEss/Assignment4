@@ -1,5 +1,11 @@
 import java.io.IOException;
+
+import controller.implementation.UniversalImageLoader;
+import controller.implementation.UniversalImageSaver;
+import controller.interfaces.ImageInput;
+import controller.interfaces.ImageSaver;
 import model.implementation.ImageConverter;
+
 import org.junit.Test;
 
 import controller.implementation.ImageUtil;
@@ -405,14 +411,43 @@ public class ImageTest {
     Image testImage = null;
     try{
       testImage = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
     assertEquals("[[101 90 58, 103 92 62, 110 95 66, 104 91 59, 104 91 59], " +
             "[104 93 63, 108 94 65, 100 86 57, 103 90 56, 105 91 64], [101 89 63, 103 91 65, " +
             "106 92 66, 103 86 66, 105 91 64]]", testImage.toString());
+  }
+
+
+  @Test
+  public void testDither() {
+    Image testImg = null;
+    Image testTemp = null;
+
+    ImageInput imageLoader = new UniversalImageLoader();
+
+    try {
+      testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
+              "resources/raiden-min.png"));
+    } catch (IOException e) {
+      fail("Couldn't read file");
+    }
+
+    Image testDither = testImg.dither();
+
+
+    try {
+      testTemp = ImageConverter.convertFromBytes(imageLoader.readFile(
+              "resources/raiden-dither.png"));
+    } catch (IOException e) {
+      fail("Couldn't read image");
+    }
+
+    assertEquals(testTemp, testDither);
+
   }
 
 }
