@@ -81,6 +81,11 @@ public interface ImageProcessor {
    */
   Image combineGreyScaleImages(Image first, Image second, Image third);
 
+  /**
+   * Convert an image into a sepia toned image.
+   * @param image the image to convert.
+   * @return a new speia toned image.
+   */
   Image sepiaTone(Image image);
 
   /**
@@ -93,7 +98,12 @@ public interface ImageProcessor {
    * @return a new image with the filter applied.
    */
   Image applyFilter(Image image, int sizeX, int sizeY, float[][] filter);
-
+  /**
+   * Dithers the given image.
+   * @param image the image to dither.
+   * @return a new dithered image.
+   */
+  Image dither(Image image);
   /**
    * Applies a blur effect to the given image using a Gaussian blur filter.
    *

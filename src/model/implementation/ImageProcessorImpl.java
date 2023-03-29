@@ -127,7 +127,17 @@ public class ImageProcessorImpl implements ImageProcessor {
     return filteredImage;
   }
 
+  @Override
+  public Image dither(Image image) {
+    return image.dither();
+  }
 
+  /**
+   * Applies a blur effect to the given image using a Gaussian blur filter.
+   *
+   * @param image the image to which the blur effect will be applied.
+   * @return a new Image with the blur effect applied.
+   */
   @Override
   public Image applyBlur(Image image) {
     float[][] arr = new float[][]{
@@ -138,7 +148,12 @@ public class ImageProcessorImpl implements ImageProcessor {
     return applyFilter(image, 3, 3, arr);
   }
 
-
+  /**
+   * Applies a sharpening effect to the given image using a custom sharpening filter.
+   *
+   * @param image the image to which the sharpening effect will be applied.
+   * @return a new Image with the sharpening effect applied.
+   */
   @Override
   public Image applySharpening(Image image) {
     float[][] arr = new float[][]{

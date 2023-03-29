@@ -28,6 +28,7 @@ public class TransformationControllerImpl extends ControllerImpl implements
   public TransformationControllerImpl(ImageInput imageInput, ImageSaver imageSaver,
                                       Input input, TransformImageHandler imageHandler, Output output) {
     super(imageInput, imageSaver, input, imageHandler, output);
+    this.imageHandler = imageHandler;
     input.setController(this);
   }
 
@@ -53,11 +54,21 @@ public class TransformationControllerImpl extends ControllerImpl implements
 
   @Override
   public void blurImage(String name, String saveName) {
-
+    try {
+      imageHandler.blurImage(name, saveName);
+      output.print("Successfully blurred the image");
+    } catch (NoSuchImageException e) {
+      output.print(e.getMessage());
+    }
   }
 
   @Override
-  public void sharpenImage(String name, String saveImage) {
-
+  public void sharpenImage(String name, String saveName) {
+    try {
+      imageHandler.sharpenImage(name, saveName);
+      output.print("Successfully sharpened the image");
+    } catch (NoSuchImageException e) {
+      output.print(e.getMessage());
+    }
   }
 }

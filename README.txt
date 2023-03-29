@@ -27,6 +27,14 @@ saving them to the filesystem, reading user inputs, appropriately calling the mo
       - PPMImageSaver - An implementation of the ImageSaver interface, that saves images in the .ppm format to the filesystem.
       - CommandLineInput - An implementation of Input that reads commands from the command line and calls the Controller to execute them.
 
+    Assignment 5 Changes:
+      Model now doesn't leak the Image implementation, when loading an image an InputStream will be returned, previously - Image. When saving and image
+      the model no longer sends the Image to the controller to save, instead an InputStream. An Image to InputStream an vice-versa converter was added.
+      The support of linear transformations was added to Pixel interface and to the Image interface. Dithering operation added to Image interface.
+      ImageProcessor interface was updated to support sepia, dither, blur, sharpen. TransformImageHandle interface added to introduce new operations without
+      changing the previous ImageHandler. TransformationController interface added to support new operations(dither, sepia, blur, sharpen) for the controller,
+      TextInput class extends CommandLineInput and adds new commands input. Inputs now use InputStream as input instead of predefined System.in.
+
 **Unzip resources folder**
 Run script instructions:
 To run a script file simply type the run command and provide the filepath to the script file as the command line argument.

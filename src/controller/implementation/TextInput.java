@@ -1,9 +1,9 @@
 package controller.implementation;
 
+import controller.interfaces.Controller;
+import controller.interfaces.TransformationController;
 import java.io.InputStream;
 import java.util.Scanner;
-
-import controller.interfaces.TransformationController;
 
 public class TextInput extends CommandLineInput {
 
@@ -16,7 +16,7 @@ public class TextInput extends CommandLineInput {
   @Override
   public void parseInput(String line) {
     Scanner scanner = new Scanner(line);
-    switch (line) {
+    switch(scanner.next()){
       case "dither":
         controller.ditherImage(scanner.next(), scanner.next());
         break;
@@ -24,11 +24,19 @@ public class TextInput extends CommandLineInput {
         controller.createSepiaImage(scanner.next(), scanner.next());
         break;
       case "blur":
+        controller.blurImage(scanner.next(), scanner.next());
         break;
       case "sharpen":
+        controller.sharpenImage(scanner.next(), scanner.next());
         break;
       default:
         super.parseInput(line);
     }
+  }
+
+  @Override
+  public void setController(Controller controller) {
+    super.setController(controller);
+    this.controller = (TransformationController)controller;
   }
 }

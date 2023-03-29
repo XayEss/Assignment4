@@ -19,6 +19,16 @@ public class TransformImageHandlerImpl extends ImageHandlerImpl implements Trans
 
   @Override
   public void ditherImage(String name, String saveName) throws NoSuchImageException {
-    saveWithName(saveName, getByName(name).dither());
+    saveWithName(saveName, imageProcessor.dither(getByName(name).dither()));
+  }
+
+  @Override
+  public void blurImage(String name, String saveName) throws NoSuchImageException {
+    saveWithName(saveName, imageProcessor.applyBlur(getByName(name)));
+  }
+
+  @Override
+  public void sharpenImage(String name, String saveName) throws NoSuchImageException {
+    saveWithName(saveName, imageProcessor.applySharpening(getByName(name)));
   }
 }

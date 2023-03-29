@@ -3,7 +3,8 @@ package model.interfaces;
 import model.implementation.NoSuchImageException;
 
 /**
- * Model class for handling transformations along with previous features.
+ * Model class for handling transformations along with previous features. Delegates the actual
+ * processing to an ImageProcessor.
  */
 public interface TransformImageHandler extends ImageHandler {
 
@@ -23,5 +24,21 @@ public interface TransformImageHandler extends ImageHandler {
    * @throws NoSuchImageException when an image with the name can't be found.
    */
   void ditherImage(String name, String saveName) throws NoSuchImageException;
+
+  /**
+   * Blurs the image with name and saves under saveName.
+   * @param name the name of the image to change.
+   * @param saveName the name to save the new image under.
+   * @throws NoSuchImageException when an image with the name can't be found.
+   */
+  void blurImage(String name, String saveName) throws NoSuchImageException;
+
+  /**
+   * Blurs the image with name and saves under saveName.
+   * @param name the name of the image to change.
+   * @param saveName the name to save the new image under.
+   * @throws NoSuchImageException when an image with the name can't be found.
+   */
+  void sharpenImage(String name, String saveName) throws NoSuchImageException;
 
 }
