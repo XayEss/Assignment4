@@ -1,6 +1,7 @@
 package view.impl;
 
 import java.io.OutputStream;
+import java.io.PrintWriter;
 
 import model.interfaces.Image;
 import view.intefraces.Output;
@@ -18,19 +19,20 @@ public class CommandLineOutput implements Output {
 
   @Override
   public void show(Image image) {
+    PrintWriter pw = new PrintWriter(outputStream);
     StringBuilder line = new StringBuilder();
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
         line.append(getAsciiChar(image.getPixel(i, j).getGreyScale()));
       }
-      System.out.println(line);
+      pw.println(line);
       line.delete(0, line.length());
     }
   }
 
   @Override
   public void print(String string) {
-    System.out.println(string);
+    new PrintWriter(outputStream).println(string);
   }
 
   private char getAsciiChar(int character) {
