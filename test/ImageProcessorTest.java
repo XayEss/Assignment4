@@ -122,18 +122,30 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetGreyScale() {
-    // TODO: Fix with new test images
+
+    ImageInput imageLoader = new UniversalImageLoader();
+
     Image testImg = null;
+    Image greyImg = null;
+
     try {
-      testImg = ImageConverter
-              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-                      "testBaseImage.ppm"));
+      testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
+              "resources/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
-    ImageProcessor testProcessor = new ImageProcessorImpl();
 
-    assertEquals(testImg.getGreyscaleImage(), testProcessor.getGreyscale(testImg));
+    ImageProcessor testProcessor = new ImageProcessorImpl();
+    Image temp = testProcessor.getGreyscale(testImg);
+
+    try {
+      greyImg = ImageConverter
+              .convertFromBytes(imageLoader.readFile("resources/raiden_grey.png"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
+
+    assertEquals(greyImg, temp);
   }
 
 
@@ -208,9 +220,9 @@ public class ImageProcessorTest {
   @Test
   public void testApplyFilter() {
     Image testImg = null;
+    Image testTemp = null;
 
     ImageInput imageLoader = new UniversalImageLoader();
-    ImageSaver imageSaver = new UniversalImageSaver();
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
@@ -219,24 +231,22 @@ public class ImageProcessorTest {
       fail("Couldn't read the image");
     }
 
+    float[][] arr = new float[][]{
+            {1f / 16, 1f / 8, 1f / 16},
+            {1f / 8, 1f / 4, 1f / 8},
+            {1f / 16, 1f / 8, 1f / 16}};
+
     ImageProcessor testProcessor = new ImageProcessorImpl();
-    Image filteredImg = testProcessor.applySharpening(testImg);
-    Image filteredImg1 = testProcessor.applyBlur(testImg);
+    Image filteredImg = testProcessor.applyFilter(testImg, 3, 3, arr);
 
     try {
-      imageSaver.save("resources/raiden_sharpened.png",
-              ImageConverter.convertToBytes(filteredImg));
+      testTemp = ImageConverter.convertFromBytes(imageLoader.readFile(
+              "resources/raiden_blurred.png"));
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      fail("Couldn't read the image");
     }
 
-    try {
-      imageSaver.save("resources/raiden_blurred.png",
-              ImageConverter.convertToBytes(filteredImg1));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-
+    assertEquals(testTemp, filteredImg);
   }
 
 
@@ -292,6 +302,34 @@ public class ImageProcessorTest {
     }
 
     assertEquals(testTemp, testSharp);
+  }
+
+
+  @Test
+  public void testSepiaTone() {
+    Image testImg = null;
+    Image testTemp = null;
+
+    ImageInput imageLoader = new UniversalImageLoader();
+
+    try {
+      testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
+              "resources/raiden-min.png"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
+
+    ImageProcessor testProcessor = new ImageProcessorImpl();
+    Image sepiaImg = testProcessor.sepiaTone(testImg);
+
+    try {
+      testTemp = ImageConverter.convertFromBytes(imageLoader.readFile(
+              "resources/raiden-sepia.png"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
+
+    assertEquals(testTemp, sepiaImg);
   }
 
 
