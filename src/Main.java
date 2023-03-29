@@ -47,9 +47,9 @@ public class Main {
       InputStream is = ImageConverter.convertToBytes(im);
       Image im2 = ImageConverter.convertFromBytes(is);
 //    ImageProcessor ip = new ImageProcessorImpl();
-//    new UniversalImageSaver().save("resources/sephia.png", ImageConverter.convertToBytes(new ImageProcessorImpl().sepiaTone(im2)));
-//    new VisualizeImage(ImageToBufferedImageService.toBuffered(im2));
-//    new VisualizeImage(ImageToBufferedImageService.toBuffered(ImageConverter.convertToBytes(im2.dither())));
+    //new UniversalImageSaver().save("resources/sephia.png", ImageConverter.convertToBytes(new ImageProcessorImpl().sepiaTone(im2)));
+    new VisualizeImage(ImageToBufferedImageService.toBuffered(im2.flipImage(false).alterBrightness(100)));
+    new VisualizeImage(ImageToBufferedImageService.toBuffered(ImageConverter.convertToBytes(im2.dither())));
     Input input = null;
     if(true || args.length != 0 && args[0].equals("-file")){
      // input = new CommandLineInput(new FileInputStream(args[1]));

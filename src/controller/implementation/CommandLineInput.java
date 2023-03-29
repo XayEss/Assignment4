@@ -21,9 +21,9 @@ import controller.interfaces.Input;
  */
 public class CommandLineInput implements Input {
 
-  private boolean run;
+  protected boolean run;
   private Controller controller;
-  private InputStream input;
+  protected InputStream input;
 
   public CommandLineInput(InputStream input) {
     run = true;

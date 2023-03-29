@@ -13,11 +13,11 @@ import view.intefraces.Output;
 
 public class CommandController implements TransformationController {
 
-    ImageInput imageInput;
-    ImageSaver imageSaver;
-    Input input;
-    Output output;
-    ImageHandler imageHandler;
+    private ImageInput imageInput;
+    private ImageSaver imageSaver;
+    private Input input;
+    private Output output;
+    private ImageHandler imageHandler;
 
 
     /**
@@ -54,6 +54,16 @@ public class CommandController implements TransformationController {
 
   @Override
   public void ditherImage(String name, String saveName) {
+
+  }
+
+  @Override
+  public void blurImage(String name, String saveName) {
+
+  }
+
+  @Override
+  public void sharpenImage(String name, String saveImage) {
 
   }
 

@@ -24,7 +24,7 @@ public class ControllerImpl implements Controller {
   protected ImageSaver imageSaver;
   protected Input input;
   protected Output output;
-  protected ImageHandler imageHandler;
+  private ImageHandler imageHandler;
 
 
   /**
@@ -147,25 +147,6 @@ public class ControllerImpl implements Controller {
     }
   }
 
-  @Override
-  public void createSepiaImage(String name, String saveName) {
-//    try {
-//      imageHandler.sepiaToneImage(name, saveName);
-//      output.print("Successfully applied sepia to image");
-//    }catch (NoSuchImageException e){
-//      output.print("No image found with name: " + name);
-//    }
-  }
-
-  @Override
-  public void ditherImage(String name, String saveName) {
-//    try {
-//      imageHandler.ditherImage(name, saveName);
-//      output.print("Successfully dithered to image");
-//    }catch (NoSuchImageException e){
-//      output.print("No image found with name: " + name);
-//    }
-  }
 
   @Override
   public void loadImage(String path, String name) {
