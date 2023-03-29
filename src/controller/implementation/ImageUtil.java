@@ -98,6 +98,7 @@ public class ImageUtil implements ImageInput {
     int byt = 0;
     String token;
     token = sc.next();
+    // TODO: This is being printed for every PPM image?
     if (!token.equals("P6")) {
 
       System.out.println("Invalid PPM file: plain RAW file should begin with P3" + token);

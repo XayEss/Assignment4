@@ -82,4 +82,19 @@ public interface ImageProcessor {
   Image combineGreyScaleImages(Image first, Image second, Image third);
 
   Image sepiaTone(Image image);
+
+  /**
+   * Applies a filter to the image.
+   *
+   * @param image  the image to apply the filter to.
+   * @param sizeX  the width of the filter matrix.
+   * @param sizeY  the height of the filter matrix.
+   * @param filter the filter matrix.
+   * @return a new image with the filter applied.
+   */
+  Image applyFilter(Image image, int sizeX, int sizeY, float[][] filter);
+
+  Image applyBlur(Image image);
+
+  Image applySharpening(Image image);
 }

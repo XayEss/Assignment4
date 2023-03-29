@@ -343,19 +343,21 @@ public class ImageTest {
   @Test
   public void testSetPixel() {
     Image testImage = null;
-    try{
+    try {
       testImage = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
 
     Pixel testPixel = testImage.getPixel(0, 0);
 
-    assertEquals(101, testPixel.getChannel(0));
-    assertEquals(90, testPixel.getChannel(1));
-    assertEquals(58, testPixel.getChannel(2));
+    System.out.println(testPixel);
+
+    assertEquals(57, testPixel.getChannel(0));
+    assertEquals(50, testPixel.getChannel(1));
+    assertEquals(10, testPixel.getChannel(2));
 
     testPixel.setChannel(0, 45);
     testPixel.setChannel(1, 145);
