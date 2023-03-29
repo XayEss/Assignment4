@@ -1,10 +1,14 @@
 package controller.implementation;
 
-import controller.interfaces.Controller;
-import controller.interfaces.TransformationController;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import controller.interfaces.Controller;
+import controller.interfaces.TransformationController;
+
+/**
+ * This class contains functionality to process text input from the user.
+ */
 public class TextInput extends CommandLineInput {
 
   private TransformationController controller;
@@ -16,7 +20,7 @@ public class TextInput extends CommandLineInput {
   @Override
   public void parseInput(String line) {
     Scanner scanner = new Scanner(line);
-    switch(scanner.next()){
+    switch (scanner.next()) {
       case "dither":
         controller.ditherImage(scanner.next(), scanner.next());
         break;
@@ -37,6 +41,6 @@ public class TextInput extends CommandLineInput {
   @Override
   public void setController(Controller controller) {
     super.setController(controller);
-    this.controller = (TransformationController)controller;
+    this.controller = (TransformationController) controller;
   }
 }

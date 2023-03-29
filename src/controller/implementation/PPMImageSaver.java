@@ -36,22 +36,22 @@ public class PPMImageSaver implements ImageSaver {
   @Override
   public void save(String path, InputStream stream) throws IOException {
     save(path, ImageConverter.convertFromBytes(stream));
-//    PrintWriter writer = new PrintWriter(path);
-//    byte[] heightBytes = new byte[4];
-//    byte[] widthBytes = new byte[4];
-//    stream.read(widthBytes);
-//    stream.read(heightBytes);
-//    ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
-//    buffer.put(heightBytes);
-//    buffer.rewind();
-//    int height = buffer.getInt();
-//    buffer.clear();
-//    buffer.put(widthBytes);
-//    buffer.rewind();
-//    int width = buffer.getInt();
-//    writer.println("P3");
-//    writer.println(width + " " + height);
-//    writer.println("255");
+    //    PrintWriter writer = new PrintWriter(path);
+    //    byte[] heightBytes = new byte[4];
+    //    byte[] widthBytes = new byte[4];
+    //    stream.read(widthBytes);
+    //    stream.read(heightBytes);
+    //    ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
+    //    buffer.put(heightBytes);
+    //    buffer.rewind();
+    //    int height = buffer.getInt();
+    //    buffer.clear();
+    //    buffer.put(widthBytes);
+    //    buffer.rewind();
+    //    int width = buffer.getInt();
+    //    writer.println("P3");
+    //    writer.println(width + " " + height);
+    //    writer.println("255");
 
   }
 }

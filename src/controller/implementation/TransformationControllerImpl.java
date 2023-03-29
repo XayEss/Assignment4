@@ -8,6 +8,9 @@ import model.implementation.NoSuchImageException;
 import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
 
+/**
+ * This class is responsible for coordinating the functionality of the image processing application.
+ */
 public class TransformationControllerImpl extends ControllerImpl implements
         TransformationController {
   private TransformImageHandler imageHandler;
@@ -26,7 +29,8 @@ public class TransformationControllerImpl extends ControllerImpl implements
    */
 
   public TransformationControllerImpl(ImageInput imageInput, ImageSaver imageSaver,
-                                      Input input, TransformImageHandler imageHandler, Output output) {
+                                      Input input, TransformImageHandler imageHandler,
+                                      Output output) {
     super(imageInput, imageSaver, input, imageHandler, output);
     this.imageHandler = imageHandler;
     input.setController(this);

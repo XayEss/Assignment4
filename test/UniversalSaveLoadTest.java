@@ -13,6 +13,9 @@ import model.interfaces.Image;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * Test class for UniversalImageSaver and Loader.
+ */
 public class UniversalSaveLoadTest {
 
   @Test

@@ -203,7 +203,7 @@ public class PixelRGB implements Pixel {
   }
 
   private void setChannelValue(int channel, int value) {
-//    checkBounds(value);
+    checkBounds(value);
     switch (channel) {
       case 0:
         red = value;

@@ -1,9 +1,8 @@
-import java.io.IOException;
-import java.io.InputStream;
-import model.implementation.ImageConverter;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import controller.implementation.ControllerImpl;
 import controller.implementation.ImageUtil;
@@ -11,6 +10,7 @@ import controller.interfaces.Controller;
 import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
+import model.implementation.ImageConverter;
 import model.implementation.NoSuchImageException;
 import model.interfaces.Image;
 import model.interfaces.ImageHandler;
@@ -254,7 +254,7 @@ public class ControllerImplTest {
 
     @Override
     public void save(String path, InputStream stream) throws IOException {
-      
+      // Do Nothing
     }
 
     public String getLog() {
@@ -353,13 +353,13 @@ public class ControllerImplTest {
     public Image getByName(String name) throws NoSuchImageException {
       log = "getByName " + name;
       Image testImage = null;
-    try{
-      testImage = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
-      return null;
-    }
+      try {
+        testImage = ImageConverter
+                .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                        "testBaseImage.ppm"));
+      } catch (IOException e) {
+        return null;
+      }
       return testImage;
     }
 
@@ -371,7 +371,7 @@ public class ControllerImplTest {
 
     @Override
     public void importImage(String name, InputStream stream) throws IOException {
-
+      // Nothing to do
     }
 
     @Override

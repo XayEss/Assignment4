@@ -1,10 +1,10 @@
-import java.io.IOException;
-import model.implementation.ImageConverter;
 import org.junit.Test;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import controller.implementation.ImageUtil;
+import model.implementation.ImageConverter;
 import model.interfaces.Image;
 
 import static model.implementation.ImageToBufferedImageService.convertToBuffered;
@@ -22,11 +22,11 @@ public class ImageToBufferedImageServiceTest {
   @Test
   public void testConvertToBuffered() {
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
 

@@ -10,6 +10,10 @@ import model.interfaces.ImageHandler;
 import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
 
+/**
+ * This class is responsible for coordinating the functionality of
+ * the image processing applications.
+ */
 public class CommandController implements TransformationController {
 
   private final ImageInput imageInput;
@@ -43,31 +47,36 @@ public class CommandController implements TransformationController {
 
   @Override
   public void start() {
-
+    // Future Scope
   }
 
   @Override
   public void createSepiaImage(String name, String saveName) {
+    // Future Scope
 
   }
 
   @Override
   public void ditherImage(String name, String saveName) {
+    // Future Scope
 
   }
 
   @Override
   public void blurImage(String name, String saveName) {
+    // Future Scope
 
   }
 
   @Override
   public void sharpenImage(String name, String saveImage) {
+    // Future Scope
 
   }
 
   @Override
   public void separateImageChannel(String name, String resultName, int channel) {
+    // Future Scope
 
   }
 
@@ -79,53 +88,63 @@ public class CommandController implements TransformationController {
 
   @Override
   public void createValueImage(String name, String resultName) {
+    // Future Scope
 
   }
 
   @Override
   public void createIntensityImage(String name, String resultName) {
+    // Future Scope
 
   }
 
   @Override
   public void createLumaImage(String name, String resultName) {
+    // Future Scope
 
   }
 
   @Override
   public void alterImageBrightness(String name, String resultName, int value) {
+    // Future Scope
 
   }
 
   @Override
   public void createGreyScaleImage(String name, String resultName) {
+    // Future Scope
 
   }
 
   @Override
   public void splitImageChannels(String name, String redResultName, String greenResultName,
                                  String blueResultName) {
+    // Future Scope
 
   }
 
   @Override
   public void combineGreyScaleImages(String redName, String greenName, String blueName,
                                      String resultName) {
+    // Future Scope
 
   }
 
   @Override
   public void loadImage(String path, String name) {
+    // Future Scope
 
   }
 
   @Override
   public void saveImage(String path, String name) {
+    // Future Scope
 
   }
 
   @Override
   public void runScript(String path) {
+    // Future Scope
 
   }
 }

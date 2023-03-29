@@ -1,8 +1,9 @@
-import java.io.IOException;
-import model.implementation.ImageConverter;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import controller.implementation.ImageUtil;
+import model.implementation.ImageConverter;
 import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageProcessorImpl;
 import model.implementation.NoSuchImageException;
@@ -36,11 +37,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
     Image testNewImg = testImg.getImageChannel(0);
@@ -74,11 +75,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
 
@@ -121,11 +122,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
 
@@ -174,11 +175,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
 
@@ -216,11 +217,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
     testHandler.saveWithName("testImg", testImg);
@@ -246,11 +247,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
     testHandler.saveWithName("testImg", testImg);
@@ -276,11 +277,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
     testHandler.saveWithName("testImg", testImg);
@@ -307,11 +308,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
     testHandler.saveWithName("testImg", testImg);
@@ -350,11 +351,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
     testHandler.saveWithName("testImg", testImg);
@@ -381,11 +382,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
     testHandler.saveWithName("testImg", testImg);
@@ -425,11 +426,11 @@ public class ImageHandlerImplTest {
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
     Image testImg = null;
-    try{
+    try {
       testImg = ImageConverter
-          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-          "testBaseImage.ppm"));
-    } catch(IOException e) {
+              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Couldn't read the image");
     }
 

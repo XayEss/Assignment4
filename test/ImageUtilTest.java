@@ -1,11 +1,12 @@
-import controller.implementation.ImageUtil;
-import java.io.IOException;
-import model.implementation.ImageConverter;
 import org.junit.Test;
-import controller.interfaces.ImageInput;
 
+import java.io.IOException;
+
+import controller.implementation.ImageUtil;
+import controller.interfaces.ImageInput;
+import model.implementation.ImageConverter;
 import model.interfaces.Image;
-import model.interfaces.Pixel;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -21,9 +22,9 @@ public class ImageUtilTest {
     try {
       ImageInput testImgUtil = new ImageUtil();
       testImg = ImageConverter
-          .convertFromBytes(testImgUtil.readFile("resources/images/ppm_testing/" +
-              "testBaseImage.ppm"));
-    }catch (IOException e){
+              .convertFromBytes(testImgUtil.readFile("resources/images/ppm_testing/" +
+                      "testBaseImage.ppm"));
+    } catch (IOException e) {
       fail("Eroor when reading a picture");
     }
     assertEquals(testImg.toString(), "[[101 90 58, 103 92 62, 110 95 66, 104 91 59, " +

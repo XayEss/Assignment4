@@ -12,11 +12,14 @@ import controller.interfaces.ImageSaver;
 import model.implementation.ImageToBufferedImageService;
 import model.interfaces.Image;
 
+/**
+ * This class contains functionality to save images in many formats.
+ */
 public class UniversalImageSaver implements ImageSaver {
 
   @Override
   public void save(String path, Image image) throws FileNotFoundException {
-
+    // Future Scope
   }
 
   @Override

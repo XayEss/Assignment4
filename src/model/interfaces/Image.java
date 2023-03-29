@@ -52,15 +52,6 @@ public interface Image {
   Image alterBrightness(int value);
 
 
-//  /**
-//   * Creates and returns an image with the give parameters.
-//   * @param height height of image desired.
-//   * @param width width of image desired.
-//   * @param value value which should be in all pixel values.
-//   * @return created image with above parameters.
-//   */
-//  Image create(int height, int width, int value);
-
   /**
    * Returns a pixel in a given row and column.
    *

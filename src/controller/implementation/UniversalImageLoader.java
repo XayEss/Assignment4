@@ -11,6 +11,9 @@ import javax.imageio.ImageIO;
 
 import controller.interfaces.ImageInput;
 
+/**
+ * This class contains functionality to load images from various file formats.
+ */
 public class UniversalImageLoader implements ImageInput {
 
   @Override
@@ -33,7 +36,7 @@ public class UniversalImageLoader implements ImageInput {
       throw new RuntimeException(e);
     }
     if (bi == null) {
-
+      // Future Scope
     }
     int height = bi.getHeight();
     int width = bi.getWidth();

@@ -138,18 +138,22 @@ public class ImageImpl implements Image {
         int error = old - newColor;
         errors[i][j] = error;
         changedPixels[i][j] = new PixelRGB(newColor);
-        if (j + 1 < width)
+        if (j + 1 < width) {
           changedPixels[i][j + 1] = changedPixels[i][j + 1].alterBrightness(
                   (int) (7 / 16d * error));
-        if (i + 1 < height && j - 1 >= 0)
+        }
+        if (i + 1 < height && j - 1 >= 0) {
           changedPixels[i + 1][j - 1] = changedPixels[i + 1][j - 1].alterBrightness(
                   (int) (3 / 16d * error));
-        if (i + 1 < height)
+        }
+        if (i + 1 < height) {
           changedPixels[i + 1][j] = changedPixels[i + 1][j].alterBrightness(
                   (int) (5 / 16d * error));
-        if (i + 1 < height && j + 1 < width)
+        }
+        if (i + 1 < height && j + 1 < width) {
           changedPixels[i + 1][j + 1] = changedPixels[i + 1][j + 1].alterBrightness(
                   (int) (1 / 16d * error));
+        }
       }
     }
     return new ImageImpl(changedPixels);

@@ -4,9 +4,7 @@ import java.io.IOException;
 
 import controller.implementation.ImageUtil;
 import controller.implementation.UniversalImageLoader;
-import controller.implementation.UniversalImageSaver;
 import controller.interfaces.ImageInput;
-import controller.interfaces.ImageSaver;
 import model.implementation.ImageConverter;
 import model.implementation.ImageProcessorImpl;
 import model.interfaces.Image;

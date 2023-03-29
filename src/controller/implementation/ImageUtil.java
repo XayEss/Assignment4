@@ -74,13 +74,19 @@ public class ImageUtil implements ImageInput {
           //System.out.println("Color of pixel ("+j+","+i+"): "+ r+","+g+","+b);
         }
       }
-    }catch (IOException e){
+    } catch (IOException e) {
       System.out.println("Error when reading");
     }
     return new ByteArrayInputStream(bas.toByteArray());
   }
 
-  public InputStream readFile(String filename){
+  /**
+   * Reads the specified image file and returns its content as an InputStream.
+   *
+   * @param filename the name of the file containing the image to read.
+   * @return an InputStream representing the content of the image, or null if the file is not found.
+   */
+  public InputStream readFile(String filename) {
     Scanner sc;
     FileInputStream fileInputStream;
     try {
@@ -90,14 +96,15 @@ public class ImageUtil implements ImageInput {
       return null;
     }
     DataInputStream dis = new DataInputStream(fileInputStream);
-//    StringBuilder builder = new StringBuilder();
-//    //read the file line by line, and populate a string. This will throw away any comment lines
-//    while (sc.hasNextLine()) {
-//      String s = sc.nextLine();
-//      if (s.charAt(0) != '#') {
-//        builder.append(s + System.lineSeparator());
-//      }
-//    }
+    //    StringBuilder builder = new StringBuilder();
+    //    //read the file line by line, and populate a string. This will throw away
+    //    any comment lines
+    //    while (sc.hasNextLine()) {
+    //      String s = sc.nextLine();
+    //      if (s.charAt(0) != '#') {
+    //        builder.append(s + System.lineSeparator());
+    //      }
+    //    }
 
     //now set up the scanner to read from the string we just built
     //sc = new Scanner(builder.toString());
@@ -110,7 +117,7 @@ public class ImageUtil implements ImageInput {
     if (!token.equals("P6")) {
 
       System.out.println("Invalid PPM file: plain RAW file should begin with P3" + token);
-    }else if(token.equals("P3")){
+    } else if (token.equals("P3")) {
       return readP3(filename);
     }
     int width = sc.nextInt();
@@ -120,19 +127,19 @@ public class ImageUtil implements ImageInput {
     byte[] data = null;
     try {
       data = dis.readAllBytes();
-    }catch(IOException e){
+    } catch (IOException e) {
       System.out.println("Exception when reading bytes");
     }
     Pixel[][] pixels = new Pixel[height][width];
     int get = 0;
-    for(int i = 0; i < 25; i++){
-      if(data[i] == '\n'){
+    for (int i = 0; i < 25; i++) {
+      if (data[i] == '\n') {
         get = i;
       }
     }
     get++;
     int index = 0;
-    byte[] returning = new byte[height*width];
+    byte[] returning = new byte[height * width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
         int r = data[get++] & 0xff;
