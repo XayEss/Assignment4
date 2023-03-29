@@ -41,7 +41,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 
   @Override
   public Image getGreyscale(Image image) {
-    double[][] grey = new double[][]{{0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722}};
+    double[][] grey = Filters.LUMA;
     return image.linearTransformation(grey);
   }
 
@@ -65,7 +65,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 
   @Override
   public Image sepiaTone(Image image) {
-    double[][] sepia = new double[][]{{0.393, 0.769, 0.189}, {0.349, 0.686, 0.168}, {0.272, 0.534, 0.131}};
+    double[][] sepia = Filters.SEPIA;
     return image.linearTransformation(sepia);
   }
 

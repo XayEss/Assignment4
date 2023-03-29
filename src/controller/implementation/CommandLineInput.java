@@ -1,6 +1,9 @@
 package controller.implementation;
 
+import controller.implementation.commands.FlipImage;
+import controller.interfaces.CommandHelper;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -20,15 +23,17 @@ public class CommandLineInput implements Input {
 
   private boolean run;
   private Controller controller;
+  private InputStream input;
 
-  public CommandLineInput() {
+  public CommandLineInput(InputStream input) {
     run = true;
+    this.input = input;
   }
 
 
   @Override
   public void startCommandReading() {
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(input);
     while (run) {
       try {
         parseInput(scanner.nextLine());
@@ -57,6 +62,7 @@ public class CommandLineInput implements Input {
         controller.alterImageBrightness(name, saveName, amount);
         break;
       case "vertical-flip":
+        CommandHelper command = new FlipImage(false);
         name = scanner.next();
         saveName = scanner.next();
         controller.createFlippedImage(name, saveName, false);
@@ -89,6 +95,18 @@ public class CommandLineInput implements Input {
         String name2 = scanner.next();
         String name3 = scanner.next();
         controller.combineGreyScaleImages(name, name2, name3, saveName);
+        break;
+      case "sepia":
+        name = scanner.next();
+        saveName = scanner.next();
+        //controller.createSepiaImage(name, saveName);
+        break;
+      case "dither":
+        name = scanner.next();
+        saveName = scanner.next();
+        //controller.ditherImage(name, saveName);
+        break;
+      case "blur":
         break;
       case "run":
         runScript(scanner.next());

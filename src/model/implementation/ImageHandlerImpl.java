@@ -17,7 +17,7 @@ import model.interfaces.ImageProcessor;
  */
 public class ImageHandlerImpl implements ImageHandler {
   private final Map<String, Image> nameToImage;
-  private final ImageProcessor imageProcessor;
+  protected final ImageProcessor imageProcessor;
 
   public ImageHandlerImpl(ImageProcessor processor) {
     nameToImage = new HashMap<>();
@@ -75,16 +75,6 @@ public class ImageHandlerImpl implements ImageHandler {
                                      String blueName, String saveName) throws NoSuchImageException {
     saveWithName(saveName, imageProcessor.combineGreyScaleImages(getByName(redName),
             getByName(greenName), getByName(blueName)));
-  }
-
-  @Override
-  public void sepiaToneImage(String name, String saveName) throws NoSuchImageException {
-    saveWithName(saveName, imageProcessor.sepiaTone(getByName(name)));
-  }
-
-  @Override
-  public void ditherImage(String name, String saveName) throws NoSuchImageException {
-    saveWithName(saveName, getByName(name).dither());
   }
 
   @Override

@@ -81,22 +81,18 @@ public interface ImageHandler {
           throws NoSuchImageException;
 
   /**
-   * Transforms the image into a sephia toned image and saves to the model.
-   * @param name of image to transform.
-   * @param saveName the new name to save under.
+   * Retrieves the image with the given name from the storage.
+   * @param name the name of the image.
+   * @return the image from the storage.
+   * @throws NoSuchImageException when an image with the name cannot be found.
    */
-  void sepiaToneImage(String name, String saveName) throws NoSuchImageException;
-
-  /**
-   * Dithers the image with name and saves under saveName.
-   * @param name the name of the image to change.
-   * @param saveName the name to save the new image under.
-   * @throws NoSuchImageException when an image with the name can't be found.
-   */
-  void ditherImage(String name, String saveName) throws NoSuchImageException;
-
   Image getByName(String name) throws NoSuchImageException;
 
+  /**
+   * Save the image to the storage with the name.
+   * @param name the name to store with.
+   * @param image the image to store.
+   */
   void saveWithName(String name, Image image);
 
   /**

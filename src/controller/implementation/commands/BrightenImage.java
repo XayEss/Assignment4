@@ -5,7 +5,7 @@ import model.implementation.NoSuchImageException;
 import model.interfaces.ImageHandler;
 
 public class BrightenImage implements CommandHelper {
-  int amount;
+  private int amount;
 
   public BrightenImage(int amount){
     this.amount = amount;

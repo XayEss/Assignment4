@@ -1,0 +1,8 @@
+package model.implementation;
+
+public class Filters {
+  public static final double[][] SEPIA = new double[][]{{0.393, 0.769, 0.189},
+      {0.349, 0.686, 0.168}, {0.272, 0.534, 0.131}};
+  public static final double[][] LUMA = new double[][]{{0.2126, 0.7152, 0.0722},
+      {0.2126, 0.7152, 0.0722}, {0.2126, 0.7152, 0.0722}};
+}

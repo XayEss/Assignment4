@@ -16,6 +16,14 @@ public class UniversalImageLoader implements ImageInput {
 
   @Override
   public InputStream readFile(String filename) throws IOException {
+    if(filename.substring(filename.lastIndexOf('.')+1).equals("ppm")){
+      return new ImageUtil().readFile(filename);
+    }else{
+      return load(filename);
+    }
+  }
+
+  private InputStream load(String filename){
     BufferedImage bi;
     try {
       bi = ImageIO.read(new File(filename));

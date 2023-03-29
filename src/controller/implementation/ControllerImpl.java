@@ -1,5 +1,6 @@
 package controller.implementation;
 
+import controller.interfaces.TransformationController;
 import java.io.FileNotFoundException;
 
 import controller.interfaces.Controller;
@@ -11,6 +12,7 @@ import java.io.InputStream;
 import model.implementation.NoSuchImageException;
 import model.interfaces.Image;
 import model.interfaces.ImageHandler;
+import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
 
 /**
@@ -18,11 +20,11 @@ import view.intefraces.Output;
  */
 public class ControllerImpl implements Controller {
 
-  ImageInput imageInput;
-  ImageSaver imageSaver;
-  Input input;
-  Output output;
-  ImageHandler imageHandler;
+  protected ImageInput imageInput;
+  protected ImageSaver imageSaver;
+  protected Input input;
+  protected Output output;
+  protected ImageHandler imageHandler;
 
 
   /**
@@ -38,12 +40,13 @@ public class ControllerImpl implements Controller {
    * @param output       an instance of Output used to display images
    */
   public ControllerImpl(ImageInput imageInput, ImageSaver imageSaver, Input input,
-                        ImageHandler imageHandler, Output output) {
+      ImageHandler imageHandler, Output output) {
     this.imageInput = imageInput;
     this.imageSaver = imageSaver;
     this.input = input;
     this.imageHandler = imageHandler;
     this.output = output;
+    input.setController(this);
   }
 
 
@@ -145,6 +148,26 @@ public class ControllerImpl implements Controller {
   }
 
   @Override
+  public void createSepiaImage(String name, String saveName) {
+//    try {
+//      imageHandler.sepiaToneImage(name, saveName);
+//      output.print("Successfully applied sepia to image");
+//    }catch (NoSuchImageException e){
+//      output.print("No image found with name: " + name);
+//    }
+  }
+
+  @Override
+  public void ditherImage(String name, String saveName) {
+//    try {
+//      imageHandler.ditherImage(name, saveName);
+//      output.print("Successfully dithered to image");
+//    }catch (NoSuchImageException e){
+//      output.print("No image found with name: " + name);
+//    }
+  }
+
+  @Override
   public void loadImage(String path, String name) {
     InputStream image = null;
     try {
@@ -156,7 +179,7 @@ public class ControllerImpl implements Controller {
       try {
         imageHandler.importImage(name, image);
       } catch (IOException e) {
-        throw new RuntimeException(e);
+        output.print("Error reding image stream");
       }
       output.print("Successfully loaded image");
     } else {

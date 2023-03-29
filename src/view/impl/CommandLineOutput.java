@@ -1,5 +1,6 @@
 package view.impl;
 
+import java.io.OutputStream;
 import model.interfaces.Image;
 import view.intefraces.Output;
 
@@ -7,6 +8,12 @@ import view.intefraces.Output;
  * The VisualizeAscii class represents an Output that displays an image in ASCII art.
  */
 public class CommandLineOutput implements Output {
+
+  private OutputStream outputStream;
+
+  public CommandLineOutput(OutputStream outputStream) {
+    this.outputStream = outputStream;
+  }
 
   @Override
   public void show(Image image) {
