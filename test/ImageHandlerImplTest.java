@@ -1,3 +1,5 @@
+import java.io.IOException;
+import model.implementation.ImageConverter;
 import org.junit.Test;
 
 import controller.implementation.ImageUtil;
@@ -33,8 +35,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     Image testNewImg = testImg.getImageChannel(0);
 
     // Image present in handler
@@ -65,8 +73,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
 
     Image testNewImg = testImg.getImageChannel(0);
 
@@ -106,8 +120,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
 
     Image testNewImg0 = testImg.getImageChannel(0);
     Image testNewImg1 = testImg.getImageChannel(1);
@@ -153,8 +173,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
 
     Image testFlipHor = testImg.flipImage(true);
     Image testFlipVer = testImg.flipImage(false);
@@ -189,8 +215,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     testHandler.saveWithName("testImg", testImg);
 
     Image testValue = testImg.getValueImage();
@@ -213,8 +245,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     testHandler.saveWithName("testImg", testImg);
 
     Image testIntensity = testImg.getIntensityImage();
@@ -237,8 +275,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     testHandler.saveWithName("testImg", testImg);
 
     Image testLuma = testImg.getLumaImage();
@@ -262,8 +306,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     testHandler.saveWithName("testImg", testImg);
 
     Image testBrightInc = testImg.alterBrightness(20);
@@ -299,8 +349,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     testHandler.saveWithName("testImg", testImg);
 
     Image testGrey = testImg.getGreyscaleImage();
@@ -324,8 +380,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     testHandler.saveWithName("testImg", testImg);
 
     Image testRed = testImg.getImageChannel(0);
@@ -362,8 +424,14 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try{
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
 
     Image testRed = testImg.getImageChannel(0);
     Image testGre = testImg.getImageChannel(1);

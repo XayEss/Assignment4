@@ -1,3 +1,5 @@
+import java.io.IOException;
+import model.implementation.ImageConverter;
 import org.junit.Test;
 
 import controller.implementation.ImageUtil;
@@ -6,6 +8,7 @@ import model.interfaces.Image;
 import model.interfaces.ImageProcessor;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Test class for ImageProcessor.
@@ -14,8 +17,14 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetChannel() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getImageChannel(0), testProcessor.getChannel(testImg, 0));
@@ -26,20 +35,32 @@ public class ImageProcessorTest {
 
   @Test
   public void testFlipImage() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.flipImage(true), testProcessor.flipImage(testImg,
-            true));
+        true));
     assertEquals(testImg.flipImage(false), testProcessor.flipImage(testImg,
-            false));
+        false));
   }
 
   @Test
   public void testGetValue() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getValueImage(), testProcessor.getValue(testImg));
@@ -47,8 +68,14 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetIntensity() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getIntensityImage(), testProcessor.getIntensity(testImg));
@@ -56,8 +83,14 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetLuma() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getLumaImage(), testProcessor.getLuma(testImg));
@@ -65,8 +98,14 @@ public class ImageProcessorTest {
 
   @Test
   public void testAlterBrightness() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     System.out.println(testImg);
@@ -76,8 +115,14 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetGreyScale() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg.getGreyscaleImage(), testProcessor.getGreyscale(testImg));
@@ -86,8 +131,14 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetSplitChannels() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     Image[] temp = testProcessor.getSplitChannels(testImg);
@@ -99,8 +150,14 @@ public class ImageProcessorTest {
 
   @Test
   public void testCombineGreyScaleImages() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImg = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     Image[] temp = testProcessor.getSplitChannels(testImg);
@@ -111,19 +168,31 @@ public class ImageProcessorTest {
 
   @Test
   public void testCombineThreeImages() {
-    Image testImg = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
-    Image testImgRed = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage_RedChannel.ppm");
-    Image testImgGreen = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage_GreenChannel.ppm");
-    Image testImgBlue = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage_BlueChannel.ppm");
+    Image testImg = null;
+    Image testImgRed = null;
+    Image testImgGreen = null;
+    Image testImgBlue = null;
+    try {
+      testImg = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage.ppm"));
+      testImgRed = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage_RedChannel.ppm"));
+      testImgGreen = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage_GreenChannel.ppm"));
+      testImgBlue = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+              "testBaseImage_BlueChannel.ppm"));
+    } catch (IOException e) {
+      fail("Couldn't read the image");
+    }
 
     ImageProcessor testProcessor = new ImageProcessorImpl();
 
     assertEquals(testImg, testProcessor.combineGreyScaleImages(testImgRed, testImgGreen,
-            testImgBlue));
+        testImgBlue));
   }
 
 

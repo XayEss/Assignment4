@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.io.InputStream;
+import model.implementation.ImageConverter;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -226,7 +229,7 @@ public class ControllerImplTest {
     public String log;
 
     @Override
-    public Image readFile(String filename) {
+    public InputStream readFile(String filename) {
       log = "readFile " + filename;
       return null;
     }
@@ -247,6 +250,11 @@ public class ControllerImplTest {
     @Override
     public void save(String path, Image image) throws FileNotFoundException {
       log = "save " + path + " " + image.toString();
+    }
+
+    @Override
+    public void save(String path, InputStream stream) throws IOException {
+      
     }
 
     public String getLog() {
@@ -340,11 +348,18 @@ public class ControllerImplTest {
       log = "combineGreyScaleImages " + redName + " " + greenName + " " + blueName + " " + saveName;
     }
 
+
     @Override
     public Image getByName(String name) throws NoSuchImageException {
       log = "getByName " + name;
-      Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-              "testBaseImage.ppm");
+      Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      return null;
+    }
       return testImage;
     }
 
@@ -352,6 +367,16 @@ public class ControllerImplTest {
     @Override
     public void saveWithName(String name, Image image) {
       log = "saveWithName " + name + " " + image;
+    }
+
+    @Override
+    public void importImage(String name, InputStream stream) throws IOException {
+
+    }
+
+    @Override
+    public InputStream exportImage(String name) throws NoSuchImageException, IOException {
+      return null;
     }
 
     public String getLog() {

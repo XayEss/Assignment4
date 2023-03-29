@@ -1,3 +1,5 @@
+import java.io.IOException;
+import model.implementation.ImageConverter;
 import org.junit.Test;
 
 import controller.implementation.ImageUtil;
@@ -6,6 +8,7 @@ import model.interfaces.Image;
 import model.interfaces.Pixel;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 //     new VisualizeImage(ImageToBufferedImageService.convertToBuffered(testImage));
 //         try {
@@ -21,8 +24,14 @@ public class ImageTest {
 
   @Test
   public void testValidCreation() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     assertEquals(5, testImage.getWidth());
     assertEquals(3, testImage.getHeight());
 
@@ -34,27 +43,52 @@ public class ImageTest {
 
   @Test
   public void testGetImageChannel() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    Image imageCh0 = null;
+    Image imageCh1 = null;
+    Image imageCh2 = null;
+    Image image2Ch0 = null;
+    Image image2Ch1 = null;
+    Image image2Ch2 = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+      imageCh0 = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage_RedChannel.ppm"));
+      imageCh1 = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage_GreenChannel.ppm"));
+      imageCh2 = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage_BlueChannel.ppm"));
+      image2Ch0 = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage_RedChannel.ppm"));
+      image2Ch1 = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage_GreenChannel.ppm"));
+      image2Ch2 = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage_BlueChannel.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     Image testCh0 = testImage.getImageChannel(0);
     Image testCh1 = testImage.getImageChannel(1);
     Image testCh2 = testImage.getImageChannel(2);
 
-    Image imageCh0 = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage_RedChannel.ppm");
-    Image imageCh1 = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage_GreenChannel.ppm");
-    Image imageCh2 = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage_BlueChannel.ppm");
+
 
 
     for (int row = 0; row < testImage.getHeight(); row++) {
       for (int col = 0; col < testImage.getWidth(); col++) {
-        assertEquals(imageCh0.getPixelChannel(row, col, 0),
+        assertEquals(image2Ch0.getPixelChannel(row, col, 0),
                 testCh0.getPixelChannel(row, col, 0));
-        assertEquals(imageCh1.getPixelChannel(row, col, 1),
+        assertEquals(image2Ch1.getPixelChannel(row, col, 1),
                 testCh1.getPixelChannel(row, col, 1));
-        assertEquals(imageCh2.getPixelChannel(row, col, 2),
+        assertEquals(image2Ch2.getPixelChannel(row, col, 2),
                 testCh2.getPixelChannel(row, col, 2));
       }
     }
@@ -63,17 +97,26 @@ public class ImageTest {
 
   @Test
   public void testFlipImage() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    Image imageHorizontalFlipped = null;
+    Image imageVerticalFlipped = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+      imageHorizontalFlipped = ImageConverter.convertFromBytes(new ImageUtil().readFile("resources/images/" +
+          "ppm_testing/testBaseImage_HorizontalFlip.ppm"));
+      imageVerticalFlipped = ImageConverter.convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage_VerticalFlip.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     // Horizontal flip
     Image flipImage = testImage.flipImage(true);
     // Vertical flip
     Image flipImageAlt = testImage.flipImage(false);
 
-    Image imageHorizontalFlipped = new ImageUtil().readFile("resources/images/" +
-            "ppm_testing/testBaseImage_HorizontalFlip.ppm");
-    Image imageVerticalFlipped = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage_VerticalFlip.ppm");
+
 
     assertEquals(imageHorizontalFlipped, flipImage);
     assertEquals(imageVerticalFlipped, flipImageAlt);
@@ -82,8 +125,14 @@ public class ImageTest {
 
   @Test
   public void testGetValueImage() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     Image testValueImage = testImage.getValueImage();
 
 
@@ -104,8 +153,14 @@ public class ImageTest {
 
   @Test
   public void testGetIntensityImage() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     Image testIntensityImage = testImage.getIntensityImage();
 
     for (int row = 0; row < testImage.getHeight(); row++) {
@@ -126,8 +181,14 @@ public class ImageTest {
 
   @Test
   public void testGetLumaImage() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     Image testLumaImage = testImage.getLumaImage();
 
     for (int row = 0; row < testImage.getHeight(); row++) {
@@ -148,8 +209,14 @@ public class ImageTest {
   @Test
   public void testAlterBrightness() {
     // Positive and Negative alterations
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
 
     System.out.println(testImage);
 
@@ -182,8 +249,14 @@ public class ImageTest {
 
   @Test
   public void testGetPixel() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     Pixel testPixel = testImage.getPixel(0, 0);
 
     assertEquals(101, testPixel.getChannel(0));
@@ -194,8 +267,14 @@ public class ImageTest {
 
   @Test
   public void testGetPixelChannel() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     int testPixelCh0 = testImage.getPixelChannel(0, 0, 0);
     int testPixelCh1 = testImage.getPixelChannel(0, 0, 1);
     int testPixelCh2 = testImage.getPixelChannel(0, 0, 2);
@@ -208,39 +287,69 @@ public class ImageTest {
 
   @Test
   public void testGetNumberOfChannels() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     assertEquals(3, testImage.getNumberOfChannels());
   }
 
 
   @Test
   public void testGetHeight() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     assertEquals(3, testImage.getHeight());
   }
 
   @Test
   public void testGetWidth() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     assertEquals(5, testImage.getWidth());
   }
 
 
   @Test
   public void testGetSize() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     assertEquals("5 x 3", testImage.getSize());
   }
 
 
   @Test
   public void testSetPixel() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
 
     Pixel testPixel = testImage.getPixel(0, 0);
 
@@ -260,8 +369,14 @@ public class ImageTest {
 
   @Test
   public void testGetGreyscaleImage() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     Image testGreyscaleImage = testImage.getGreyscaleImage();
 
     for (int row = 0; row < testImage.getHeight(); row++) {
@@ -285,8 +400,14 @@ public class ImageTest {
 
   @Test
   public void testToString() {
-    Image testImage = new ImageUtil().readFile("resources/images/ppm_testing/" +
-            "testBaseImage.ppm");
+    Image testImage = null;
+    try{
+      testImage = ImageConverter
+          .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
+          "testBaseImage.ppm"));
+    } catch(IOException e) {
+      fail("Couldn't read the image");
+    }
     assertEquals("[[101 90 58, 103 92 62, 110 95 66, 104 91 59, 104 91 59], " +
             "[104 93 63, 108 94 65, 100 86 57, 103 90 56, 105 91 64], [101 89 63, 103 91 65, " +
             "106 92 66, 103 86 66, 105 91 64]]", testImage.toString());
