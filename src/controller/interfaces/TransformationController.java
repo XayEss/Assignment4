@@ -1,6 +1,6 @@
 package controller.interfaces;
 
-public interface TransformationController extends Controller{
+public interface TransformationController extends Controller {
 
   void createSepiaImage(String name, String saveName);
 

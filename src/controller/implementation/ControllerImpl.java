@@ -1,18 +1,14 @@
 package controller.implementation;
 
-import controller.interfaces.TransformationController;
-import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import controller.interfaces.Controller;
 import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
-import java.io.IOException;
-import java.io.InputStream;
 import model.implementation.NoSuchImageException;
-import model.interfaces.Image;
 import model.interfaces.ImageHandler;
-import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
 
 /**
@@ -24,7 +20,7 @@ public class ControllerImpl implements Controller {
   protected ImageSaver imageSaver;
   protected Input input;
   protected Output output;
-  private ImageHandler imageHandler;
+  private final ImageHandler imageHandler;
 
 
   /**
@@ -40,7 +36,7 @@ public class ControllerImpl implements Controller {
    * @param output       an instance of Output used to display images
    */
   public ControllerImpl(ImageInput imageInput, ImageSaver imageSaver, Input input,
-      ImageHandler imageHandler, Output output) {
+                        ImageHandler imageHandler, Output output) {
     this.imageInput = imageInput;
     this.imageSaver = imageSaver;
     this.input = input;
@@ -153,7 +149,7 @@ public class ControllerImpl implements Controller {
     InputStream image = null;
     try {
       image = imageInput.readFile(path);
-    }catch(IOException e){
+    } catch (IOException e) {
       output.print("Could not read the file");
     }
     if (image != null) {

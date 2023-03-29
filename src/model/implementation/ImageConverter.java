@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+
 import model.interfaces.Image;
 import model.interfaces.Pixel;
 
@@ -16,6 +17,7 @@ public class ImageConverter {
   /**
    * Converts an InputStream to an Image. First 4 bytes have to be the width of the image,
    * next 4 bytes - the height. After, each byte represents an r, g, b component of a pixel.
+   *
    * @param stream the stream to read the data from.
    * @return an Image created from the data of the InputStream.
    * @throws IOException if a stream reading exception occurs.
@@ -44,9 +46,11 @@ public class ImageConverter {
 
     return new ImageImpl(pixels);
   }
+
   /**
    * Converts an Image to an InputStream. First 4 bytes will be written the width of the image,
    * next 4 bytes - the height. After, each byte represents an r, g, b component of a pixel.
+   *
    * @param image the image to convert.
    * @return an InputStream created from the data of the Image.
    * @throws IOException if a stream writing exception occurs.

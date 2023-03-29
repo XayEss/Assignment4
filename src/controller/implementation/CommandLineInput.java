@@ -1,7 +1,5 @@
 package controller.implementation;
 
-import controller.implementation.commands.FlipImage;
-import controller.interfaces.CommandHelper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -10,6 +8,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import controller.implementation.commands.FlipImage;
+import controller.interfaces.CommandHelper;
 import controller.interfaces.Controller;
 import controller.interfaces.Input;
 
@@ -22,8 +22,8 @@ import controller.interfaces.Input;
 public class CommandLineInput implements Input {
 
   protected boolean run;
-  private Controller controller;
   protected InputStream input;
+  private Controller controller;
 
   public CommandLineInput(InputStream input) {
     run = true;

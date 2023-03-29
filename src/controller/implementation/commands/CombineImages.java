@@ -15,7 +15,7 @@ public class CombineImages implements CommandHelper {
 
   @Override
   public void execute(String name, String saveName, ImageHandler handler)
-      throws NoSuchImageException {
+          throws NoSuchImageException {
     handler.combineGreyScaleImages(name, greenName, blueName, saveName);
   }
 }

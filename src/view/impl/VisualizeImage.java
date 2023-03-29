@@ -2,10 +2,7 @@ package view.impl;
 
 import java.awt.image.BufferedImage;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * The VisualizeImage class represents a JFrame for displaying an image.

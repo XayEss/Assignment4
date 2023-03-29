@@ -5,13 +5,13 @@ import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
 import controller.interfaces.TransformationController;
 import model.implementation.NoSuchImageException;
-import model.interfaces.ImageHandler;
 import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
 
 public class TransformationControllerImpl extends ControllerImpl implements
-    TransformationController {
+        TransformationController {
   private TransformImageHandler imageHandler;
+
   /**
    * This is the constructor for the ControllerImpl class, which is responsible for coordinating the
    * functionality of the image processing application. It takes in instances of ImageInput,
@@ -26,7 +26,7 @@ public class TransformationControllerImpl extends ControllerImpl implements
    */
 
   public TransformationControllerImpl(ImageInput imageInput, ImageSaver imageSaver,
-      Input input, TransformImageHandler imageHandler, Output output){
+                                      Input input, TransformImageHandler imageHandler, Output output) {
     super(imageInput, imageSaver, input, imageHandler, output);
     input.setController(this);
   }

@@ -5,14 +5,15 @@ import model.implementation.NoSuchImageException;
 import model.interfaces.ImageHandler;
 
 public class BrightenImage implements CommandHelper {
-  private int amount;
+  private final int amount;
 
-  public BrightenImage(int amount){
+  public BrightenImage(int amount) {
     this.amount = amount;
   }
+
   @Override
   public void execute(String name, String saveName, ImageHandler handler)
-      throws NoSuchImageException {
+          throws NoSuchImageException {
     handler.alterBrightness(name, amount, saveName);
   }
 

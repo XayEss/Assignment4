@@ -133,13 +133,13 @@ public class PixelRGB implements Pixel {
     int valueRed = transform(transformation[0]);
     int valueGreen = transform(transformation[1]);
     int valueBlue = transform(transformation[2]);
-    if(valueRed > 255){
+    if (valueRed > 255) {
       valueRed = 255;
     }
-    if(valueGreen > 255){
+    if (valueGreen > 255) {
       valueGreen = 255;
     }
-    if(valueBlue > 255){
+    if (valueBlue > 255) {
       valueBlue = 255;
     }
     System.out.println(valueRed + " " + valueGreen + " " + valueGreen);
@@ -147,8 +147,8 @@ public class PixelRGB implements Pixel {
   }
 
 
-  private int transform(double[] vector){
-    return (int)(red * vector[0] + green * vector[1] + blue * vector[2]);
+  private int transform(double[] vector) {
+    return (int) (red * vector[0] + green * vector[1] + blue * vector[2]);
 
   }
 

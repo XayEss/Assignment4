@@ -118,7 +118,7 @@ public class ImageProcessorImpl implements ImageProcessor {
             }
           }
 
-          int newValue = (int) Math.round(sum);
+          int newValue = Math.round(sum);
           newValue = Math.max(0, Math.min(255, newValue)); // Clamp the value between 0 and 255.
           filteredImage.setPixelChannel(row, col, ch, newValue);
         }
@@ -127,12 +127,7 @@ public class ImageProcessorImpl implements ImageProcessor {
     return filteredImage;
   }
 
-  /**
-   * Applies a blur effect to the given image using a Gaussian blur filter.
-   *
-   * @param image the image to which the blur effect will be applied.
-   * @return a new Image with the blur effect applied.
-   */
+
   @Override
   public Image applyBlur(Image image) {
     float[][] arr = new float[][]{
@@ -143,12 +138,7 @@ public class ImageProcessorImpl implements ImageProcessor {
     return applyFilter(image, 3, 3, arr);
   }
 
-  /**
-   * Applies a sharpening effect to the given image using a custom sharpening filter.
-   *
-   * @param image the image to which the sharpening effect will be applied.
-   * @return a new Image with the sharpening effect applied.
-   */
+
   @Override
   public Image applySharpening(Image image) {
     float[][] arr = new float[][]{

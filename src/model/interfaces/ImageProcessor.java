@@ -94,7 +94,19 @@ public interface ImageProcessor {
    */
   Image applyFilter(Image image, int sizeX, int sizeY, float[][] filter);
 
+  /**
+   * Applies a blur effect to the given image using a Gaussian blur filter.
+   *
+   * @param image the image to which the blur effect will be applied.
+   * @return a new Image with the blur effect applied.
+   */
   Image applyBlur(Image image);
 
+  /**
+   * Applies a sharpening effect to the given image using a custom sharpening filter.
+   *
+   * @param image the image to which the sharpening effect will be applied.
+   * @return a new Image with the sharpening effect applied.
+   */
   Image applySharpening(Image image);
 }

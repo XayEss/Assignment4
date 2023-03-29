@@ -15,7 +15,7 @@ public class SplitImage implements CommandHelper {
 
   @Override
   public void execute(String name, String saveName, ImageHandler handler)
-      throws NoSuchImageException {
+          throws NoSuchImageException {
     handler.getSplitChannels(name, saveName, secondName, thirdName);
   }
 }

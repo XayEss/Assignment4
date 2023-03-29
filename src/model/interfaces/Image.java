@@ -127,6 +127,7 @@ public interface Image {
 
   /**
    * Linearly transforms the image with the given transformation matrix.
+   *
    * @param transformation the transformation matrix.
    * @return a new linearly transformed image.
    */
@@ -134,6 +135,7 @@ public interface Image {
 
   /**
    * Applies the Floyd-Steinberg dithering to the image.
+   *
    * @return a new dithered image.
    */
   Image dither();

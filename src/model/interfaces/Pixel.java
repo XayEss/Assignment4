@@ -83,6 +83,7 @@ public interface Pixel {
 
   /**
    * Linearly transforms pixel with the given vector.
+   *
    * @param transformation the vector to apply to the pixel.
    * @return new linearly transformed pixel.
    */

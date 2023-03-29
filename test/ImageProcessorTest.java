@@ -122,6 +122,7 @@ public class ImageProcessorTest {
 
   @Test
   public void testGetGreyScale() {
+    // TODO: Fix with new test images
     Image testImg = null;
     try {
       testImg = ImageConverter
@@ -175,6 +176,7 @@ public class ImageProcessorTest {
 
   @Test
   public void testCombineThreeImages() {
+    // TODO: Fix with new test images
     Image testImg = null;
     Image testImgRed = null;
     Image testImgGreen = null;
@@ -212,17 +214,25 @@ public class ImageProcessorTest {
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden.png"));
+              "resources/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
 
     ImageProcessor testProcessor = new ImageProcessorImpl();
     Image filteredImg = testProcessor.applySharpening(testImg);
+    Image filteredImg1 = testProcessor.applyBlur(testImg);
 
     try {
       imageSaver.save("resources/raiden_sharpened.png",
               ImageConverter.convertToBytes(filteredImg));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    try {
+      imageSaver.save("resources/raiden_blurred.png",
+              ImageConverter.convertToBytes(filteredImg1));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
@@ -239,7 +249,7 @@ public class ImageProcessorTest {
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden.png"));
+              "resources/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
@@ -266,7 +276,7 @@ public class ImageProcessorTest {
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden.png"));
+              "resources/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read the image");
     }

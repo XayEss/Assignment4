@@ -1,6 +1,5 @@
 package model.implementation;
 
-import model.interfaces.ImageHandler;
 import model.interfaces.ImageProcessor;
 import model.interfaces.TransformImageHandler;
 

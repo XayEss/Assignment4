@@ -1,16 +1,13 @@
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import controller.implementation.CommandLineInput;
 import controller.implementation.ControllerImpl;
-import controller.implementation.ImageUtil;
-import controller.implementation.PPMImageSaver;
 import controller.implementation.UniversalImageLoader;
 import controller.implementation.UniversalImageSaver;
 import controller.interfaces.Controller;
 import controller.interfaces.Input;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-
-import java.io.InputStream;
 import model.implementation.ImageConverter;
 import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageProcessorImpl;
@@ -44,20 +41,20 @@ public class Main {
 //    pipedOutputStream.connect(pipedInputStream);
 //    ObjectOutput os = new ObjectOutputStream(pipedOutputStream);
 //    os.writeObject(im);
-      InputStream is = ImageConverter.convertToBytes(im);
-      Image im2 = ImageConverter.convertFromBytes(is);
+    InputStream is = ImageConverter.convertToBytes(im);
+    Image im2 = ImageConverter.convertFromBytes(is);
 //    ImageProcessor ip = new ImageProcessorImpl();
     //new UniversalImageSaver().save("resources/sephia.png", ImageConverter.convertToBytes(new ImageProcessorImpl().sepiaTone(im2)));
     new VisualizeImage(ImageToBufferedImageService.toBuffered(im2.flipImage(false).alterBrightness(100)));
     new VisualizeImage(ImageToBufferedImageService.toBuffered(ImageConverter.convertToBytes(im2.dither())));
     Input input = null;
-    if(true || args.length != 0 && args[0].equals("-file")){
-     // input = new CommandLineInput(new FileInputStream(args[1]));
+    if (true) {
+      // input = new CommandLineInput(new FileInputStream(args[1]));
       input = new CommandLineInput(new ByteArrayInputStream(("load resources/raiden.jpg raiden\n"
-          + "horizontal-flip raiden raidendither\n"
-          + "save resources/raidend.jpg raidendither\n stop\n").getBytes()));
+              + "horizontal-flip raiden raidendither\n"
+              + "save resources/raidend.jpg raidendither\n stop\n").getBytes()));
 
-    }else{
+    } else {
       input = new CommandLineInput(System.in);
     }
 

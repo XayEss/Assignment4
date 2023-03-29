@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 
 import controller.interfaces.ImageSaver;
-import java.nio.ByteBuffer;
 import model.implementation.ImageConverter;
 import model.interfaces.Image;
 

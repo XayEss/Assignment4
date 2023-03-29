@@ -2,6 +2,7 @@ package model.interfaces;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import model.implementation.NoSuchImageException;
 
 /**
@@ -82,6 +83,7 @@ public interface ImageHandler {
 
   /**
    * Retrieves the image with the given name from the storage.
+   *
    * @param name the name of the image.
    * @return the image from the storage.
    * @throws NoSuchImageException when an image with the name cannot be found.
@@ -90,23 +92,27 @@ public interface ImageHandler {
 
   /**
    * Save the image to the storage with the name.
-   * @param name the name to store with.
+   *
+   * @param name  the name to store with.
    * @param image the image to store.
    */
   void saveWithName(String name, Image image);
 
   /**
    * Imports an image to the model, saves with the given name.
-   * @param name the name to save with.
+   *
+   * @param name   the name to save with.
    * @param stream InputStream that has image data written inside.
    * @throws IOException when a stream reading operation fails.
    */
   void importImage(String name, InputStream stream) throws IOException;
+
   /**
    * Exports an image with the given name from the model, as an InputStream.
+   *
    * @param name the name to save with.
    * @return InputStream that has image data written inside.
-   * @throws IOException when a stream reading operation fails.
+   * @throws IOException          when a stream reading operation fails.
    * @throws NoSuchImageException when an image with the name can't be found.
    */
   InputStream exportImage(String name) throws NoSuchImageException, IOException;

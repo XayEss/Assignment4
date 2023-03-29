@@ -1,6 +1,7 @@
 package view.impl;
 
 import java.io.OutputStream;
+
 import model.interfaces.Image;
 import view.intefraces.Output;
 
@@ -9,7 +10,7 @@ import view.intefraces.Output;
  */
 public class CommandLineOutput implements Output {
 
-  private OutputStream outputStream;
+  private final OutputStream outputStream;
 
   public CommandLineOutput(OutputStream outputStream) {
     this.outputStream = outputStream;

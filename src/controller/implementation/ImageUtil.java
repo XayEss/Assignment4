@@ -1,6 +1,5 @@
 package controller.implementation;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -14,7 +13,6 @@ import controller.interfaces.ImageInput;
 import model.implementation.ImageConverter;
 import model.implementation.ImageImpl;
 import model.implementation.PixelRGB;
-import model.interfaces.Image;
 import model.interfaces.Pixel;
 
 /**
@@ -71,8 +69,7 @@ public class ImageUtil implements ImageInput {
 //    }
 //    return new ImageImpl(pixels);
 //  }
-
-  public InputStream readFile(String filename){
+  public InputStream readFile(String filename) {
     Scanner sc;
     FileInputStream fileInputStream;
     try {
@@ -120,20 +117,20 @@ public class ImageUtil implements ImageInput {
 //      } while (byt != -1);
       //System.out.println(Arrays.toString(data));
       //System.out.println(Arrays.toString("÷".getBytes(StandardCharsets.UTF_8)));
-    }catch(IOException e){
+    } catch (IOException e) {
 
     }
     Pixel[][] pixels = new Pixel[height][width];
     int get = 0;
-    for(int i = 0; i < 25; i++){
-      if(data[i] == '\n'){
+    for (int i = 0; i < 25; i++) {
+      if (data[i] == '\n') {
         get = i;
         System.out.println("get" + get);
       }
     }
     get++;
     int index = 0;
-    byte[] returning = new byte[height*width];
+    byte[] returning = new byte[height * width];
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
         int r = data[get++] & 0xff;
@@ -149,7 +146,7 @@ public class ImageUtil implements ImageInput {
     InputStream s = null;
     try {
       s = ImageConverter.convertToBytes(new ImageImpl(pixels));
-    }catch(IOException e){
+    } catch (IOException e) {
       e.printStackTrace();
     }
     return s;

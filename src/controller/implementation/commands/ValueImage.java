@@ -8,7 +8,7 @@ public class ValueImage implements CommandHelper {
 
   @Override
   public void execute(String name, String saveName, ImageHandler handler)
-      throws NoSuchImageException {
+          throws NoSuchImageException {
     handler.getValue(name, saveName);
   }
 }

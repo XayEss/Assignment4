@@ -2,7 +2,6 @@ package controller.implementation;
 
 import controller.implementation.commands.FlipImage;
 import controller.interfaces.CommandHelper;
-import controller.interfaces.Controller;
 import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
@@ -13,34 +12,34 @@ import view.intefraces.Output;
 
 public class CommandController implements TransformationController {
 
-    private ImageInput imageInput;
-    private ImageSaver imageSaver;
-    private Input input;
-    private Output output;
-    private ImageHandler imageHandler;
+  private final ImageInput imageInput;
+  private final ImageSaver imageSaver;
+  private final Input input;
+  private final Output output;
+  private final ImageHandler imageHandler;
 
 
-    /**
-     * This is the constructor for the ControllerImpl class, which is responsible for coordinating the
-     * functionality of the image processing application. It takes in instances of ImageInput,
-     * ImageSaver, Input, ImageHandler, and Output as parameters, which are used to load, save,
-     * manipulate, and display images as required.
-     *
-     * @param imageInput   an instance of ImageInput used to load images
-     * @param imageSaver   an instance of ImageSaver used to save images
-     * @param input        an instance of Input used to receive user input
-     * @param imageHandler an instance of ImageHandler used to manipulate images
-     * @param output       an instance of Output used to display images
-     */
-    public CommandController(ImageInput imageInput, ImageSaver imageSaver, Input input,
-        TransformImageHandler imageHandler, Output output) {
-      this.imageInput = imageInput;
-      this.imageSaver = imageSaver;
-      this.input = input;
-      this.imageHandler = imageHandler;
-      this.output = output;
-      input.setController(this);
-    }
+  /**
+   * This is the constructor for the ControllerImpl class, which is responsible for coordinating the
+   * functionality of the image processing application. It takes in instances of ImageInput,
+   * ImageSaver, Input, ImageHandler, and Output as parameters, which are used to load, save,
+   * manipulate, and display images as required.
+   *
+   * @param imageInput   an instance of ImageInput used to load images
+   * @param imageSaver   an instance of ImageSaver used to save images
+   * @param input        an instance of Input used to receive user input
+   * @param imageHandler an instance of ImageHandler used to manipulate images
+   * @param output       an instance of Output used to display images
+   */
+  public CommandController(ImageInput imageInput, ImageSaver imageSaver, Input input,
+                           TransformImageHandler imageHandler, Output output) {
+    this.imageInput = imageInput;
+    this.imageSaver = imageSaver;
+    this.input = input;
+    this.imageHandler = imageHandler;
+    this.output = output;
+    input.setController(this);
+  }
 
   @Override
   public void start() {
@@ -105,13 +104,13 @@ public class CommandController implements TransformationController {
 
   @Override
   public void splitImageChannels(String name, String redResultName, String greenResultName,
-      String blueResultName) {
+                                 String blueResultName) {
 
   }
 
   @Override
   public void combineGreyScaleImages(String redName, String greenName, String blueName,
-      String resultName) {
+                                     String resultName) {
 
   }
 

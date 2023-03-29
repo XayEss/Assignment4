@@ -1,11 +1,10 @@
 package model.implementation;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+
 import model.interfaces.Image;
 import model.interfaces.Pixel;
 
@@ -94,6 +93,7 @@ public class ImageToBufferedImageService {
 
   /**
    * Converts an Image to a BufferedImage.
+   *
    * @param image the image to convert.
    * @return a BufferedImage representation of the image.
    */
@@ -121,6 +121,7 @@ public class ImageToBufferedImageService {
    * Converts an Image to a BufferedImage given an InputStream.
    * First 4 bytes have to be the width of the image, next 4 bytes - the height. After each byte
    * represents an r, g, b component.
+   *
    * @param stream The stream from which to read the image data from.
    * @return a BufferedImage representation of the image.
    * @throws IOException if an error while reading the stream occurs.
@@ -136,11 +137,11 @@ public class ImageToBufferedImageService {
     BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        int red =  stream.read() & 0xff;
+        int red = stream.read() & 0xff;
         int green = stream.read() & 0xff;
         int blue = stream.read() & 0xff;
         int rgb = 0xff000000 + (red << 16) + (green << 8) + blue;
-        bufferedImage.setRGB(j,i,rgb);
+        bufferedImage.setRGB(j, i, rgb);
       }
 
     }

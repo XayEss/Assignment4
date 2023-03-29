@@ -1,12 +1,14 @@
 package controller.implementation;
 
-import controller.interfaces.ImageSaver;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
 import javax.imageio.ImageIO;
+
+import controller.interfaces.ImageSaver;
 import model.implementation.ImageToBufferedImageService;
 import model.interfaces.Image;
 
@@ -19,8 +21,8 @@ public class UniversalImageSaver implements ImageSaver {
 
   @Override
   public void save(String path, InputStream stream) throws IOException {
-    String format = path.substring(path.lastIndexOf('.')+1);
-    if(format.equals("ppm")){
+    String format = path.substring(path.lastIndexOf('.') + 1);
+    if (format.equals("ppm")) {
       new PPMImageSaver().save(path, stream);
     } else {
       saveConventional(path, format, stream);

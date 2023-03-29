@@ -16,8 +16,8 @@ import model.interfaces.ImageProcessor;
  * It uses an ImageProcessor object to perform the actual processing on images.
  */
 public class ImageHandlerImpl implements ImageHandler {
-  private final Map<String, Image> nameToImage;
   protected final ImageProcessor imageProcessor;
+  private final Map<String, Image> nameToImage;
 
   public ImageHandlerImpl(ImageProcessor processor) {
     nameToImage = new HashMap<>();
@@ -86,7 +86,7 @@ public class ImageHandlerImpl implements ImageHandler {
   }
 
   @Override
-  public void saveWithName(String name, Image image){
+  public void saveWithName(String name, Image image) {
     nameToImage.put(name, image);
   }
 

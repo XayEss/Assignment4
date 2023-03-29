@@ -1,13 +1,14 @@
 package controller.implementation.commands;
 
-import controller.interfaces.CommandHelper;
-import controller.interfaces.Controller;
-import controller.interfaces.Input;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
+
+import controller.interfaces.CommandHelper;
+import controller.interfaces.Controller;
+import controller.interfaces.Input;
 
 public class TextCommandInput implements Input {
   InputStream stream;
@@ -33,7 +34,7 @@ public class TextCommandInput implements Input {
 
   }
 
-  private void populateCommands(){
+  private void populateCommands() {
     commands.put("brighten", s -> new BrightenImage(s.nextInt()));
   }
 }
