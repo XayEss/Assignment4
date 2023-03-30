@@ -12,27 +12,30 @@ import view.intefraces.Output;
 public class CommandLineOutput implements Output {
 
   private final OutputStream outputStream;
-
+  PrintWriter writer;
   public CommandLineOutput(OutputStream outputStream) {
     this.outputStream = outputStream;
+    writer = new PrintWriter(outputStream);
   }
 
   @Override
   public void show(Image image) {
-    PrintWriter pw = new PrintWriter(outputStream);
     StringBuilder line = new StringBuilder();
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
         line.append(getAsciiChar(image.getPixel(i, j).getGreyScale()));
       }
-      pw.println(line);
+      writer.println(line);
       line.delete(0, line.length());
     }
+    writer.flush();
   }
 
   @Override
   public void print(String string) {
-    new PrintWriter(outputStream).println(string);
+    //PrintWriter writer = new PrintWriter(outputStream);
+    writer.println(string);
+    writer.flush();
   }
 
   private char getAsciiChar(int character) {

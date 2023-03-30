@@ -28,17 +28,43 @@ saving them to the filesystem, reading user inputs, appropriately calling the mo
       - CommandLineInput - An implementation of Input that reads commands from the command line and calls the Controller to execute them.
 
     Assignment 5 Changes:
-      Model now doesn't leak the Image implementation, when loading an image an InputStream will be returned, previously - Image. When saving and image
-      the model no longer sends the Image to the controller to save, instead an InputStream. An Image to InputStream an vice-versa converter was added.
-      The support of linear transformations was added to Pixel interface and to the Image interface. Dithering operation added to Image interface.
-      ImageProcessor interface was updated to support sepia, dither, blur, sharpen. TransformImageHandle interface added to introduce new operations without
-      changing the previous ImageHandler. TransformationController interface added to support new operations(dither, sepia, blur, sharpen) for the controller,
+        Model now doesn't leak the Image implementation, when loading an image an InputStream will be returned, previously - Image. When saving and image
+      the model no longer sends the Image to the controller to save, instead an InputStream. This provides a better independence of model - controller relationship,
+      as the controller doesn't rely on specific implementation of model. An Image to InputStream an vice-versa converter was added.
+        The support of linear transformations was added to Pixel interface and to the Image interface. Dithering operation added to Image interface.
+      ImageProcessor interface was updated to support sepia, dither, blur, sharpen, previous greyscale implementation was replaced with linear transformation.
+      TransformImageHandle interface added to introduce new operations without changing the previous ImageHandler.
+      TransformationController interface added to support new operations(dither, sepia, blur, sharpen) for the controller,
       TextInput class extends CommandLineInput and adds new commands input. Inputs now use InputStream as input instead of predefined System.in.
+        The new features for the controller and main model class were chosen to be added to new interfaces - TransformImageHandler and TransformationController
+      to make the initial controller-model pair work with the same functionality as before. The transform functionality was added to existing Image,
+      Pixel interfaces and dithering to Image, as they are needed features. Transformation is universal, subsequently helps with a lot of pixel and image manipulations.
+      The filter function was added to ImageProcessor and is also universal, because applies a matrix of float values to an image, allowing the change of
+      any pixel value based on nearby pixels, subsequently is and important operation to be in the base interface.
+
+      Additions:
+        Model:
+          Interfaces:
+          - TransformImageHandler - extends the ImageHandler interface and provides the blur, sharpen, sepia, dither image manipulations.
+          Classes:
+          - TransformImageHandler - extends ImageHandlerImpl and implements TransformImageHandler, provides implementation for new operations.
+          - ImageConverter - provides operation of Image to InputStream conversion in both directions.
+          - Filters - a class that contains matrix constants with double values to perform transformation operations.
+        Controller:
+          Interfaces:
+          - TransformationController - Extends controller interface and provides new operations: blurImage, sharpenImage, ditherImage, sepiaImage.
+          Classes:
+          - TransformationControllerImpl - extends ControllerImpl, implements TransformationController. Implements new controller functionality to control new model operations.
+          - UniversalImageLoader - implements ImageInput interface, is capable of loading images from various formats.
+          - UniversalImageSaver - implements ImageSaver interface, is capable of saving images in various formats.
+          - TextInput - extends CommandLineInput and adds new commands to parseInput method, calling parent class if an old command is being read.
 
 **Unzip resources folder**
 Run script instructions:
 To run a script file simply type the run command and provide the filepath to the script file as the command line argument.
 A script file with the name example-script is already given, to execute it type:
 run resources/example-script.txt
+or if using the jar file:
+java -jar Assignment4.jar -file example-script.txt
 
-©Example image created by Alexander Seljuk(me), all rights reserved.
+©Example image(raiden.png) created by 小弃, https://www.pixiv.net/en/artworks/104691815.

@@ -59,7 +59,6 @@ public class ImageConverter {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     byte[] heightBytes;
     byte[] widthBytes;
-    System.out.println(image.getHeight());
     heightBytes = ByteBuffer.allocate(4).putInt(image.getHeight()).array();
     widthBytes = ByteBuffer.allocate(4).putInt(image.getWidth()).array();
     outputStream.write(widthBytes);

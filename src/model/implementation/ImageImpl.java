@@ -127,7 +127,6 @@ public class ImageImpl implements Image {
         changedPixels[i][j] = workingImage.getPixel(i, j);
       }
     }
-    int[][] errors = new int[height][width];
     for (int i = 0; i < getHeight(); i++) {
       for (int j = 0; j < getWidth(); j++) {
         int old = changedPixels[i][j].getChannel(0);
@@ -136,7 +135,6 @@ public class ImageImpl implements Image {
           newColor = 255;
         }
         int error = old - newColor;
-        errors[i][j] = error;
         changedPixels[i][j] = new PixelRGB(newColor);
         if (j + 1 < width) {
           changedPixels[i][j + 1] = changedPixels[i][j + 1].alterBrightness(

@@ -142,7 +142,7 @@ public class PixelRGB implements Pixel {
     if (valueBlue > 255) {
       valueBlue = 255;
     }
-    System.out.println(valueRed + " " + valueGreen + " " + valueGreen);
+    //System.out.println(valueRed + " " + valueGreen + " " + valueGreen);
     return new PixelRGB(valueRed, valueGreen, valueBlue);
   }
 
