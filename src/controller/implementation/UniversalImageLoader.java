@@ -28,8 +28,8 @@ public class UniversalImageLoader implements ImageInput {
   private InputStream load(String filename) throws IOException {
     BufferedImage bi;
     bi = ImageIO.read(new File(filename));
-      //ImageInputStream is = ImageIO.createImageInputStream(new File(filename));
-      //ImageReader reader = ImageIO.getImageReadersByFormatName("png").next();
+    //ImageInputStream is = ImageIO.createImageInputStream(new File(filename));
+    //ImageReader reader = ImageIO.getImageReadersByFormatName("png").next();
     if (bi == null) {
       // Future Scope
     }

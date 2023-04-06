@@ -11,10 +11,9 @@ import view.intefraces.Output;
  */
 public class CommandLineOutput implements Output {
 
-  private final OutputStream outputStream;
-  PrintWriter writer;
+  private final PrintWriter writer;
+
   public CommandLineOutput(OutputStream outputStream) {
-    this.outputStream = outputStream;
     writer = new PrintWriter(outputStream);
   }
 

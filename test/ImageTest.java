@@ -255,9 +255,9 @@ public class ImageTest {
     }
     Pixel testPixel = testImage.getPixel(0, 0);
 
-    assertEquals(101, testPixel.getChannel(0));
-    assertEquals(90, testPixel.getChannel(1));
-    assertEquals(58, testPixel.getChannel(2));
+    assertEquals(57, testPixel.getChannel(0));
+    assertEquals(50, testPixel.getChannel(1));
+    assertEquals(10, testPixel.getChannel(2));
   }
 
 
@@ -275,9 +275,9 @@ public class ImageTest {
     int testPixelCh1 = testImage.getPixelChannel(0, 0, 1);
     int testPixelCh2 = testImage.getPixelChannel(0, 0, 2);
 
-    assertEquals(101, testPixelCh0);
-    assertEquals(90, testPixelCh1);
-    assertEquals(58, testPixelCh2);
+    assertEquals(57, testPixelCh0);
+    assertEquals(50, testPixelCh1);
+    assertEquals(10, testPixelCh2);
   }
 
 
@@ -406,9 +406,9 @@ public class ImageTest {
     } catch (IOException e) {
       fail("Couldn't read the image");
     }
-    assertEquals("[[101 90 58, 103 92 62, 110 95 66, 104 91 59, 104 91 59], " +
-            "[104 93 63, 108 94 65, 100 86 57, 103 90 56, 105 91 64], [101 89 63, 103 91 65, " +
-            "106 92 66, 103 86 66, 105 91 64]]", testImage.toString());
+    assertEquals("[[57 50 10, 54 50 10, 49 49 48, 10 57 53, 10 54 54], " +
+            "[10 49 48, 52 10 57, 49 10 53, 57 10 49, 48 52 10], " +
+            "[57 49 10, 53 57 10, 49 48 52, 10 57 51, 10 54 51]]", testImage.toString());
   }
 
 
@@ -421,7 +421,7 @@ public class ImageTest {
 
     try {
       testImg = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden-min.png"));
+              "resources/images/new_examples/raiden-min.png"));
     } catch (IOException e) {
       fail("Couldn't read file");
     }
@@ -431,7 +431,7 @@ public class ImageTest {
 
     try {
       testTemp = ImageConverter.convertFromBytes(imageLoader.readFile(
-              "resources/raiden-dither.png"));
+              "resources/images/new_examples/raiden-dither.png"));
     } catch (IOException e) {
       fail("Couldn't read image");
     }

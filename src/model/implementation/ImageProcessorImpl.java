@@ -90,7 +90,7 @@ public class ImageProcessorImpl implements ImageProcessor {
     int padWidth = sizeX / 2;
     int padHeight = sizeY / 2;
 
-    // TODO: make function for this in Image?
+    // Generating a blank image
     Pixel[][] newImage = new Pixel[image.getHeight()][image.getWidth()];
     for (int row = 0; row < image.getHeight(); row++) {
       for (int col = 0; col < image.getWidth(); col++) {

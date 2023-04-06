@@ -3,6 +3,10 @@ import org.junit.Test;
 import java.io.IOException;
 
 import controller.implementation.ImageUtil;
+import controller.implementation.UniversalImageLoader;
+import controller.implementation.UniversalImageSaver;
+import controller.interfaces.ImageInput;
+import controller.interfaces.ImageSaver;
 import model.implementation.ImageConverter;
 import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageProcessorImpl;
@@ -350,29 +354,30 @@ public class ImageHandlerImplTest {
     ImageProcessor testProcessor = new ImageProcessorImpl();
     ImageHandler testHandler = new ImageHandlerImpl(testProcessor);
 
+    ImageSaver imageSaver = new UniversalImageSaver();
+    ImageInput imageLoader = new UniversalImageLoader();
+
     Image testImg = null;
+    Image testTemp = null;
+
     try {
-      testImg = ImageConverter
-              .convertFromBytes(new ImageUtil().readFile("resources/images/ppm_testing/" +
-                      "testBaseImage.ppm"));
+      testImg = ImageConverter.convertFromBytes(imageLoader.readFile("resources/example.ppm"));
     } catch (IOException e) {
-      fail("Couldn't read the image");
+      fail("Couldn't load image");
     }
-    testHandler.saveWithName("testImg", testImg);
 
     Image testGrey = testImg.getGreyscaleImage();
-    try {
-      testHandler.getGreyscale("testImg", "testGrey");
-    } catch (NoSuchImageException e) {
-      throw new RuntimeException(e);
-    }
 
-    try {
-      assertEquals(testGrey, testHandler.getByName("testGrey"));
-    } catch (NoSuchImageException e) {
-      throw new RuntimeException(e);
-    }
 
+    assertEquals("[[52 52 52, 37 37 37, 37 37 37, 37 37 37, 38 38 38, " +
+                    "37 37 37, 51 51 51], [37 37 37, 37 37 37, 38 38 38, 52 52 52, 37 37 37, " +
+                    "37 37 37, 38 38 38], [52 52 52, 37 37 37, 37 37 37, 22 22 22, 35 35 35, " +
+                    "38 38 38, " +
+                    "52 52 52], [37 37 37, 37 37 37, 22 22 22, 52 52 52, 37 37 37, 38 38 38, " +
+                    "36 36 36], " +
+                    "[36 36 36, 35 35 35, 37 37 37, 37 37 37, 37 37 37, 38 38 38, 49 49 49], " +
+                    "[37 37 37, 37 37 37, 38 38 38, 52 52 52, 37 37 37, 38 38 38, 36 36 36]]",
+            testGrey.toString());
   }
 
 
