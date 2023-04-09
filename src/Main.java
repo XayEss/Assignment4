@@ -1,3 +1,4 @@
+import java.awt.FileDialog;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -10,6 +11,7 @@ import controller.interfaces.Input;
 import model.implementation.ImageProcessorImpl;
 import model.implementation.TransformImageHandlerImpl;
 import view.impl.CommandLineOutput;
+import view.impl.GUI;
 
 /**
  * The Main class is the entry point of the program. It contains the main method which loads an
@@ -28,20 +30,28 @@ public class Main {
    */
   public static void main(String[] args) throws IOException, InterruptedException {
 
-    Input input = null;
-    if (args.length != 0 && args[0].equals("-file")) {
-      input = new TextInput(new FileInputStream(args[1]));
-    } else {
-      input = new TextInput(System.in);
-    }
-
-    Controller controller = new TransformationControllerImpl(new UniversalImageLoader(),
-            new UniversalImageSaver(),
-            input, new TransformImageHandlerImpl(new ImageProcessorImpl()) {
-    },
-            new CommandLineOutput(System.out));
-    controller.start();
-
+//    Input input = null;
+//    if (args.length != 0 && args[0].equals("-file")) {
+//      input = new TextInput(new FileInputStream(args[1]));
+//    } else {
+//      input = new TextInput(System.in);
+//    }
+//
+//    Controller controller = new TransformationControllerImpl(new UniversalImageLoader(),
+//            new UniversalImageSaver(),
+//            input, new TransformImageHandlerImpl(new ImageProcessorImpl()) {
+//    },
+//            new CommandLineOutput(System.out));
+//    controller.start();
+    GUI gui = new GUI();
+//    FileDialog fd = new FileDialog(gui, "Choose a file", FileDialog.LOAD);
+//    fd.setDirectory("C:\\");
+//    fd.setVisible(true);
+//    String filename = fd.getFile();
+//    if (filename == null)
+//      System.out.println("You cancelled the choice");
+//    else
+//      System.out.println("You chose " + filename);
   }
 
 }
