@@ -38,7 +38,6 @@ public class ImageViewer extends JPanel {
     int binWidth = width / rgbHistograms[0].length;
 
     Color[] channelColors = {Color.RED, Color.GREEN, Color.BLUE};
-
     for (int channel = 0; channel < 3; channel++) {
       g.setColor(channelColors[channel]);
       for (int i = 0; i < rgbHistograms[channel].length; i++) {
