@@ -37,5 +37,4 @@ public class HistogramCreator {
     return histogram;
   }
 
-
 }
