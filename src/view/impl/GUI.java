@@ -183,7 +183,7 @@ public class GUI extends JFrame implements Output {
     formatGroup.add(pngRadio);
     savePanel.add(pngRadio, gbc);
 
-    JRadioButton ppmRadio = new JRadioButton("ppm");
+    JRadioButton ppmRadio = new JRadioButton("PPM");
     formatGroup.add(ppmRadio);
     savePanel.add(ppmRadio, gbc);
 
