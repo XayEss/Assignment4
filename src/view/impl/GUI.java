@@ -1,6 +1,7 @@
 package view.impl;
 
 import controller.interfaces.TransformationController;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FileDialog;
@@ -8,18 +9,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
+
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
+
 import model.interfaces.Image;
 import view.intefraces.Output;
 
@@ -141,6 +137,7 @@ public class GUI extends JFrame implements Output {
   }
 
   private void initMainListeners(){
+
     itemLoad.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -151,10 +148,56 @@ public class GUI extends JFrame implements Output {
     itemSave.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-
+        saveFrame();
       }
     });
+
   }
+
+
+  private void saveFrame() {
+    JFrame saveFrame = new JFrame("Save Image");
+    saveFrame.setSize(600, 300);
+    saveFrame.setLocationRelativeTo(null);
+    saveFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+    JPanel savePanel = new JPanel();
+    savePanel.setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+
+    // File path text field
+    gbc.gridy = 0;
+    JTextField savePathField = new JTextField("File path");
+    savePathField.setPreferredSize(new Dimension(400, 55));
+    savePathField.setBorder(BorderFactory.createLineBorder(Color.black));
+    savePanel.add(savePathField, gbc);
+
+    // Radio buttons for file formats
+    gbc.gridy = 1;
+    ButtonGroup formatGroup = new ButtonGroup();
+    JRadioButton jpgRadio = new JRadioButton("JPG");
+    formatGroup.add(jpgRadio);
+    savePanel.add(jpgRadio, gbc);
+
+    JRadioButton pngRadio = new JRadioButton("PNG");
+    formatGroup.add(pngRadio);
+    savePanel.add(pngRadio, gbc);
+
+    JRadioButton ppmRadio = new JRadioButton("ppm");
+    formatGroup.add(ppmRadio);
+    savePanel.add(ppmRadio, gbc);
+
+    // Save button
+    gbc.gridy = 2;
+    JButton saveButton = new JButton("Save");
+    savePanel.add(saveButton, gbc);
+
+    saveFrame.add(savePanel);
+    saveFrame.setVisible(true);
+
+    repaint();
+  }
+
 
   @Override
   public void show(Image image) {
