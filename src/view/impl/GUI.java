@@ -1,5 +1,6 @@
 package view.impl;
 
+import controller.implementation.UniversalImageLoader;
 import controller.interfaces.TransformationController;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,9 +9,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -19,7 +24,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.border.BevelBorder;
+import model.implementation.ImageConverter;
+import model.implementation.ImageToBufferedImageService;
 import model.interfaces.Image;
 import view.intefraces.Output;
 
@@ -31,6 +39,8 @@ public class GUI extends JFrame implements Output {
   JMenuItem itemLoad;
   JMenuItem itemSave;
   private JButton load;
+
+  ScrollableImagePanel image;
 
   public GUI() {
     setName("Image manipulator");
@@ -68,10 +78,6 @@ public class GUI extends JFrame implements Output {
   private void mainFrame() {
     panel.removeAll();
     JMenuBar menuBar = new JMenuBar();
-    load = new JButton("Load image");
-    save = new JButton("Save");
-    //menuBar.add(load);
-    //menuBar.add(save);
     JMenu menu = new JMenu("File");
     itemLoad = new JMenuItem("Load");
     itemSave = new JMenuItem("Save");
@@ -90,6 +96,7 @@ public class GUI extends JFrame implements Output {
 
     GridBagConstraints gbcapply = new GridBagConstraints();
     gbcapply.gridx = 2;
+    gbcapply.gridy = 2;
     JButton apply = new JButton("Apply");
     panel.add(textField);
     panel.add(apply, gbcapply);
@@ -98,20 +105,40 @@ public class GUI extends JFrame implements Output {
     gbc.gridy = 1;
     //panel.add(file, gbc);
 
-    JPanel image = new JPanel();
-    image.add(new JLabel(/*new ImageIcon("resources/sephia.jpg")*/));
+    try {
+      image = new ScrollableImagePanel(ImageToBufferedImageService.toBuffered(
+          new UniversalImageLoader().readFile("resources/sephia.jpg")));
+    } catch (IOException e){
+
+    }
+    //image.add(new JLabel(/*new ImageIcon("resources/sephia.jpg")*/));
     GridBagConstraints gbc2 = new GridBagConstraints();
-    gbc2.gridy = 2;
+    image.setPreferredSize(new Dimension(500, 500));
+    gbc2.gridy = 1;
+    gbc2.gridx = 0;
     panel.add(image, gbc2);
 
     JTextArea log = new JTextArea("log");
     log.setPreferredSize(new Dimension(300, 70));
     log.setBorder(BorderFactory.createLineBorder(Color.black));
     GridBagConstraints gbc3 = new GridBagConstraints();
-    gbc3.gridy = 3;
+    gbc3.gridy = 2;
+    gbc3.gridx = 0;
     panel.add(log, gbc3);
-    load = new JButton("Load");
-    panel.add(load);
+
+    GridBagConstraints gbcOperations = new GridBagConstraints();
+    gbcOperations.gridy = 0;
+    gbcOperations.gridx = 2;
+    JComboBox<String> box  = new JComboBox<>(new String[]{"dither", "sepia", "vertical-flip"});
+    panel.add(box, gbcOperations);
+
+    GridBagConstraints gbcParams = new GridBagConstraints();
+    gbcParams.gridx = 2;
+    gbcParams.gridy = 1;
+    JTextField pane = new JTextField("parameters");
+    pane.setSize(100, 100);
+    panel.add(pane, gbcParams);
+
     add(panel);
     initMainListeners();
     setVisible(true);
@@ -153,6 +180,30 @@ public class GUI extends JFrame implements Output {
       public void actionPerformed(ActionEvent e) {
 
       }
+    });
+
+    image.addMouseWheelListener(new MouseWheelListener() {
+      @Override
+      public void mouseWheelMoved(MouseWheelEvent e) {
+        if(!e.isShiftDown()) {
+          if (e.getWheelRotation() < 0) {
+            image.scrollYNegative();
+            System.out.println("lol");
+          } else {
+            System.out.println("dlol");
+            image.scrollYPositive();
+          }
+        }else {
+          if (e.getWheelRotation() < 0) {
+            image.scrollXNegative();
+            System.out.println("lol");
+          } else {
+            System.out.println("dlol");
+            image.scrollXPositive();
+          }
+        }
+          image.repaint();
+        }
     });
   }
 
