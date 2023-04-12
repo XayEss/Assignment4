@@ -120,65 +120,46 @@ public class GUI extends JFrame implements Output {
         if (e.getStateChange() == ItemEvent.SELECTED) {
           String selectedAction = (String) e.getItem();
 
+          // TODO: Fix imagename and savename here and get parameters from GUI
+          String name = "GUI_Main_Image";
+          String saveName = "GUI_Save_Image";
           switch (selectedAction) {
             // TODO: Fix switchcase
-//            case "brighten":
-//              int amount = scanner.nextInt();
-//              name = scanner.next();
-//              saveName = scanner.next();
-//              controller.alterImageBrightness(name, saveName, amount);
-//              break;
-//            case "vertical-flip":
-//              CommandHelper command = new FlipImage(false);
-//              name = scanner.next();
-//              saveName = scanner.next();
-//              controller.createFlippedImage(name, saveName, false);
-//              break;
-//            case "horizontal-flip":
-//              name = scanner.next();
-//              saveName = scanner.next();
-//              controller.createFlippedImage(name, saveName, true);
-//              break;
-//            case "greyscale":
-//              name = scanner.next();
-//              saveName = scanner.next();
-//              controller.createGreyScaleImage(name, saveName);
-//              break;
-//            case "save":
-//              name = scanner.next();
-//              saveName = scanner.next();
-//              controller.saveImage(name, saveName);
-//              break;
-//            case "rgb-split":
-//              name = scanner.next();
-//              saveName = scanner.next();
-//              String saveName2 = scanner.next();
-//              String saveName3 = scanner.next();
-//              controller.splitImageChannels(name, saveName, saveName2, saveName3);
-//              break;
-//            case "rgb-combine":
-//              saveName = scanner.next();
-//              name = scanner.next();
-//              String name2 = scanner.next();
-//              String name3 = scanner.next();
-//              controller.combineGreyScaleImages(name, name2, name3, saveName);
-//              break;
-//            case "sepia":
-//              name = scanner.next();
-//              saveName = scanner.next();
-//              //controller.createSepiaImage(name, saveName);
-//              break;
-//            case "dither":
-//              name = scanner.next();
-//              saveName = scanner.next();
-            //controller.ditherImage(name, saveName);
-//              break;
-            case "blur":
+            case "brighten":
+              int amount = scanner.nextInt();
+              controller.alterImageBrightness(name, saveName, amount);
               break;
-
-            case "Select an action":
+            case "vertical-flip":
+              CommandHelper command = new FlipImage(false);
+              controller.createFlippedImage(name, saveName, false);
+              break;
+            case "horizontal-flip":
+              controller.createFlippedImage(name, saveName, true);
+              break;
+            case "greyscale":
+              controller.createGreyScaleImage(name, saveName);
+              break;
+            case "rgb-split":
+              String saveName2 = scanner.next();
+              String saveName3 = scanner.next();
+              controller.splitImageChannels(name, saveName, saveName2, saveName3);
+              break;
+            case "rgb-combine":
+              String name2 = scanner.next();
+              String name3 = scanner.next();
+              controller.combineGreyScaleImages(name, name2, name3, saveName);
+              break;
+            case "sepia":
+              controller.createSepiaImage(name, saveName);
+              break;
+            case "dither":
+              controller.ditherImage(name, saveName);
+              break;
+            case "blur":
+              controller.blurImage(name, saveName);
+              break;
             default:
-              // Do nothing if "Select an action" or an unrecognized action is selected
+              // Do nothing an empty action is selected
               break;
           }
         }
