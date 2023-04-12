@@ -6,18 +6,27 @@ import java.awt.image.ImageObserver;
 import javax.swing.JPanel;
 
 public class ScrollableImagePanel extends JPanel {
-  private final BufferedImage image;
-  private int x = 0;
-  private int y = 0;
+  private BufferedImage image;
+  private int x;
+  private int y;
 
   public ScrollableImagePanel(BufferedImage image) {
+    x = 0;
+    y = 0;
     this.image = image;
+  }
+
+  public ScrollableImagePanel() {
+    x = 0;
+    y = 0;
   }
 
   @Override
   public void paint(Graphics g) {
     super.paint(g);
-    paintScroll(g);
+    if(image != null) {
+      paintScroll(g);
+    }
   }
 
   private void paintScroll(Graphics g){
@@ -46,9 +55,16 @@ public class ScrollableImagePanel extends JPanel {
 
   private void changeX(int value){
     x += value;
+    x = Math.max(0, Math.min(x, image.getWidth()-getWidth()));
   }
 
   private void changeY(int value){
     y += value;
+    y = Math.max(0, Math.min(y, image.getHeight()-getHeight()));
+  }
+
+  public void setImage(BufferedImage image){
+    this.image = image;
+    repaint();
   }
 }

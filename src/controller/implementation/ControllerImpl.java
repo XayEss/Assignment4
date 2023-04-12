@@ -48,7 +48,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void start() {
-    input.startCommandReading();
+    //input.startCommandReading();
   }
 
   @Override
@@ -155,10 +155,13 @@ public class ControllerImpl implements Controller {
     if (image != null) {
       try {
         imageHandler.importImage(name, image);
+        showImage(name);
       } catch (IOException e) {
-        output.print("Error reding image stream");
+        output.print("Error reading image stream");
+      } catch (NoSuchImageException i){
+        output.print("image not found");
       }
-      output.print("Successfully loaded image");
+      //output.print("Successfully loaded image");
     } else {
       output.print("No file with path " + path + " found");
     }
@@ -174,6 +177,9 @@ public class ControllerImpl implements Controller {
     }
   }
 
+  private void showImage(String name) throws IOException, NoSuchImageException {
+    output.show(imageHandler.exportImage(name));
+  }
 
   @Override
   public void runScript(String path) {

@@ -1,5 +1,8 @@
 package view.intefraces;
 
+import controller.interfaces.TransformationController;
+import java.io.IOException;
+import java.io.InputStream;
 import model.interfaces.Image;
 
 /**
@@ -7,7 +10,9 @@ import model.interfaces.Image;
  */
 public interface Output {
 
-  void show(Image image);
+  void show(InputStream image) throws IOException;
 
   void print(String string);
+
+  void setController(TransformationController controller);
 }

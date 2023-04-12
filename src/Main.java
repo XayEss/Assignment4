@@ -30,20 +30,18 @@ public class Main {
    */
   public static void main(String[] args) throws IOException, InterruptedException {
 
-//    Input input = null;
-//    if (args.length != 0 && args[0].equals("-file")) {
-//      input = new TextInput(new FileInputStream(args[1]));
-//    } else {
-//      input = new TextInput(System.in);
-//    }
-//
-//    Controller controller = new TransformationControllerImpl(new UniversalImageLoader(),
-//            new UniversalImageSaver(),
-//            input, new TransformImageHandlerImpl(new ImageProcessorImpl()) {
-//    },
-//            new CommandLineOutput(System.out));
-//    controller.start();
+    Input input = null;
+    if (args.length != 0 && args[0].equals("-file")) {
+      input = new TextInput(new FileInputStream(args[1]));
+    } else {
+      input = new TextInput(System.in);
+    }
     GUI gui = new GUI();
+    Controller controller = new TransformationControllerImpl(new UniversalImageLoader(),
+            new UniversalImageSaver(),
+            input, new TransformImageHandlerImpl(new ImageProcessorImpl()),
+            gui);
+    controller.start();
 //    FileDialog fd = new FileDialog(gui, "Choose a file", FileDialog.LOAD);
 //    fd.setDirectory("C:\\");
 //    fd.setVisible(true);

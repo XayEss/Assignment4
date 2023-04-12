@@ -1,8 +1,12 @@
 package view.impl;
 
+import controller.interfaces.TransformationController;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
+import model.implementation.ImageConverter;
 import model.interfaces.Image;
 import view.intefraces.Output;
 
@@ -18,11 +22,12 @@ public class CommandLineOutput implements Output {
   }
 
   @Override
-  public void show(Image image) {
+  public void show(InputStream image) throws IOException {
+    Image image2 = ImageConverter.convertFromBytes(image);
     StringBuilder line = new StringBuilder();
-    for (int i = 0; i < image.getHeight(); i++) {
-      for (int j = 0; j < image.getWidth(); j++) {
-        line.append(getAsciiChar(image.getPixel(i, j).getGreyScale()));
+    for (int i = 0; i < image2.getHeight(); i++) {
+      for (int j = 0; j < image2.getWidth(); j++) {
+        line.append(getAsciiChar(image2.getPixel(i, j).getGreyScale()));
       }
       writer.println(line);
       line.delete(0, line.length());
@@ -35,6 +40,11 @@ public class CommandLineOutput implements Output {
     //PrintWriter writer = new PrintWriter(outputStream);
     writer.println(string);
     writer.flush();
+  }
+
+  @Override
+  public void setController(TransformationController controller) {
+
   }
 
   private char getAsciiChar(int character) {
