@@ -32,7 +32,7 @@ public class ScrollableImagePanel extends JPanel {
   private void paintScroll(Graphics g){
     int width = getWidth();
     int height = getHeight();
-    BufferedImage sub = image.getSubimage(x,y, width,height);
+    BufferedImage sub = image.getSubimage(x, y, Math.min(width, image.getWidth()), Math.min(height, image.getHeight()));
     g.drawImage(sub, 0, 0, width, height, null);
 
   }

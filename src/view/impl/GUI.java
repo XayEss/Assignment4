@@ -1,21 +1,39 @@
 package view.impl;
 
-import java.awt.*;
+import controller.implementation.UniversalImageLoader;
+import controller.implementation.UniversalImageSaver;
+import controller.implementation.commands.FlipImage;
+import controller.interfaces.CommandHelper;
+import controller.interfaces.TransformationController;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FileDialog;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JRadioButton;
 
 import javax.swing.*;
 
-import controller.implementation.UniversalImageLoader;
-import controller.interfaces.TransformationController;
 import model.implementation.ImageConverter;
+import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageToBufferedImageService;
+import model.interfaces.Image;
+import model.interfaces.ImageHandler;
 import view.intefraces.Output;
 
 public class GUI extends JFrame implements Output {
@@ -85,13 +103,12 @@ public class GUI extends JFrame implements Output {
     //panel = new JPanel();
     GridBagLayout cl = new GridBagLayout();
     panel.setLayout(cl);
-    fileField = new JTextField("File path");
+    //fileField = new JTextField("File path");
     fileField.setPreferredSize(new Dimension(getWidth() / 2, 55));
 //    GridBagConstraints gbcapply = new GridBagConstraints();
 //    gbcapply.gridx = 2;
 //    gbcapply.gridy = 2;
     panel.add(fileField);
-
 
     JPanel interactionPanel = new JPanel();
     interactionPanel.setLayout(new FlowLayout());
@@ -101,7 +118,7 @@ public class GUI extends JFrame implements Output {
     gbcOperations.gridx = 0;
 
     JComboBox<String> box = new JComboBox<>(new String[]{"dither", "sepia", "sharpen", "blur",
-            "vertical-flip", "horizontal-flip", "brighten", "greyscale", "extract channel"});
+        "vertical-flip", "horizontal-flip", "brighten", "greyscale", "extract channel"});
 
 
     box.addItemListener(new ItemListener() {
@@ -133,7 +150,7 @@ public class GUI extends JFrame implements Output {
     ImageViewer histogram = null;
     try {
       histogram = new ImageViewer(ImageConverter.convertFromBytes(
-              new UniversalImageLoader().readFile("resources/images/new_examples/raiden-min.png")));
+          new UniversalImageLoader().readFile("resources/images/new_examples/raiden-min.png")));
       histogram.setPreferredSize(new Dimension(800, 800));
       //panel.add(file, gbc);
 
@@ -323,6 +340,7 @@ public class GUI extends JFrame implements Output {
     // Radio buttons for file formats
     JPanel buttonPanel = new JPanel();
     gbc.gridy = 1;
+    //gbc.gridx = 0;
     ButtonGroup formatGroup = new ButtonGroup();
     JRadioButton jpgRadio = new JRadioButton("JPG", true);
     formatGroup.add(jpgRadio);

@@ -4,6 +4,7 @@ import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
 import controller.interfaces.TransformationController;
+import java.io.IOException;
 import model.implementation.NoSuchImageException;
 import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
@@ -42,7 +43,8 @@ public class TransformationControllerImpl extends ControllerImpl implements
     try {
       imageHandler.sepiaToneImage(name, saveName);
       output.print("Successfully applied sepia to the image");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -52,7 +54,8 @@ public class TransformationControllerImpl extends ControllerImpl implements
     try {
       imageHandler.ditherImage(name, saveName);
       output.print("Successfully dithered the image");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -62,7 +65,8 @@ public class TransformationControllerImpl extends ControllerImpl implements
     try {
       imageHandler.blurImage(name, saveName);
       output.print("Successfully blurred the image");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -72,7 +76,8 @@ public class TransformationControllerImpl extends ControllerImpl implements
     try {
       imageHandler.sharpenImage(name, saveName);
       output.print("Successfully sharpened the image");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }

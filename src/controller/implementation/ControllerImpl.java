@@ -56,7 +56,8 @@ public class ControllerImpl implements Controller {
     try {
       imageHandler.getChannel(name, channel, resultName);
       output.print("Successfully created a new image with a separate channel");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -66,7 +67,8 @@ public class ControllerImpl implements Controller {
     try {
       imageHandler.flipImage(name, horizontal, resultName);
       output.print("Image successfully flipped");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -76,7 +78,8 @@ public class ControllerImpl implements Controller {
     try {
       imageHandler.getValue(name, resultName);
       output.print("Successfully created a value image");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -86,7 +89,8 @@ public class ControllerImpl implements Controller {
     try {
       imageHandler.getIntensity(name, resultName);
       output.print("Successfully created a intensity image");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -96,7 +100,8 @@ public class ControllerImpl implements Controller {
     try {
       imageHandler.getLuma(name, resultName);
       output.print("Successfully created a luma image");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -106,7 +111,8 @@ public class ControllerImpl implements Controller {
     try {
       imageHandler.alterBrightness(name, value, resultName);
       output.print("Successfully created an image with changed brightness");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -116,7 +122,8 @@ public class ControllerImpl implements Controller {
     try {
       imageHandler.getGreyscale(name, resultName);
       output.print("Successfully created a greyscale image");
-    } catch (NoSuchImageException e) {
+      showImage(name);
+    } catch (NoSuchImageException | IOException e) {
       output.print(e.getMessage());
     }
   }
@@ -177,7 +184,7 @@ public class ControllerImpl implements Controller {
     }
   }
 
-  private void showImage(String name) throws IOException, NoSuchImageException {
+  protected void showImage(String name) throws IOException, NoSuchImageException {
     output.show(imageHandler.exportImage(name));
   }
 
