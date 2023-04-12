@@ -1,7 +1,11 @@
 package view.impl;
 
 import controller.implementation.UniversalImageLoader;
+import controller.implementation.UniversalImageSaver;
+import controller.implementation.commands.FlipImage;
+import controller.interfaces.CommandHelper;
 import controller.interfaces.TransformationController;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FileDialog;
@@ -11,16 +15,22 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
 import javax.swing.*;
+
 import model.implementation.ImageConverter;
 import model.implementation.ImageToBufferedImageService;
+import model.interfaces.Image;
 import view.intefraces.Output;
 
 public class GUI extends JFrame implements Output {
@@ -101,8 +111,81 @@ public class GUI extends JFrame implements Output {
     gbcOperations.gridy = 1;
     gbcOperations.gridx = 0;
 
-    JComboBox<String> box  = new JComboBox<>(new String[]{"dither", "sepia", "sharpen", "blur",
-        "vertical-flip", "horizontal-flip", "brighten", "greyscale", "extract channel"});
+    JComboBox<String> box = new JComboBox<>(new String[]{"dither", "sepia", "sharpen", "blur",
+            "vertical-flip", "horizontal-flip", "brighten", "greyscale", "extract channel"});
+
+    box.addItemListener(new ItemListener() {
+      @Override
+      public void itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+          String selectedAction = (String) e.getItem();
+
+          switch (selectedAction) {
+            // TODO: Fix switchcase
+//            case "brighten":
+//              int amount = scanner.nextInt();
+//              name = scanner.next();
+//              saveName = scanner.next();
+//              controller.alterImageBrightness(name, saveName, amount);
+//              break;
+//            case "vertical-flip":
+//              CommandHelper command = new FlipImage(false);
+//              name = scanner.next();
+//              saveName = scanner.next();
+//              controller.createFlippedImage(name, saveName, false);
+//              break;
+//            case "horizontal-flip":
+//              name = scanner.next();
+//              saveName = scanner.next();
+//              controller.createFlippedImage(name, saveName, true);
+//              break;
+//            case "greyscale":
+//              name = scanner.next();
+//              saveName = scanner.next();
+//              controller.createGreyScaleImage(name, saveName);
+//              break;
+//            case "save":
+//              name = scanner.next();
+//              saveName = scanner.next();
+//              controller.saveImage(name, saveName);
+//              break;
+//            case "rgb-split":
+//              name = scanner.next();
+//              saveName = scanner.next();
+//              String saveName2 = scanner.next();
+//              String saveName3 = scanner.next();
+//              controller.splitImageChannels(name, saveName, saveName2, saveName3);
+//              break;
+//            case "rgb-combine":
+//              saveName = scanner.next();
+//              name = scanner.next();
+//              String name2 = scanner.next();
+//              String name3 = scanner.next();
+//              controller.combineGreyScaleImages(name, name2, name3, saveName);
+//              break;
+//            case "sepia":
+//              name = scanner.next();
+//              saveName = scanner.next();
+//              //controller.createSepiaImage(name, saveName);
+//              break;
+//            case "dither":
+//              name = scanner.next();
+//              saveName = scanner.next();
+            //controller.ditherImage(name, saveName);
+//              break;
+            case "blur":
+              break;
+
+            case "Select an action":
+            default:
+              // Do nothing if "Select an action" or an unrecognized action is selected
+              break;
+          }
+        }
+      }
+    });
+
+
     interactionPanel.add(box);
 
     GridBagConstraints gbcParams = new GridBagConstraints();
@@ -129,7 +212,7 @@ public class GUI extends JFrame implements Output {
 
       image = new ScrollableImagePanel();
     } catch (IOException e){
-
+      // Do Nothing
     }
     //image.add(new JLabel(/*new ImageIcon("resources/sephia.jpg")*/));
     GridBagConstraints gbc2 = new GridBagConstraints();
@@ -201,7 +284,7 @@ public class GUI extends JFrame implements Output {
           image.setImage(ImageToBufferedImageService.toBuffered(
               new UniversalImageLoader().readFile("resources/images/new_examples/raiden_sharpened.png")));
         }catch (IOException m){
-
+          // Do Nothing
         }
       }
     });
@@ -229,6 +312,7 @@ public class GUI extends JFrame implements Output {
 
 
   private void saveFrame() {
+
     JFrame saveFrame = new JFrame("Save Image");
     saveFrame.setSize(600, 300);
     saveFrame.setLocationRelativeTo(null);
@@ -260,11 +344,58 @@ public class GUI extends JFrame implements Output {
     JRadioButton ppmRadio = new JRadioButton("PPM");
     formatGroup.add(ppmRadio);
     buttonPanel.add(ppmRadio, gbc);
-    savePanel.add(buttonPanel,gbc);
+    savePanel.add(buttonPanel, gbc);
 
     // Save button
     gbc.gridy = 2;
     JButton saveButton = new JButton("Save");
+    saveButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String filePath = savePathField.getText();
+        String format = null;
+        if (jpgRadio.isSelected()) {
+          format = "jpg";
+        } else if (pngRadio.isSelected()) {
+          format = "png";
+        } else if (ppmRadio.isSelected()) {
+          format = "ppm";
+        }
+
+        Image image = null;
+
+        if (format != null) {
+          try {
+            // TODO: Image import here
+//            BufferedImage bufferedImage = image.getImage();
+//            InputStream inputStream = ImageToBufferedImageService.toInputStream(bufferedImage, format);
+
+            UniversalImageLoader imageLoader = new UniversalImageLoader();
+
+            try {
+              image = ImageConverter.convertFromBytes(imageLoader.readFile(
+                      "resources/images/new_examples/raiden-min.png"));
+            } catch (IOException g) {
+              System.out.println("Couldn't load image!!");
+            }
+
+            UniversalImageSaver saver = new UniversalImageSaver();
+//            saver.save(filePath, inputStream);
+
+            filePath = "resources/images/new_examples/raiden_GUI_saved.png";
+            saver.save(filePath, ImageConverter.convertToBytes(image));
+
+            JOptionPane.showMessageDialog(saveFrame, "Image saved successfully!");
+            saveFrame.dispose();
+          } catch (IOException ex) {
+            JOptionPane.showMessageDialog(saveFrame, "Error saving image: " + ex.getMessage());
+          }
+        } else {
+          JOptionPane.showMessageDialog(saveFrame, "Please select an image format.");
+        }
+      }
+    });
+
     savePanel.add(saveButton, gbc);
 
     saveFrame.add(savePanel);
