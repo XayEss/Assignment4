@@ -22,6 +22,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
@@ -29,8 +30,10 @@ import javax.swing.JRadioButton;
 import javax.swing.*;
 
 import model.implementation.ImageConverter;
+import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageToBufferedImageService;
 import model.interfaces.Image;
+import model.interfaces.ImageHandler;
 import view.intefraces.Output;
 
 public class GUI extends JFrame implements Output {
@@ -43,6 +46,9 @@ public class GUI extends JFrame implements Output {
   private JButton load;
   private JButton apply;
   private String imageName;
+  private String selectedAction;
+  private JTextField pane;
+
 
   private ScrollableImagePanel image;
 
@@ -114,54 +120,12 @@ public class GUI extends JFrame implements Output {
     JComboBox<String> box = new JComboBox<>(new String[]{"dither", "sepia", "sharpen", "blur",
             "vertical-flip", "horizontal-flip", "brighten", "greyscale", "extract channel"});
 
+
     box.addItemListener(new ItemListener() {
       @Override
       public void itemStateChanged(ItemEvent e) {
         if (e.getStateChange() == ItemEvent.SELECTED) {
-          String selectedAction = (String) e.getItem();
-
-          // TODO: Fix imagename and savename here and get parameters from GUI
-          String name = "GUI_Main_Image";
-          String saveName = "GUI_Save_Image";
-          switch (selectedAction) {
-            // TODO: Fix switchcase
-            case "brighten":
-              int amount = scanner.nextInt();
-              controller.alterImageBrightness(name, saveName, amount);
-              break;
-            case "vertical-flip":
-              CommandHelper command = new FlipImage(false);
-              controller.createFlippedImage(name, saveName, false);
-              break;
-            case "horizontal-flip":
-              controller.createFlippedImage(name, saveName, true);
-              break;
-            case "greyscale":
-              controller.createGreyScaleImage(name, saveName);
-              break;
-            case "rgb-split":
-              String saveName2 = scanner.next();
-              String saveName3 = scanner.next();
-              controller.splitImageChannels(name, saveName, saveName2, saveName3);
-              break;
-            case "rgb-combine":
-              String name2 = scanner.next();
-              String name3 = scanner.next();
-              controller.combineGreyScaleImages(name, name2, name3, saveName);
-              break;
-            case "sepia":
-              controller.createSepiaImage(name, saveName);
-              break;
-            case "dither":
-              controller.ditherImage(name, saveName);
-              break;
-            case "blur":
-              controller.blurImage(name, saveName);
-              break;
-            default:
-              // Do nothing an empty action is selected
-              break;
-          }
+          selectedAction = (String) e.getItem();
         }
       }
     });
@@ -172,7 +136,7 @@ public class GUI extends JFrame implements Output {
     GridBagConstraints gbcParams = new GridBagConstraints();
     gbcParams.gridx = 2;
     gbcParams.gridy = 1;
-    JTextField pane = new JTextField("parameters");
+    pane = new JTextField("parameters");
     pane.setSize(100, 100);
     interactionPanel.add(pane);
 
@@ -220,6 +184,15 @@ public class GUI extends JFrame implements Output {
     repaint();
   }
 
+
+  private String[] getParameters() {
+    String paramsInput = pane.getText(); // Get the text from the pane (JTextField)
+    String[] params = paramsInput.split(" ");
+
+    return params;
+  }
+
+
   private void initLoadListeners() {
     file.addActionListener(e -> {
       FileDialog fd = new FileDialog(this, "Choose a file", FileDialog.LOAD);
@@ -261,14 +234,52 @@ public class GUI extends JFrame implements Output {
     apply.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        try {
-          image.setImage(ImageToBufferedImageService.toBuffered(
-              new UniversalImageLoader().readFile("resources/images/new_examples/raiden_sharpened.png")));
-        }catch (IOException m){
-          // Do Nothing
+        if (selectedAction != null) {
+          // Get the parameters from the pane
+          String[] params = getParameters();
+
+          // TODO: Fix imagename and savename here and get parameters from GUI
+          String name = imageName;
+          String saveName = imageName;
+          switch (selectedAction) {
+            // TODO: Fix switchcase
+            case "brighten":
+              // Get the amount parameter as an integer
+              int amount = Integer.parseInt(params[0]);
+              controller.alterImageBrightness(name, saveName, amount);
+              System.out.println("Brighten called with amount: " + amount);
+              break;
+            case "vertical-flip":
+              controller.createFlippedImage(name, saveName, false);
+              break;
+            case "horizontal-flip":
+              controller.createFlippedImage(name, saveName, true);
+              break;
+            case "greyscale":
+              controller.createGreyScaleImage(name, saveName);
+              break;
+            case "sepia":
+              controller.createSepiaImage(name, saveName);
+              break;
+            case "dither":
+              controller.ditherImage(name, saveName);
+              break;
+            case "blur":
+              controller.blurImage(name, saveName);
+              break;
+            case "sharpen":
+              controller.sharpenImage(name, saveName);
+              break;
+            default:
+              // Do nothing if an empty action is selected
+              break;
+          }
+        } else {
+          JOptionPane.showMessageDialog(GUI.this, "Please select an operation.");
         }
       }
     });
+
 
     image.addMouseWheelListener(new MouseWheelListener() {
       @Override
@@ -289,6 +300,7 @@ public class GUI extends JFrame implements Output {
         image.repaint();
       }
     });
+
   }
 
 
