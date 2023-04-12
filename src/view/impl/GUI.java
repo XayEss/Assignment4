@@ -322,6 +322,21 @@ public class GUI extends JFrame implements Output {
     savePathField.setBorder(BorderFactory.createLineBorder(Color.black));
     savePanel.add(savePathField, gbc);
 
+    // Add directory navigation button
+    JButton directoryButton = new JButton(new ImageIcon("resources/folder.png"));
+    directoryButton.addActionListener(e -> {
+      FileDialog fd = new FileDialog(this, "Choose a folder", FileDialog.SAVE);
+      fd.setVisible(true);
+      String filename = fd.getFile();
+      if (filename == null) {
+        savePathField.setText("You cancelled the choice");
+      } else {
+        savePathField.setText(fd.getDirectory() + fd.getFile());
+      }
+    });
+    gbc.gridx = 1;
+    savePanel.add(directoryButton, gbc);
+
     // Radio buttons for file formats
     JPanel buttonPanel = new JPanel();
     gbc.gridy = 1;
