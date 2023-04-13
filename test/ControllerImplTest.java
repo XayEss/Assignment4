@@ -405,7 +405,12 @@ public class ControllerImplTest {
 
     @Override
     public void setController(TransformationController controller) {
+      // Empty for mock class.
+    }
 
+    @Override
+    public void showHistogram(Image image) {
+      // Empty for mock class.
     }
 
     public String getLog() {

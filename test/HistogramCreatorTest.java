@@ -8,7 +8,8 @@ import model.implementation.HistogramCreator;
 import model.implementation.ImageConverter;
 import model.interfaces.Image;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 
 /**
