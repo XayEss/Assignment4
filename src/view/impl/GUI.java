@@ -48,6 +48,7 @@ public class GUI extends JFrame implements Output {
   private String imageName;
   private String selectedAction;
   private JTextField pane;
+  private JTextArea log;
 
 
   private ScrollableImagePanel image;
@@ -169,7 +170,7 @@ public class GUI extends JFrame implements Output {
     gbc2.gridx = 1;
     //panel.add(histogram, gbc2);
 
-    JTextArea log = new JTextArea("log");
+    log = new JTextArea("Logs:");
     log.setEditable(false);
     log.setPreferredSize(new Dimension(300, 70));
     log.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -231,6 +232,7 @@ public class GUI extends JFrame implements Output {
       }
     });
 
+
     apply.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -238,42 +240,53 @@ public class GUI extends JFrame implements Output {
           // Get the parameters from the pane
           String[] params = getParameters();
 
-          // TODO: Fix imagename and savename here and get parameters from GUI
           String name = imageName;
           String saveName = imageName;
+          String logText = ""; // Add this line to store the operation description
           switch (selectedAction) {
-            // TODO: Fix switchcase
             case "brighten":
-              // Get the amount parameter as an integer
               int amount = Integer.parseInt(params[0]);
               controller.alterImageBrightness(name, saveName, amount);
-              System.out.println("Brighten called with amount: " + amount);
+              logText = "Brighten called with amount: " + amount;
               break;
             case "vertical-flip":
               controller.createFlippedImage(name, saveName, false);
+              logText = "Vertical flip called";
               break;
             case "horizontal-flip":
               controller.createFlippedImage(name, saveName, true);
+              logText = "Horizontal flip called";
               break;
             case "greyscale":
               controller.createGreyScaleImage(name, saveName);
+              logText = "Greyscale called";
               break;
             case "sepia":
               controller.createSepiaImage(name, saveName);
+              logText = "Sepia called";
               break;
             case "dither":
               controller.ditherImage(name, saveName);
+              logText = "Dither called";
               break;
             case "blur":
               controller.blurImage(name, saveName);
+              logText = "Blur called";
               break;
             case "sharpen":
               controller.sharpenImage(name, saveName);
+              logText = "Sharpen called";
+              break;
+            case "extract channel":
+              int channel = Integer.parseInt(params[0]);
+              controller.separateImageChannel(name, saveName, channel);
+              logText = "Extract channel called with channel: " + channel;
               break;
             default:
               // Do nothing if an empty action is selected
               break;
           }
+          log.append("\n" + logText); // Append the operation description to the log
         } else {
           JOptionPane.showMessageDialog(GUI.this, "Please select an operation.");
         }
@@ -315,6 +328,7 @@ public class GUI extends JFrame implements Output {
     savePanel.setLayout(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();
 
+
     // File path text field
     gbc.gridy = 0;
     JTextField savePathField = new JTextField("File path");
@@ -340,7 +354,10 @@ public class GUI extends JFrame implements Output {
     // Radio buttons for file formats
     JPanel buttonPanel = new JPanel();
     gbc.gridy = 1;
-    //gbc.gridx = 0;
+    gbc.gridx = 0;
+    gbc.gridwidth = 2;
+    gbc.fill = GridBagConstraints.HORIZONTAL;
+    gbc.anchor = GridBagConstraints.CENTER;
     ButtonGroup formatGroup = new ButtonGroup();
     JRadioButton jpgRadio = new JRadioButton("JPG", true);
     formatGroup.add(jpgRadio);
@@ -357,6 +374,8 @@ public class GUI extends JFrame implements Output {
 
     // Save button
     gbc.gridy = 2;
+    gbc.anchor = GridBagConstraints.CENTER;
+    gbc.fill = GridBagConstraints.NONE;
     JButton saveButton = new JButton("Save");
 
     saveButton.addActionListener(new ActionListener() {
@@ -376,9 +395,7 @@ public class GUI extends JFrame implements Output {
         filePath += "." + (String) format;
         System.out.println("Saving image as: " + filePath);
         controller.saveImage(filePath, imageName);
-        JOptionPane.showMessageDialog(saveFrame, "Image saved successfully!");
         saveFrame.dispose();
-
       }
 
     });
