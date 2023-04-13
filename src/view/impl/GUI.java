@@ -1,16 +1,8 @@
 package view.impl;
 
-import controller.interfaces.TransformationController;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FileDialog;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseWheelEvent;
@@ -23,8 +15,8 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import controller.interfaces.TransformationController;
 import model.implementation.HistogramArtist;
-import model.implementation.HistogramCreator;
 import model.implementation.ImageToBufferedImageService;
 import view.intefraces.Output;
 
@@ -101,7 +93,7 @@ public class GUI extends JFrame implements Output {
     menuBar.add(menu);
 
     setJMenuBar(menuBar);
-    setLocation(0,0);
+    setLocation(0, 0);
     setSize(1450, 1000);
     GridBagLayout cl = new GridBagLayout();
     panel.setLayout(cl);
@@ -160,7 +152,7 @@ public class GUI extends JFrame implements Output {
     histogram = new ImageViewer();
     histogram.setPreferredSize(new Dimension(800, 500));
     histogram2 = new ScrollableImagePanel();
-    histogram2.setPreferredSize(new Dimension(700,500));
+    histogram2.setPreferredSize(new Dimension(700, 500));
     imagePanel.add(histogram2);
 
     panel.add(imagePanel, gbc2);
@@ -177,9 +169,9 @@ public class GUI extends JFrame implements Output {
 
     log = new JTextArea("Logs:");
     log.setEditable(false);
-    log.setLineWrap(true); // Add this line to enable line wrapping
-    log.setWrapStyleWord(true); // Add this line to wrap text at word boundaries
-    JScrollPane logScrollPane = new JScrollPane(log); // Create a JScrollPane and add the log JTextArea to it
+    log.setLineWrap(true);
+    log.setWrapStyleWord(true);
+    JScrollPane logScrollPane = new JScrollPane(log);
     logScrollPane.setPreferredSize(new Dimension(300, 70));
     logScrollPane.setBorder(BorderFactory.createLineBorder(Color.black));
     GridBagConstraints gbc3 = new GridBagConstraints();
@@ -229,11 +221,13 @@ public class GUI extends JFrame implements Output {
             isValidImage = true;
           } else {
             // Not a valid image, show an error message
-            JOptionPane.showMessageDialog(GUI.this, "Invalid image file: " + path);
+            JOptionPane.showMessageDialog(GUI.this, "Invalid image file: "
+                    + path);
           }
         } catch (IOException ex) {
           // Error reading file, show an error message
-          JOptionPane.showMessageDialog(GUI.this, "Error reading file: " + path);
+          JOptionPane.showMessageDialog(GUI.this, "Error reading file: "
+                  + path);
         }
 
         if (isValidImage) {
@@ -316,7 +310,8 @@ public class GUI extends JFrame implements Output {
           }
           log.append("\n" + logText); // Append the operation description to the log
         } else {
-          JOptionPane.showMessageDialog(GUI.this, "Please select an operation.");
+          JOptionPane.showMessageDialog(GUI.this,
+                  "Please select an operation.");
         }
       }
     });
@@ -342,7 +337,7 @@ public class GUI extends JFrame implements Output {
       }
     });
 
-    histogram2.addMouseWheelListener(e ->{
+    histogram2.addMouseWheelListener(e -> {
       if (!e.isShiftDown()) {
         if (e.getWheelRotation() < 0) {
           histogram2.scrollYNegative();
