@@ -68,5 +68,8 @@ or if using the jar file:
 java -jar Assignment4.jar -file example-script.txt
 
 Run the .jar file to run the GUI based program, instructions are in the USEME.txt file.
+Screenshot of mainFrame with image is located in "resources/screenshots/"
 
 ©Example image(raiden.png) created by 小弃, https://www.pixiv.net/en/artworks/104691815.
+©Screenshot image(hutao.jpg) created by 小弃, https://www.pixiv.net/en/artworks/10469345.
+
