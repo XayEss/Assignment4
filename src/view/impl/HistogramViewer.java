@@ -1,8 +1,11 @@
 package view.impl;
 
+import java.awt.Dimension;
 import java.io.IOException;
 
+import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import controller.implementation.UniversalImageLoader;
@@ -39,10 +42,17 @@ public class HistogramViewer {
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       frame.setSize(800, 600);
 
-      ImageViewer histogramDisplay = new ImageViewer(finalImage);
+      ImageViewer histogramDisplay = new ImageViewer();
+      histogramDisplay.setPreferredSize(new Dimension(100,100));
       frame.add(histogramDisplay);
-
       frame.setVisible(true);
+
+      try {
+        TimeUnit.SECONDS.sleep(2);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      histogramDisplay.setImage(finalImage);
     });
   }
 }

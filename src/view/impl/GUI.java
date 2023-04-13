@@ -30,6 +30,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -42,6 +43,8 @@ import javax.swing.JTextField;
 
 import controller.implementation.UniversalImageLoader;
 import controller.interfaces.TransformationController;
+import model.implementation.HistogramArtist;
+import model.implementation.HistogramCreator;
 import model.implementation.ImageConverter;
 import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageToBufferedImageService;
@@ -66,6 +69,7 @@ public class GUI extends JFrame implements Output {
   private String selectedAction;
   private JTextField pane;
   private JTextArea log;
+  private ScrollableImagePanel histogram2;
 
   private ImageViewer histogram;
 
@@ -120,8 +124,8 @@ public class GUI extends JFrame implements Output {
     menuBar.add(menu);
 
     setJMenuBar(menuBar);
-
-    setSize(900, 750);
+    setLocation(0,0);
+    setSize(1450, 1000);
     GridBagLayout cl = new GridBagLayout();
     panel.setLayout(cl);
     fileField.setPreferredSize(new Dimension(getWidth() / 2, 55));
@@ -166,23 +170,29 @@ public class GUI extends JFrame implements Output {
     gbc.gridy = 1;
 
     image = new ScrollableImagePanel();
+    JPanel imagePanel = new JPanel();
+    imagePanel.setLayout(new FlowLayout());
     //image.add(new JLabel(/*new ImageIcon("resources/sephia.jpg")*/));
     GridBagConstraints gbc2 = new GridBagConstraints();
     image.setPreferredSize(new Dimension(700, 500));
     gbc2.gridy = 2;
     gbc2.gridx = 0;
-    panel.add(image, gbc2);
-    gbc2.gridy = 1;
-    gbc2.gridx = 2;
-    try {
-      ScrollableImagePanel pp = new ScrollableImagePanel(ImageToBufferedImageService.toBuffered(new UniversalImageLoader().readFile("resources/test.jpg")));
-      histogram = new ImageViewer(ImageConverter.convertFromBytes(new UniversalImageLoader().readFile("resources/test.jpg")));
-      pp.setPreferredSize(new Dimension(200, 200));
-      histogram.setPreferredSize(new Dimension(120, 234));
-      //panel.add(histogram, gbc2);
-    }catch(IOException e){
+    imagePanel.add(image);
+    //panel.add(image, gbc2);
 
-    }
+    histogram2 = new ScrollableImagePanel();
+    histogram2.setPreferredSize(new Dimension(700,500));
+    imagePanel.add(histogram2);
+
+    panel.add(imagePanel, gbc2);
+
+
+    gbc2.gridy = 2;
+    gbc2.gridx = 2;
+    GridBagConstraints histConstraints = new GridBagConstraints();
+    histConstraints.gridx = 1;
+    histConstraints.gridy = 2;
+
 
     //panel.add(histogram, gbc2);
 
@@ -329,6 +339,23 @@ public class GUI extends JFrame implements Output {
       }
     });
 
+    histogram2.addMouseWheelListener(e ->{
+      if (!e.isShiftDown()) {
+        if (e.getWheelRotation() < 0) {
+          histogram2.scrollYNegative();
+        } else if (e.getWheelRotation() > 0) {
+          histogram2.scrollYPositive();
+        }
+      } else {
+        if (e.getWheelRotation() < 0) {
+          histogram2.scrollXNegative();
+        } else if (e.getWheelRotation() > 0) {
+          histogram2.scrollXPositive();
+        }
+      }
+      histogram2.repaint();
+    });
+
   }
 
 
@@ -441,6 +468,10 @@ public class GUI extends JFrame implements Output {
 
   @Override
   public void showHistogram(Image image) {
-    histogram.setImage(image);
+    BufferedImage img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
+    HistogramCreator histogramCreator = new HistogramCreator();
+    int[][] rgbHistograms = histogramCreator.getRGBHistograms(image);
+    HistogramArtist.drawHistogram(img.getGraphics(), rgbHistograms, img.getWidth(), img.getHeight());
+    histogram2.setImage(img);
   }
 }
