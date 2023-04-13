@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class HistogramCreatorTest {
 
   @Test
-  public void testHistogram() {
+  public void testHistogram() throws IOException {
 
     Image testImg = null;
 
@@ -32,7 +32,7 @@ public class HistogramCreatorTest {
 
     HistogramCreator temp = new HistogramCreator();
 
-    int[][] hist = temp.getRGBHistograms(testImg);
+    int[][] hist = temp.getRGBHistograms(ImageConverter.convertToBytes(testImg));
 
     int[] testHist1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2050, 0, 0, 0, 0, 0, 0, 0, 0, 5109,
             0, 0, 0, 0, 0, 0, 0, 5681, 4783, 0, 0, 0, 0, 0, 0, 7247, 0, 8231, 0, 0, 0, 2049, 0,

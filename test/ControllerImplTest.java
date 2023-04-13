@@ -408,6 +408,11 @@ public class ControllerImplTest {
 
     }
 
+    @Override
+    public void showHistogram(int[][] histogram) {
+
+    }
+
     public String getLog() {
       return log;
     }
