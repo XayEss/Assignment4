@@ -131,8 +131,6 @@ public class GUIController extends TransformationControllerImpl {
     setImageName(saveName);
   }
 
-
-
   @Override
   protected void printInfo(String info) {
     super.printInfo(info);
@@ -148,11 +146,4 @@ public class GUIController extends TransformationControllerImpl {
     imageName = name;
   }
 
-  @Override
-  public void runScript(String path) {
-    //System.out.println("in runScript!");
-    //new VisualizeAscii().show(imageHandler.getByName(path));
-    //new VisualizeImage(ImageToBufferedImageService.convertToBuffered
-    // (imageHandler.getByName(path)));
-  }
 }

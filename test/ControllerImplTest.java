@@ -408,10 +408,6 @@ public class ControllerImplTest {
       // Empty for mock class.
     }
 
-    @Override
-    public void showHistogram(Image image) {
-      // Empty for mock class.
-    }
 
     @Override
     public void showHistogram(int[][] histogram) {
