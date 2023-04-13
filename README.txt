@@ -59,7 +59,7 @@ saving them to the filesystem, reading user inputs, appropriately calling the mo
           - UniversalImageSaver - implements ImageSaver interface, is capable of saving images in various formats.
           - TextInput - extends CommandLineInput and adds new commands to parseInput method, calling parent class if an old command is being read.
 
-**Unzip resources folder**
+**Unzip all zipped folders**
 Run script instructions:
 To run a script file simply type the run command and provide the filepath to the script file as the command line argument.
 A script file with the name example-script is already given, to execute it type:
@@ -67,4 +67,9 @@ run resources/example-script.txt
 or if using the jar file:
 java -jar Assignment4.jar -file example-script.txt
 
+Run the .jar file to run the GUI based program, instructions are in the USEME.txt file.
+Screenshot of mainFrame with image is located in "resources/screenshots/"
+
 ©Example image(raiden.png) created by 小弃, https://www.pixiv.net/en/artworks/104691815.
+©Screenshot image(hutao.jpg) created by 小弃, https://www.pixiv.net/en/artworks/10469345.
+

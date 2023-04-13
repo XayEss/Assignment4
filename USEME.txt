@@ -1,0 +1,45 @@
+load 'path' 'name' - loads an image with the given path and saves it with name.
+save 'path' 'name' - save an image with name to the given path.\n"
+brighten [amount] 'name' 'save name' - brightens image with the name by a amount and saves under save name.
+vertical-flip 'name' 'save name' - vertically flips image with the name and saves under save name
+horizontal-flip 'name' 'save name' - horizontally flips image with the name and saves under save name
+greyscale 'name' 'save name' - makes a greyscale version of the image with the name and saves under save name"
+rgb-split 'name' 'name-red' 'name-green' 'name-blue' - splits image " +
+with name into three rgb component images, red component is saved under name-red, green - name-green, blue - name-blue.\n"
+rgb-combine 'save name' 'name-red' 'name-green' 'name-blue' - combines three images into
+one, where name-red is the name of the image with the red component, name-green - green component, name-blue - blue component. Saves the image with save name.\n"
+dither 'name' 'save name' - makes a dithered version of the image with the name and saves under save name.
+blur 'name' 'save name' - makes a blurred version of the image with the name and saves under save name.
+sharpen 'name' 'save name' - makes a sharpened version of the image with the name and saves under save name.
+sepia 'name' 'save name' - makes a sepia-ed version of the image with the name and saves under save name.
+run 'path' runs all commands from a file with the give path. Each command should start from a new line.
+help - prints the list of commands.
+stop - stops the program.
+
+It is advised to load an image with the load command before doing image manipulations,
+as all other commands which operate on images need a loaded image to execute.
+
+Instructions for operating the GUI:
+
+    - Run the .jar file to run the GUI
+    - This open the loadFrame, on this click on the folder icon and select the image you want to work on and click on the Load button.
+    - You will now see the image that have selected and a histogram representing its RGB components.
+    - Select the operation you want to perform on the image and fill in the parameters as described below:
+        dither
+        sepia
+        sharpen
+        blur
+        vertical-flip
+        horizontal-flip
+        greyscale
+        brighten [Parameter -> value by which brightness is to be altered (+ve or -ve)
+        extract channel [Parameter -> 0,1,2 corresponding to R,G,B channels
+    - Click on the Apply button to perform the operation
+    - The log will keep display all the operations performed
+
+    - From the top-left of the frame, clicking on 'File', we can choose load - to load a new image or save, to save the image that is currently being displayed.
+        - Clicking on load will take you back to the loadFrame to load a new image
+        - Clicking on save will take you to the save frame
+    - In the saveFrame, click on the file icon to select the directory and name of where you want to store the image.
+    - Select the desired extension from the radiobuttons then click on the save button.
+

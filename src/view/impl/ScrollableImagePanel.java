@@ -3,7 +3,7 @@ package view.impl;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 /**
  * This class implements an ImagePanel which can be scrolled.
