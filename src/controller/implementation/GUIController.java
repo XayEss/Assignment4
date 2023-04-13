@@ -6,6 +6,9 @@ import controller.interfaces.Input;
 import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
 
+/**
+ * This class is responsible for coordinating the functionality of the image processing application.
+ */
 public class GUIController extends TransformationControllerImpl {
 
   /**
@@ -104,9 +107,6 @@ public class GUIController extends TransformationControllerImpl {
     super.sharpenImage(name, saveName);
   }
 
-//  protected void showImage(String name) throws IOException, NoSuchImageException {
-//    output.show(imageHandler.exportImage(name));
-//  }
 
   @Override
   public void runScript(String path) {
@@ -114,6 +114,5 @@ public class GUIController extends TransformationControllerImpl {
     //new VisualizeAscii().show(imageHandler.getByName(path));
     //new VisualizeImage(ImageToBufferedImageService.convertToBuffered
     // (imageHandler.getByName(path)));
-
   }
 }

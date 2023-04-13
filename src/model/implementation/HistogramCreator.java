@@ -10,8 +10,7 @@ public class HistogramCreator {
   /**
    * Calculates the RGB histograms for the image.
    *
-   * @return An array of integer arrays representing the histograms for red, green,
-   * and blue channels.
+   * @return An array of integer arrays representing the histograms for RGB channels.
    */
   public int[][] getRGBHistograms(Image img) {
     int[][] histogram = new int[3][256]; // 3 channels with 256 possible values each
