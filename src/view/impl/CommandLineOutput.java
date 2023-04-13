@@ -44,12 +44,12 @@ public class CommandLineOutput implements Output {
 
   @Override
   public void setController(TransformationController controller) {
-    // Future scope
+    throw new UnsupportedOperationException();
   }
 
   @Override
-  public void showHistogram(Image image) {
-
+  public void showHistogram(int[][] histogram) {
+    throw new UnsupportedOperationException();
   }
 
 

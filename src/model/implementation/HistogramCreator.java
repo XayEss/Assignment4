@@ -1,5 +1,7 @@
 package model.implementation;
 
+import java.io.IOException;
+import java.io.InputStream;
 import model.interfaces.Image;
 
 /**
@@ -13,7 +15,8 @@ public class HistogramCreator {
    * @return An array of integer arrays representing the histograms for red, green,
    * and blue channels.
    */
-  public int[][] getRGBHistograms(Image img) {
+  public int[][] getRGBHistograms(InputStream image) throws IOException {
+    Image img = ImageConverter.convertFromBytes(image);
     int[][] histogram = new int[3][256]; // 3 channels with 256 possible values each
 
     // Initialize histograms

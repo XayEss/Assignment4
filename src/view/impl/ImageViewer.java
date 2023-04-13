@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 
 import javax.swing.SwingUtilities;
 import model.implementation.HistogramCreator;
+import model.implementation.ImageConverter;
 import model.interfaces.Image;
 
 /**
@@ -44,14 +46,20 @@ public class ImageViewer extends JPanel {
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-
+    if(image != null){
+      try {
+        drawRGBHistograms(g);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
-  private void drawRGBHistograms(Graphics g) {
+  private void drawRGBHistograms(Graphics g) throws IOException {
     System.out.println("drawing");
     System.out.println(image.getWidth());
     HistogramCreator histogramCreator = new HistogramCreator();
-    int[][] rgbHistograms = histogramCreator.getRGBHistograms(image);
+    int[][] rgbHistograms = histogramCreator.getRGBHistograms(ImageConverter.convertToBytes(image));
 
     int maxCount = 0;
     for (int channel = 0; channel < 3; channel++) {
@@ -76,11 +84,6 @@ public class ImageViewer extends JPanel {
 
   public void setImage(Image image) {
     this.image = image;
-    if(image != null) {
-      BufferedImage img = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
-      drawRGBHistograms(img.getGraphics());
-      label.setIcon(new ImageIcon(img));
-    }
-    //repaint();
+    repaint();
   }
 }

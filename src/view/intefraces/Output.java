@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import controller.interfaces.TransformationController;
-import model.interfaces.Image;
 
 /**
  * The output interface defines methods for the view.
@@ -33,6 +32,7 @@ public interface Output {
 
   /**
    * Displays the histogram to the view.
+   * @param histogram
    */
-  void showHistogram(Image image);
+  void showHistogram(int[][] histogram);
 }

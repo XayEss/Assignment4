@@ -1,3 +1,4 @@
+import controller.implementation.GUIController;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -9,6 +10,7 @@ import controller.interfaces.Controller;
 import controller.interfaces.Input;
 import model.implementation.ImageProcessorImpl;
 import model.implementation.TransformImageHandlerImpl;
+import view.impl.CommandLineOutput;
 import view.impl.GUI;
 
 /**
@@ -31,15 +33,19 @@ public class Main {
     Input input = null;
     if (args.length != 0 && args[0].equals("-file")) {
       input = new TextInput(new FileInputStream(args[1]));
-    } else {
+    } else if(args.length != 0 && args[0].equals("-text") ){
       input = new TextInput(System.in);
     }
     GUI gui = new GUI();
-    Controller controller = new TransformationControllerImpl(new UniversalImageLoader(),
-            new UniversalImageSaver(),
-            input, new TransformImageHandlerImpl(new ImageProcessorImpl()),
-            gui);
-    controller.start();
+//    Controller controller = new TransformationControllerImpl(new UniversalImageLoader(),
+//            new UniversalImageSaver(),
+//            input, new TransformImageHandlerImpl(new ImageProcessorImpl()),
+//            new CommandLineOutput(System.out));
+    Controller controller2 = new GUIController(new UniversalImageLoader(),
+        new UniversalImageSaver(),
+        input, new TransformImageHandlerImpl(new ImageProcessorImpl()),
+        gui);
+    //controller.start();
   }
 
 }

@@ -6,6 +6,7 @@ import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
 import controller.interfaces.TransformationController;
+import java.io.InputStream;
 import model.implementation.NoSuchImageException;
 import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
@@ -35,7 +36,6 @@ public class TransformationControllerImpl extends ControllerImpl implements
                                       Output output) {
     super(imageInput, imageSaver, input, imageHandler, output);
     this.imageHandler = imageHandler;
-    input.setController(this);
     output.setController(this);
   }
 
@@ -43,10 +43,9 @@ public class TransformationControllerImpl extends ControllerImpl implements
   public void createSepiaImage(String name, String saveName) {
     try {
       imageHandler.sepiaToneImage(name, saveName);
-      output.print("Successfully applied sepia to the image");
-      showImage(name);
-    } catch (NoSuchImageException | IOException e) {
-      output.print(e.getMessage());
+      printInfo("Successfully applied sepia to the image");
+    } catch (NoSuchImageException e) {
+      printInfo(e.getMessage());
     }
   }
 
@@ -54,10 +53,9 @@ public class TransformationControllerImpl extends ControllerImpl implements
   public void ditherImage(String name, String saveName) {
     try {
       imageHandler.ditherImage(name, saveName);
-      output.print("Successfully dithered the image");
-      showImage(name);
-    } catch (NoSuchImageException | IOException e) {
-      output.print(e.getMessage());
+      printInfo("Successfully dithered the image");
+    } catch (NoSuchImageException e) {
+      printInfo(e.getMessage());
     }
   }
 
@@ -65,10 +63,9 @@ public class TransformationControllerImpl extends ControllerImpl implements
   public void blurImage(String name, String saveName) {
     try {
       imageHandler.blurImage(name, saveName);
-      output.print("Successfully blurred the image");
-      showImage(name);
-    } catch (NoSuchImageException | IOException e) {
-      output.print(e.getMessage());
+      printInfo("Successfully blurred the image");
+    } catch (NoSuchImageException e) {
+      printInfo(e.getMessage());
     }
   }
 
@@ -76,10 +73,18 @@ public class TransformationControllerImpl extends ControllerImpl implements
   public void sharpenImage(String name, String saveName) {
     try {
       imageHandler.sharpenImage(name, saveName);
-      output.print("Successfully sharpened the image");
-      showImage(name);
-    } catch (NoSuchImageException | IOException e) {
-      output.print(e.getMessage());
+      printInfo("Successfully sharpened the image");
+    } catch (NoSuchImageException e) {
+      printInfo(e.getMessage());
     }
+  }
+
+  protected InputStream getImageStream(String name){
+    try {
+      return imageHandler.exportImage(name);
+    }catch (NoSuchImageException | IOException e){
+      printInfo(e.getMessage());
+    }
+    return null;
   }
 }

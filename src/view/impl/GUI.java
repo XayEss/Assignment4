@@ -1,9 +1,5 @@
 package view.impl;
 
-import controller.implementation.UniversalImageLoader;
-import controller.implementation.UniversalImageSaver;
-import controller.implementation.commands.FlipImage;
-import controller.interfaces.CommandHelper;
 import controller.interfaces.TransformationController;
 
 import java.awt.Color;
@@ -22,7 +18,6 @@ import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -30,26 +25,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import controller.implementation.UniversalImageLoader;
-import controller.interfaces.TransformationController;
 import model.implementation.HistogramArtist;
 import model.implementation.HistogramCreator;
-import model.implementation.ImageConverter;
-import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageToBufferedImageService;
-import model.interfaces.Image;
-import model.interfaces.ImageHandler;
 import view.intefraces.Output;
 
 
@@ -90,6 +77,7 @@ public class GUI extends JFrame implements Output {
   }
 
   private void loadFrame() {
+    setLocation(500, 500);
     setSize(700, 700);
     //panel = new JPanel();
     panel.removeAll();
@@ -180,6 +168,8 @@ public class GUI extends JFrame implements Output {
     imagePanel.add(image);
     //panel.add(image, gbc2);
 
+    histogram = new ImageViewer();
+    histogram.setPreferredSize(new Dimension(800, 500));
     histogram2 = new ScrollableImagePanel();
     histogram2.setPreferredSize(new Dimension(700,500));
     imagePanel.add(histogram2);
@@ -467,11 +457,10 @@ public class GUI extends JFrame implements Output {
   }
 
   @Override
-  public void showHistogram(Image image) {
+  public void showHistogram(int[][] histogram) {
     BufferedImage img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
-    HistogramCreator histogramCreator = new HistogramCreator();
-    int[][] rgbHistograms = histogramCreator.getRGBHistograms(image);
-    HistogramArtist.drawHistogram(img.getGraphics(), rgbHistograms, img.getWidth(), img.getHeight());
+    HistogramArtist.drawHistogram(img.getGraphics(), histogram, img.getWidth(), img.getHeight());
     histogram2.setImage(img);
+    //this.histogram.setImage(histogram);
   }
 }
