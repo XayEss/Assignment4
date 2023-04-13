@@ -1,5 +1,11 @@
 package view.impl;
 
+import controller.implementation.UniversalImageLoader;
+import controller.implementation.UniversalImageSaver;
+import controller.implementation.commands.FlipImage;
+import controller.interfaces.CommandHelper;
+import controller.interfaces.TransformationController;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FileDialog;
@@ -8,12 +14,15 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -27,13 +36,17 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controller.implementation.UniversalImageLoader;
 import controller.interfaces.TransformationController;
 import model.implementation.ImageConverter;
+import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageToBufferedImageService;
+import model.interfaces.Image;
+import model.interfaces.ImageHandler;
 import view.intefraces.Output;
 
 
@@ -53,6 +66,8 @@ public class GUI extends JFrame implements Output {
   private String selectedAction;
   private JTextField pane;
   private JTextArea log;
+
+  private ImageViewer histogram;
 
 
   private ScrollableImagePanel image;
@@ -149,25 +164,26 @@ public class GUI extends JFrame implements Output {
 
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridy = 1;
-    ImageViewer histogram = null;
-    try {
-      histogram = new ImageViewer(ImageConverter.convertFromBytes(
-              new UniversalImageLoader().readFile("resources/images/new_examples" +
-                      "/raiden-min.png")));
-      histogram.setPreferredSize(new Dimension(800, 800));
 
-      image = new ScrollableImagePanel();
-    } catch (IOException e) {
-      // Do Nothing
-    }
+    image = new ScrollableImagePanel();
     //image.add(new JLabel(/*new ImageIcon("resources/sephia.jpg")*/));
     GridBagConstraints gbc2 = new GridBagConstraints();
     image.setPreferredSize(new Dimension(700, 500));
     gbc2.gridy = 2;
     gbc2.gridx = 0;
     panel.add(image, gbc2);
-    gbc2.gridy = 2;
-    gbc2.gridx = 1;
+    gbc2.gridy = 1;
+    gbc2.gridx = 2;
+    try {
+      ScrollableImagePanel pp = new ScrollableImagePanel(ImageToBufferedImageService.toBuffered(new UniversalImageLoader().readFile("resources/test.jpg")));
+      histogram = new ImageViewer(ImageConverter.convertFromBytes(new UniversalImageLoader().readFile("resources/test.jpg")));
+      pp.setPreferredSize(new Dimension(200, 200));
+      histogram.setPreferredSize(new Dimension(120, 234));
+      //panel.add(histogram, gbc2);
+    }catch(IOException e){
+
+    }
+
     //panel.add(histogram, gbc2);
 
     log = new JTextArea("Logs:");
@@ -211,7 +227,6 @@ public class GUI extends JFrame implements Output {
       public void actionPerformed(ActionEvent e) {
         String path = fileField.getText();
         mainFrame();
-        System.out.println(path);
         controller.loadImage(path, imageName);
       }
     });
@@ -422,5 +437,10 @@ public class GUI extends JFrame implements Output {
   @Override
   public void setController(TransformationController controller) {
     this.controller = controller;
+  }
+
+  @Override
+  public void showHistogram(Image image) {
+    histogram.setImage(image);
   }
 }

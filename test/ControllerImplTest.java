@@ -1,3 +1,4 @@
+import controller.interfaces.TransformationController;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -393,13 +394,18 @@ public class ControllerImplTest {
     public String log;
 
     @Override
-    public void show(Image image) {
+    public void show(InputStream image) {
       log = "show " + image.toString();
     }
 
     @Override
     public void print(String string) {
       log = "print " + string;
+    }
+
+    @Override
+    public void setController(TransformationController controller) {
+
     }
 
     public String getLog() {

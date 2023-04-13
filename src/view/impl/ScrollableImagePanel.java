@@ -42,7 +42,10 @@ public class ScrollableImagePanel extends JPanel {
     int height = getHeight();
     BufferedImage sub = image.getSubimage(x, y, Math.min(width, image.getWidth()),
             Math.min(height, image.getHeight()));
-    g.drawImage(sub, 0, 0, width, height, null);
+    //BufferedImage sub = image.getSubimage(x, y, image.getWidth(), image.getHeight());
+    g.drawImage(sub, Math.max(0, width/2-image.getWidth()/2), Math.max(0, height/2-image.getHeight()/2), Math.min(width, image.getWidth()), Math.min(height, image.getHeight()), null);
+    //g.drawImage(sub, 0, 0, Math.min(width, image.getWidth()), Math.min(height, image.getHeight()), null);
+    //g.drawImage(sub, 0, 0, width, height,  null);
 
   }
 

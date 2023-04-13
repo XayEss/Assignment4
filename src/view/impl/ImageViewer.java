@@ -12,7 +12,7 @@ import model.interfaces.Image;
  * This class ouputs the Histogram visualization.
  */
 public class ImageViewer extends JPanel {
-  private final Image image;
+  private Image image;
 
   /**
    * Constructor that sets the Image for the class.
@@ -22,11 +22,15 @@ public class ImageViewer extends JPanel {
   public ImageViewer(Image image) {
     this.image = image;
   }
+  public ImageViewer(){
+
+  }
 
   @Override
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-    drawRGBHistograms(g);
+    if(image != null)
+      drawRGBHistograms(g);
   }
 
   private void drawRGBHistograms(Graphics g) {
@@ -55,5 +59,8 @@ public class ImageViewer extends JPanel {
     }
   }
 
-
+  public void setImage(Image image) {
+    this.image = image;
+    repaint();
+  }
 }

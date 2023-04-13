@@ -48,7 +48,7 @@ public class ControllerImpl implements Controller {
 
   @Override
   public void start() {
-    //input.startCommandReading();
+    input.startCommandReading();
   }
 
   @Override
@@ -163,6 +163,7 @@ public class ControllerImpl implements Controller {
       try {
         imageHandler.importImage(name, image);
         showImage(name);
+        output.showHistogram(imageHandler.getByName(name));
       } catch (IOException e) {
         output.print("Error reading image stream");
       } catch (NoSuchImageException i) {

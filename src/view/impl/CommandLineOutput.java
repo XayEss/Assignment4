@@ -47,6 +47,12 @@ public class CommandLineOutput implements Output {
     // Future scope
   }
 
+  @Override
+  public void showHistogram(Image image) {
+
+  }
+
+
   private char getAsciiChar(int character) {
     final char str;
     if (character >= 230.0) {
