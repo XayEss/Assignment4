@@ -27,7 +27,8 @@ public interface TransformImageHandler extends ImageHandler {
 
   /**
    * Blurs the image with name and saves under saveName.
-   * @param name the name of the image to change.
+   *
+   * @param name     the name of the image to change.
    * @param saveName the name to save the new image under.
    * @throws NoSuchImageException when an image with the name can't be found.
    */
@@ -35,7 +36,8 @@ public interface TransformImageHandler extends ImageHandler {
 
   /**
    * Blurs the image with name and saves under saveName.
-   * @param name the name of the image to change.
+   *
+   * @param name     the name of the image to change.
    * @param saveName the name to save the new image under.
    * @throws NoSuchImageException when an image with the name can't be found.
    */

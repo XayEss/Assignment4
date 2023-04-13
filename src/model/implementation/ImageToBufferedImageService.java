@@ -24,7 +24,6 @@ public class ImageToBufferedImageService {
   }
 
 
-
   /**
    * Converts an Image to a BufferedImage.
    *

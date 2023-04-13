@@ -16,11 +16,11 @@ import view.intefraces.Output;
  */
 public class ControllerImpl implements Controller {
 
+  private final ImageHandler imageHandler;
   protected ImageInput imageInput;
   protected ImageSaver imageSaver;
   protected Input input;
   protected Output output;
-  private final ImageHandler imageHandler;
 
 
   /**
@@ -165,7 +165,7 @@ public class ControllerImpl implements Controller {
         showImage(name);
       } catch (IOException e) {
         output.print("Error reading image stream");
-      } catch (NoSuchImageException i){
+      } catch (NoSuchImageException i) {
         output.print("image not found");
       }
       //output.print("Successfully loaded image");

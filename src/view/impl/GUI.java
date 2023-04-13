@@ -1,11 +1,5 @@
 package view.impl;
 
-import controller.implementation.UniversalImageLoader;
-import controller.implementation.UniversalImageSaver;
-import controller.implementation.commands.FlipImage;
-import controller.interfaces.CommandHelper;
-import controller.interfaces.TransformationController;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FileDialog;
@@ -14,45 +8,59 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
-import javax.swing.*;
-
+import controller.implementation.UniversalImageLoader;
+import controller.interfaces.TransformationController;
 import model.implementation.ImageConverter;
-import model.implementation.ImageHandlerImpl;
 import model.implementation.ImageToBufferedImageService;
-import model.interfaces.Image;
-import model.interfaces.ImageHandler;
 import view.intefraces.Output;
 
+
+/**
+ * This class contains the entire GUI of the program.
+ */
 public class GUI extends JFrame implements Output {
   private TransformationController controller;
-  private JPanel panel;
+  private final JPanel panel;
   private JTextField fileField;
   private JButton file;
   private JMenuItem itemLoad;
   private JMenuItem itemSave;
   private JButton load;
   private JButton apply;
-  private String imageName;
+  private final String imageName;
   private String selectedAction;
   private JTextField pane;
   private JTextArea log;
 
 
   private ScrollableImagePanel image;
+  private JButton save;
 
+  /**
+   * Constructor for GUI.
+   */
   public GUI() {
     imageName = "loadedI";
     setName("Image manipulator");
@@ -86,8 +94,6 @@ public class GUI extends JFrame implements Output {
     repaint();
   }
 
-  private JButton save;
-
   private void mainFrame() {
     panel.removeAll();
     JMenuBar menuBar = new JMenuBar();
@@ -101,14 +107,9 @@ public class GUI extends JFrame implements Output {
     setJMenuBar(menuBar);
 
     setSize(900, 750);
-    //panel = new JPanel();
     GridBagLayout cl = new GridBagLayout();
     panel.setLayout(cl);
-    //fileField = new JTextField("File path");
     fileField.setPreferredSize(new Dimension(getWidth() / 2, 55));
-//    GridBagConstraints gbcapply = new GridBagConstraints();
-//    gbcapply.gridx = 2;
-//    gbcapply.gridy = 2;
     panel.add(fileField);
 
     JPanel interactionPanel = new JPanel();
@@ -118,9 +119,9 @@ public class GUI extends JFrame implements Output {
     gbcOperations.gridy = 1;
     gbcOperations.gridx = 0;
 
-    JComboBox<String> box = new JComboBox<>(new String[]{"dither", "sepia", "sharpen", "blur",
-        "vertical-flip", "horizontal-flip", "brighten", "greyscale", "extract channel"});
-
+    JComboBox<String> box = new JComboBox<>(new String[]{"------", "dither", "sepia", "sharpen",
+            "blur", "vertical-flip", "horizontal-flip", "brighten", "greyscale",
+            "extract channel"});
 
     box.addItemListener(new ItemListener() {
       @Override
@@ -151,10 +152,9 @@ public class GUI extends JFrame implements Output {
     ImageViewer histogram = null;
     try {
       histogram = new ImageViewer(ImageConverter.convertFromBytes(
-          new UniversalImageLoader().readFile("resources/images/new_examples/raiden-min.png")));
+              new UniversalImageLoader().readFile("resources/images/new_examples" +
+                      "/raiden-min.png")));
       histogram.setPreferredSize(new Dimension(800, 800));
-      //panel.add(file, gbc);
-
 
       image = new ScrollableImagePanel();
     } catch (IOException e) {
@@ -392,7 +392,7 @@ public class GUI extends JFrame implements Output {
           format = "ppm";
         }
 
-        filePath += "." + (String) format;
+        filePath += "." + format;
         System.out.println("Saving image as: " + filePath);
         controller.saveImage(filePath, imageName);
         saveFrame.dispose();

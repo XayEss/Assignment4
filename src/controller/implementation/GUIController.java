@@ -1,12 +1,8 @@
 package controller.implementation;
 
-import controller.implementation.TransformationControllerImpl;
 import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
-import java.io.IOException;
-import java.io.InputStream;
-import model.implementation.NoSuchImageException;
 import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
 
@@ -25,13 +21,14 @@ public class GUIController extends TransformationControllerImpl {
    * @param output       an instance of Output used to display images
    */
   public GUIController(ImageInput imageInput,
-      ImageSaver imageSaver, Input input,
-      TransformImageHandler imageHandler, Output output) {
+                       ImageSaver imageSaver, Input input,
+                       TransformImageHandler imageHandler, Output output) {
     super(imageInput, imageSaver, input, imageHandler, output);
   }
+
   @Override
   public void separateImageChannel(String name, String resultName, int channel) {
-    super.separateImageChannel(name,resultName,channel);
+    super.separateImageChannel(name, resultName, channel);
   }
 
   @Override
@@ -66,13 +63,13 @@ public class GUIController extends TransformationControllerImpl {
 
   @Override
   public void splitImageChannels(String name, String redResultName,
-      String greenResultName, String blueResultName) {
+                                 String greenResultName, String blueResultName) {
     super.splitImageChannels(name, redResultName, greenResultName, blueResultName);
   }
 
   @Override
   public void combineGreyScaleImages(String redName, String greenName, String blueName,
-      String resultName) {
+                                     String resultName) {
     super.combineGreyScaleImages(redName, greenName, blueName, resultName);
   }
 

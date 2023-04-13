@@ -1,4 +1,3 @@
-import java.awt.FileDialog;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -10,7 +9,6 @@ import controller.interfaces.Controller;
 import controller.interfaces.Input;
 import model.implementation.ImageProcessorImpl;
 import model.implementation.TransformImageHandlerImpl;
-import view.impl.CommandLineOutput;
 import view.impl.GUI;
 
 /**
@@ -42,14 +40,6 @@ public class Main {
             input, new TransformImageHandlerImpl(new ImageProcessorImpl()),
             gui);
     controller.start();
-//    FileDialog fd = new FileDialog(gui, "Choose a file", FileDialog.LOAD);
-//    fd.setDirectory("C:\\");
-//    fd.setVisible(true);
-//    String filename = fd.getFile();
-//    if (filename == null)
-//      System.out.println("You cancelled the choice");
-//    else
-//      System.out.println("You chose " + filename);
   }
 
 }

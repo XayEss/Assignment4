@@ -2,15 +2,23 @@ package view.impl;
 
 import java.io.IOException;
 
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 import controller.implementation.UniversalImageLoader;
 import controller.interfaces.ImageInput;
 import model.implementation.ImageConverter;
 import model.interfaces.Image;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-
+/**
+ * This class visualizes the Histogram of an Image.
+ */
 public class HistogramViewer {
+
+
+  /**
+   * This functions runs the histogram visualization.
+   */
   public static void main(String[] args) {
 
     Image image = null;

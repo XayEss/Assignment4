@@ -1,9 +1,9 @@
 package view.intefraces;
 
-import controller.interfaces.TransformationController;
 import java.io.IOException;
 import java.io.InputStream;
-import model.interfaces.Image;
+
+import controller.interfaces.TransformationController;
 
 /**
  * The output interface defines methods for the view.

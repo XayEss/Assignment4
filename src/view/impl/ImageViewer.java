@@ -1,16 +1,24 @@
 package view.impl;
 
-import model.implementation.HistogramCreator;
-import model.interfaces.Image;
+import java.awt.Color;
+import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import java.awt.Graphics;
-import java.awt.Color;
+import model.implementation.HistogramCreator;
+import model.interfaces.Image;
 
+/**
+ * This class ouputs the Histogram visualization.
+ */
 public class ImageViewer extends JPanel {
-  private Image image;
+  private final Image image;
 
+  /**
+   * Constructor that sets the Image for the class.
+   *
+   * @param image Histogram visualization.
+   */
   public ImageViewer(Image image) {
     this.image = image;
   }

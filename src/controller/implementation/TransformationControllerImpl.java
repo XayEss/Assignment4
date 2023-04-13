@@ -1,10 +1,11 @@
 package controller.implementation;
 
+import java.io.IOException;
+
 import controller.interfaces.ImageInput;
 import controller.interfaces.ImageSaver;
 import controller.interfaces.Input;
 import controller.interfaces.TransformationController;
-import java.io.IOException;
 import model.implementation.NoSuchImageException;
 import model.interfaces.TransformImageHandler;
 import view.intefraces.Output;
@@ -14,7 +15,7 @@ import view.intefraces.Output;
  */
 public class TransformationControllerImpl extends ControllerImpl implements
         TransformationController {
-  private TransformImageHandler imageHandler;
+  private final TransformImageHandler imageHandler;
 
   /**
    * This is the constructor for the ControllerImpl class, which is responsible for coordinating the

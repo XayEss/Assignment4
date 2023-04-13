@@ -1,11 +1,11 @@
 package view.impl;
 
-import controller.interfaces.TransformationController;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 
+import controller.interfaces.TransformationController;
 import model.implementation.ImageConverter;
 import model.interfaces.Image;
 import view.intefraces.Output;
@@ -44,7 +44,7 @@ public class CommandLineOutput implements Output {
 
   @Override
   public void setController(TransformationController controller) {
-
+    // Future scope
   }
 
   private char getAsciiChar(int character) {

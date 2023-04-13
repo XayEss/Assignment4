@@ -2,14 +2,22 @@ package view.impl;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import javax.swing.JPanel;
 
+import javax.swing.*;
+
+/**
+ * This class implements an ImagePanel which can be scrolled.
+ */
 public class ScrollableImagePanel extends JPanel {
   private BufferedImage image;
   private int x;
   private int y;
 
+  /**
+   * Constructor that initializes the image for which the panel has to be made.
+   *
+   * @param image BufferedImage for which panel is to be made.
+   */
   public ScrollableImagePanel(BufferedImage image) {
     x = 0;
     y = 0;
@@ -24,46 +32,47 @@ public class ScrollableImagePanel extends JPanel {
   @Override
   public void paint(Graphics g) {
     super.paint(g);
-    if(image != null) {
+    if (image != null) {
       paintScroll(g);
     }
   }
 
-  private void paintScroll(Graphics g){
+  private void paintScroll(Graphics g) {
     int width = getWidth();
     int height = getHeight();
-    BufferedImage sub = image.getSubimage(x, y, Math.min(width, image.getWidth()), Math.min(height, image.getHeight()));
+    BufferedImage sub = image.getSubimage(x, y, Math.min(width, image.getWidth()),
+            Math.min(height, image.getHeight()));
     g.drawImage(sub, 0, 0, width, height, null);
 
   }
 
-  public void scrollXNegative(){
+  public void scrollXNegative() {
     changeX(-10);
   }
 
-  public void scrollXPositive(){
+  public void scrollXPositive() {
     changeX(10);
   }
 
-  public void scrollYPositive(){
+  public void scrollYPositive() {
     changeY(10);
   }
 
-  public void scrollYNegative(){
+  public void scrollYNegative() {
     changeY(-10);
   }
 
-  private void changeX(int value){
+  private void changeX(int value) {
     x += value;
-    x = Math.max(0, Math.min(x, image.getWidth()-getWidth()));
+    x = Math.max(0, Math.min(x, image.getWidth() - getWidth()));
   }
 
-  private void changeY(int value){
+  private void changeY(int value) {
     y += value;
-    y = Math.max(0, Math.min(y, image.getHeight()-getHeight()));
+    y = Math.max(0, Math.min(y, image.getHeight() - getHeight()));
   }
 
-  public void setImage(BufferedImage image){
+  public void setImage(BufferedImage image) {
     this.image = image;
     repaint();
   }
