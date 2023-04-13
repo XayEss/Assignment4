@@ -225,7 +225,7 @@ public class GUI extends JFrame implements Output {
         try {
           // Check if the file path points to a valid image
           BufferedImage img = ImageIO.read(new File(path));
-          if (img != null) {
+          if (img != null || path.substring(path.length() - 3).equals("ppm")) {
             isValidImage = true;
           } else {
             // Not a valid image, show an error message
