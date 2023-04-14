@@ -74,6 +74,9 @@ saving them to the filesystem, reading user inputs, appropriately calling the mo
          - ScrollImagePanel - extends Jpanel and allows of scrolling given images.
          - HistogramCreator - creates the histogram by the given InputStream.
 
+The program supports dither, sepia, blur, sharpen, greyscale, horizontal and vertical flip, brighten and extracting a channel in the gui mode. Additionally
+splitting images into 3 components and combining three images into one is supported in text mode.
+
 **Unzip all zipped folders**
 Run script instructions:
 To run a script file simply type the run command and provide the filepath to the script file as the command line argument.
@@ -85,6 +88,10 @@ java -jar Assignment4.jar -file example-script.txt
 Run the .jar file to run the GUI based program, instructions are in the USEME.txt file.
 Screenshot of mainFrame with image is located in "resources/screenshots/"
 
+When running the jar file with the -text command line argument the program will run in the interactive scripting mode.
+java -jar Assignment4.jar -text
+
 ©Example image(raiden.png) created by 小弃, https://www.pixiv.net/en/artworks/104691815.
 ©Screenshot image(hutao.jpg) created by 小弃, https://www.pixiv.net/en/artworks/10469345.
+©Free folder icon from https://icons8.com/
 

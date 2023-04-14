@@ -68,7 +68,7 @@ public class GUI extends JFrame implements GUIOutput {
     fileField = new JTextField("File path");
     fileField.setPreferredSize(new Dimension(400, 55));
     panel.add(fileField);
-    file = new JButton("explorer");
+    file = new JButton(new ImageIcon("folder.png"));
     panel.add(file);
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridy = 1;
@@ -377,9 +377,8 @@ public class GUI extends JFrame implements GUIOutput {
     savePathField.setPreferredSize(new Dimension(400, 55));
     savePathField.setBorder(BorderFactory.createLineBorder(Color.black));
     savePanel.add(savePathField, gbc);
-
     // Add directory navigation button
-    JButton directoryButton = new JButton("explorer");
+    JButton directoryButton = new JButton(new ImageIcon("folder.png"));
     directoryButton.addActionListener(e -> {
       FileDialog fd = new FileDialog(this, "Choose a folder", FileDialog.SAVE);
       fd.setVisible(true);
