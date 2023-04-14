@@ -22,7 +22,7 @@ as all other commands which operate on images need a loaded image to execute.
 Instructions for operating the GUI:
 
     - Run the .jar file to run the GUI
-    - This open the loadFrame, on this click on the folder icon and select the image you want to work on and click on the Load button.
+    - This open the loadFrame, on this click on the folder icon/explorer button and select the image you want to work on and click on the Load button.
     - You will now see the image that have selected and a histogram representing its RGB components.
     - Select the operation you want to perform on the image and fill in the parameters as described below:
         dither

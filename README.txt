@@ -59,6 +59,21 @@ saving them to the filesystem, reading user inputs, appropriately calling the mo
           - UniversalImageSaver - implements ImageSaver interface, is capable of saving images in various formats.
           - TextInput - extends CommandLineInput and adds new commands to parseInput method, calling parent class if an old command is being read.
 
+    Assignment 6 Changes:
+      No major changes to the previous code were done, model stayed unchanged.
+      The gui was created as the implementation of the GUIOutput interface which is the extension of Output. A new controller implementation was created to work with the gui.
+      In that way the old controller will work with text without the need to change existing methods to support gui. A class for creating histograms from an InputStream was created.
+      A ScrollableImagePanel was created to be able to scroll images. Protected printInfo method was added to previous controller to be able to print for text output and override for
+      to be able to display images and histograms to the GUI.
+        Interfaces:
+         - GUIOutput - extends Output and introduces GUI specific methods.
+        Classes:
+         - GUI - implements GUIOutput and extends JFrame, handles the displaying of visual components and handling actions.
+         - GUIController - extends TransformationController, redirects calls from the GUI to the methods to TransformationController, but adds update of images to the gui
+         and the histograms.
+         - ScrollImagePanel - extends Jpanel and allows of scrolling given images.
+         - HistogramCreator - creates the histogram by the given InputStream.
+
 **Unzip all zipped folders**
 Run script instructions:
 To run a script file simply type the run command and provide the filepath to the script file as the command line argument.
