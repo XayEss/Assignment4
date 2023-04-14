@@ -7,6 +7,7 @@ import java.io.IOException;
 import model.implementation.HistogramCreator;
 import model.implementation.NoSuchImageException;
 import model.interfaces.TransformImageHandler;
+import view.intefraces.GUIOutput;
 import view.intefraces.Output;
 
 /**
@@ -14,6 +15,7 @@ import view.intefraces.Output;
  */
 public class GUIController extends TransformationControllerImpl {
   private String imageName;
+  private GUIOutput output;
   /**
    * This is the constructor for the ControllerImpl class, which is responsible for coordinating the
    * functionality of the image processing application. It takes in instances of ImageInput,
@@ -28,8 +30,10 @@ public class GUIController extends TransformationControllerImpl {
    */
   public GUIController(ImageInput imageInput,
                        ImageSaver imageSaver, Input input,
-                       TransformImageHandler imageHandler, Output output) {
+                       TransformImageHandler imageHandler, GUIOutput output) {
     super(imageInput, imageSaver, input, imageHandler, output);
+    output.setController(this);
+    this.output = output;
   }
 
   @Override
@@ -135,6 +139,7 @@ public class GUIController extends TransformationControllerImpl {
   protected void printInfo(String info) {
     super.printInfo(info);
     try {
+      output.goToMainView();
       showImage(imageName);
       output.showHistogram(new HistogramCreator().getRGBHistograms(getImageStream(imageName)));
     }catch (NoSuchImageException | IOException e){

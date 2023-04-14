@@ -36,7 +36,6 @@ public class TransformationControllerImpl extends ControllerImpl implements
                                       Output output) {
     super(imageInput, imageSaver, input, imageHandler, output);
     this.imageHandler = imageHandler;
-    output.setController(this);
   }
 
   @Override

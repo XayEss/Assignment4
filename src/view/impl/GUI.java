@@ -37,13 +37,14 @@ import javax.swing.JTextField;
 import model.implementation.HistogramArtist;
 import model.implementation.HistogramCreator;
 import model.implementation.ImageToBufferedImageService;
+import view.intefraces.GUIOutput;
 import view.intefraces.Output;
 
 
 /**
  * This class contains the entire GUI of the program.
  */
-public class GUI extends JFrame implements Output {
+public class GUI extends JFrame implements GUIOutput {
   private TransformationController controller;
   private final JPanel panel;
   private JTextField fileField;
@@ -86,7 +87,7 @@ public class GUI extends JFrame implements Output {
     fileField = new JTextField("File path");
     fileField.setPreferredSize(new Dimension(400, 55));
     panel.add(fileField);
-    file = new JButton(new ImageIcon("resources/folder.png"));
+    file = new JButton("explorer");
     panel.add(file);
     GridBagConstraints gbc = new GridBagConstraints();
     gbc.gridy = 1;
@@ -214,6 +215,7 @@ public class GUI extends JFrame implements Output {
     file.addActionListener(e -> {
       FileDialog fd = new FileDialog(this, "Choose a file", FileDialog.LOAD);
       fd.setDirectory("C:\\");
+      //fd.setFile("*.jpg;*.jpeg;*.png;*.ppm");
       fd.setVisible(true);
       String filename = fd.getFile();
       if (filename == null) {
@@ -369,7 +371,7 @@ public class GUI extends JFrame implements Output {
     savePanel.add(savePathField, gbc);
 
     // Add directory navigation button
-    JButton directoryButton = new JButton(new ImageIcon("resources/folder.png"));
+    JButton directoryButton = new JButton("explorer");
     directoryButton.addActionListener(e -> {
       FileDialog fd = new FileDialog(this, "Choose a folder", FileDialog.SAVE);
       fd.setVisible(true);
@@ -462,5 +464,15 @@ public class GUI extends JFrame implements Output {
     HistogramArtist.drawHistogram(img.getGraphics(), histogram, img.getWidth(), img.getHeight());
     histogram2.setImage(img);
     //this.histogram.setImage(histogram);
+  }
+
+  @Override
+  public void startGUI() {
+
+  }
+
+  @Override
+  public void goToMainView() {
+    //mainFrame();
   }
 }

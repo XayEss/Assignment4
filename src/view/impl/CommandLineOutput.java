@@ -44,7 +44,6 @@ public class CommandLineOutput implements Output {
 
   @Override
   public void setController(TransformationController controller) {
-    throw new UnsupportedOperationException();
   }
 
   @Override

@@ -29,23 +29,26 @@ public class Main {
    * @throws InterruptedException if an error occurs while executing the program
    */
   public static void main(String[] args) throws IOException, InterruptedException {
-
+    Controller controller = null;
     Input input = null;
-    if (args.length != 0 && args[0].equals("-file")) {
-      input = new TextInput(new FileInputStream(args[1]));
-    } else if(args.length != 0 && args[0].equals("-text") ){
-      input = new TextInput(System.in);
+    if (args.length != 0) {
+      if(args[0].equals("-file")) {
+        input = new TextInput(new FileInputStream(args[1]));
+      }else if (args[0].equals("-text")){
+        input = new TextInput(System.in);
+      }
+      controller = new TransformationControllerImpl(new UniversalImageLoader(),
+          new UniversalImageSaver(),
+          input, new TransformImageHandlerImpl(new ImageProcessorImpl()),
+          new CommandLineOutput(System.out));
+    } else {
+      GUI gui = new GUI();
+      controller = new GUIController(new UniversalImageLoader(),
+          new UniversalImageSaver(),
+          input, new TransformImageHandlerImpl(new ImageProcessorImpl()),
+          gui);
     }
-    GUI gui = new GUI();
-//    Controller controller = new TransformationControllerImpl(new UniversalImageLoader(),
-//            new UniversalImageSaver(),
-//            input, new TransformImageHandlerImpl(new ImageProcessorImpl()),
-//            new CommandLineOutput(System.out));
-    Controller controller2 = new GUIController(new UniversalImageLoader(),
-        new UniversalImageSaver(),
-        input, new TransformImageHandlerImpl(new ImageProcessorImpl()),
-        gui);
-    //controller.start();
+    controller.start();
   }
 
 }
