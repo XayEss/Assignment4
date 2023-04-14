@@ -1,41 +1,22 @@
 package view.impl;
 
-import controller.interfaces.TransformationController;
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FileDialog;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
+import controller.interfaces.TransformationController;
 import model.implementation.HistogramArtist;
-import model.implementation.HistogramCreator;
 import model.implementation.ImageToBufferedImageService;
 import view.intefraces.GUIOutput;
 import view.intefraces.Output;
@@ -113,7 +94,7 @@ public class GUI extends JFrame implements GUIOutput {
     menuBar.add(menu);
 
     setJMenuBar(menuBar);
-    setLocation(0,0);
+    setLocation(0, 0);
     setSize(1450, 1000);
     GridBagLayout cl = new GridBagLayout();
     panel.setLayout(cl);
@@ -172,7 +153,7 @@ public class GUI extends JFrame implements GUIOutput {
     histogram = new ImageViewer();
     histogram.setPreferredSize(new Dimension(800, 500));
     histogram2 = new ScrollableImagePanel();
-    histogram2.setPreferredSize(new Dimension(700,500));
+    histogram2.setPreferredSize(new Dimension(700, 500));
     imagePanel.add(histogram2);
 
     panel.add(imagePanel, gbc2);
@@ -189,17 +170,21 @@ public class GUI extends JFrame implements GUIOutput {
 
     log = new JTextArea("Logs:");
     log.setEditable(false);
-    log.setPreferredSize(new Dimension(300, 70));
-    log.setBorder(BorderFactory.createLineBorder(Color.black));
+    log.setLineWrap(true);
+    log.setWrapStyleWord(true);
+    JScrollPane logScrollPane = new JScrollPane(log);
+    logScrollPane.setPreferredSize(new Dimension(300, 70));
+    logScrollPane.setBorder(BorderFactory.createLineBorder(Color.black));
     GridBagConstraints gbc3 = new GridBagConstraints();
     gbc3.gridy = 3;
     gbc3.gridx = 0;
-    panel.add(log, gbc3);
+    panel.add(logScrollPane, gbc3); // Add the logScrollPane instead of the log JTextArea
 
     add(panel);
     initMainListeners();
     setVisible(true);
     repaint();
+
   }
 
 
@@ -227,9 +212,31 @@ public class GUI extends JFrame implements GUIOutput {
     load.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
+
         String path = fileField.getText();
-        mainFrame();
-        controller.loadImage(path, imageName);
+        boolean isValidImage = false;
+
+        try {
+          // Check if the file path points to a valid image
+          BufferedImage img = ImageIO.read(new File(path));
+          if (img != null || path.substring(path.length() - 3).equals("ppm")) {
+            isValidImage = true;
+          } else {
+            // Not a valid image, show an error message
+            JOptionPane.showMessageDialog(GUI.this, "Invalid image file: "
+                    + path);
+          }
+        } catch (IOException ex) {
+          // Error reading file, show an error message
+          JOptionPane.showMessageDialog(GUI.this, "Error reading file: "
+                  + path);
+        }
+
+        if (isValidImage) {
+          mainFrame();
+          controller.loadImage(path, imageName);
+        }
+
       }
     });
   }
@@ -305,7 +312,8 @@ public class GUI extends JFrame implements GUIOutput {
           }
           log.append("\n" + logText); // Append the operation description to the log
         } else {
-          JOptionPane.showMessageDialog(GUI.this, "Please select an operation.");
+          JOptionPane.showMessageDialog(GUI.this,
+                  "Please select an operation.");
         }
       }
     });
@@ -331,7 +339,7 @@ public class GUI extends JFrame implements GUIOutput {
       }
     });
 
-    histogram2.addMouseWheelListener(e ->{
+    histogram2.addMouseWheelListener(e -> {
       if (!e.isShiftDown()) {
         if (e.getWheelRotation() < 0) {
           histogram2.scrollYNegative();
